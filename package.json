@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "npx webpack",
-    "serve": "npx webpack serve"
+    "serve": "npx webpack serve",
+    "watch": "jest --watch *.js"
   },
   "keywords": [],
   "author": "",
