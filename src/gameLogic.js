@@ -24,6 +24,15 @@ export const gameBoard = () => {
     return {
         getBoard() {
             return board;
+        },
+        recieveAttack(coordinate) {
+            const [x, y] = coordinate;
+
+            if(!board[x][y]) {
+                board[x][y] = "miss";
+            } else if(board[x][y] == "miss") {
+                throw new Error("You already tried that spot, choose another.");
+            }
         }
     }
 }
