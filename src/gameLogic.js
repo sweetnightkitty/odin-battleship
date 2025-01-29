@@ -3,6 +3,11 @@ export const ship = (length) => {
 
     return {
         length,
-        hits,
+        hits () {
+            ++hits;
+        },
+        getHits() {
+            return hits;
+        }
     }
 }
