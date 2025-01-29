@@ -4,7 +4,10 @@ export const ship = (length) => {
     return {
         length,
         hits () {
-            ++hits;
+            //Length is the max # of hits, so hits should not exceed it.
+            if(hits < length){
+                ++hits;
+            }
         },
         getHits() {
             return hits;
