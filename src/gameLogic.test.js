@@ -25,6 +25,17 @@ describe("Ship Factory Function", ()=> {
         myShip.hits();
         myShip.hits();
         expect(myShip.getHits()).toBe(3);
+    })
 
+    it("Ship sinks when hits = length", ()=> {
+        const myShip = ship(3);
+        expect(myShip.isSunk()).toBe(false);
+        myShip.hits();
+        myShip.hits();
+        expect(myShip.isSunk()).toBe(false);
+        myShip.hits();
+        expect(myShip.isSunk()).toBe(true);
+        myShip.hits();
+        expect(myShip.isSunk()).toBe(true);
     })
 })
