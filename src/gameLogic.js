@@ -17,3 +17,13 @@ export const ship = (length) => {
         }
     }
 }
+
+export const gameBoard = () => {
+    const board = Array.from({length: 10}, ()=> Array(10).fill(false));
+
+    return {
+        getBoard() {
+            return board;
+        }
+    }
+}
