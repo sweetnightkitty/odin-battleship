@@ -11,6 +11,9 @@ export const ship = (length) => {
         },
         getHits() {
             return hits;
+        },
+        isSunk() {
+            return hits == length;
         }
     }
 }
