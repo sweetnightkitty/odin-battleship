@@ -51,8 +51,11 @@ describe("Game Board factory function", ()=> {
     })
 
     it("Board logs correct values", ()=> {
-        const board = gameBoard().getBoard();
-        expect(board[5][2]).toBe(false);
+        const board = gameBoard()
+        expect(board.getBoard()[5][2]).toBe(false);
+        board.recieveAttack([5, 2]);
+        expect(board.getBoard()[5][2]).toBe("miss");
+        expect(()=> board.recieveAttack([5, 2])).toThrow();
     })
 
 })
