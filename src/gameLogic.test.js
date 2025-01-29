@@ -1,4 +1,4 @@
-import { ship } from "./gameLogic.js";
+import { gameBoard, ship } from "./gameLogic.js";
 
 describe("Ship Factory Function", ()=> {
     it("Ship initializes with correct length", () => {
@@ -38,4 +38,21 @@ describe("Ship Factory Function", ()=> {
         myShip.hits();
         expect(myShip.isSunk()).toBe(true);
     })
+})
+
+describe("Game Board factory function", ()=> {
+
+    it("Board row and columns have a length of 10", ()=> {
+        const board = gameBoard().getBoard();
+        expect(board.length).toBe(10);
+        expect(board[5].length).toBe(10);
+        expect(board[10]).toBeUndefined();
+        expect(board[2][10]).toBeUndefined();
+    })
+
+    it("Board logs correct values", ()=> {
+        const board = gameBoard().getBoard();
+        expect(board[5][2]).toBe(false);
+    })
+
 })
