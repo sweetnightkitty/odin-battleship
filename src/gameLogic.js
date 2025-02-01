@@ -55,6 +55,8 @@ export const gameBoard = () => {
         },
         placeship(shipname, coordinates) {
             const ship = selectShip(shipname);
+
+            if(!ship) throw new Error ("That's not a valid ship name");
             
             //Coordinate is an array, ship is an object with a length property
             if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
