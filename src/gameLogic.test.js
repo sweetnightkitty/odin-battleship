@@ -67,8 +67,18 @@ describe("Game Board factory function", ()=> {
         it("Correctly targets the ship object", ()=> {
             const board = gameBoard();
             const testCruiser = ship(3);
-            const placeShipResult = board.placeship("cruiser");
+
+            //Cruiser has a length of 3 (thus 3 coordinates):
+            const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+
+            //Serializes to the same string:
             expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
+        })
+
+        it("Throws an error if spaces selected are not the same size as the ship", ()=> {
+            const board = gameBoard();
+            //Cruiser has length 3, and should have 3 coordinates
+            expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
         })
     })
 })
