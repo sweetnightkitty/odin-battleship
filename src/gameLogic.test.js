@@ -112,3 +112,45 @@ describe("Place Ship function", ()=> {
         expect(()=> game.placeship("destroyer", [[1, 1], [5, 2]])).toThrow();
     })
 })
+
+describe("Receive attacks", ()=> {
+    it("Records misses", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+        expect(board[3][3]).toBe(false);
+
+        game.recieveAttack([3, 3]);
+        expect(board[3][3]).toBe("miss");
+    })
+
+    it("Records hits", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+        game.placeship("destroyer", [[1, 2], [3, 4]]);
+        game.recieveAttack([3, 4]);
+        expect(board[3][4]).toBe("hit");
+    })
+
+    it("Throws an error if spot already marked miss or hit", ()=> {
+        const game = gameBoard();
+
+        //miss case:
+        game.recieveAttack([3, 3]);
+        expect(()=> game.recieveAttack([3, 3])).toThrow();
+
+        //hit case:
+        game.placeship("destroyer", [[1, 1], [2, 2]]);
+        game.recieveAttack([1, 1]);
+        expect(()=> game.recieveAttack([1, 1])).toThrow();
+
+    })
+
+    it("Marks a ship as hit", ()=> {
+        const game = gameBoard();
+
+        game.placeship("destroyer", [[1, 1], [2, 2]]);
+        game.recieveAttack([1, 1]);
+        expect(game.getDestroyer().getHits()).toBe(1);
+
+    })
+})
