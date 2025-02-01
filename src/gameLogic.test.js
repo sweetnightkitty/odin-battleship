@@ -76,9 +76,29 @@ describe("Place Ship function", ()=> {
         expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
     })
 
-    it("Throws an error if spaces selected are not the same size as the ship", ()=> {
+    it("Spaces selected must be the same size as the ship", ()=> {
         const board = gameBoard();
         //Cruiser has length 3, and should have 3 coordinates
         expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
+
+    
+        const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+        const testCruiser = ship(3);
+        //Serializes to the same string:
+        expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
+    })
+
+    it("Does not allow duplicate coordinates or reassigning", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+
+        //Before hitting [5, 2]
+        expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
+
+        game.recieveAttack([3, 5]);
+        expect(board[3][5]).toBe("miss");
+
+        //After hitting [5, 2]
+        expect(()=> game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]])).toThrow();
     })
 })
