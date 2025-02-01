@@ -1,3 +1,4 @@
+import { isWebTarget } from "webpack-dev-server";
 import { gameBoard, ship } from "./gameLogic.js";
 
 describe("Ship Factory Function", ()=> {
@@ -61,6 +62,13 @@ describe("Game Board factory function", ()=> {
 
         //If board logs an attack on a spot marked miss:
         expect(()=> board.recieveAttack([5, 2])).toThrow();
+    })
+
+    it("is game over", ()=> {
+        const game = gameBoard();
+        expect(game.isGameOver()).toBe(false);
+
+        //When game is over:
     })
 })
 
