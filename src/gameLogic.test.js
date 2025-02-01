@@ -62,23 +62,23 @@ describe("Game Board factory function", ()=> {
         //If board logs an attack on a spot marked miss:
         expect(()=> board.recieveAttack([5, 2])).toThrow();
     })
+})
 
-    describe("Place Ship function", ()=> {
-        it("Correctly targets the ship object", ()=> {
-            const board = gameBoard();
-            const testCruiser = ship(3);
+describe("Place Ship function", ()=> {
+    it("Correctly targets the ship object", ()=> {
+        const board = gameBoard();
+        const testCruiser = ship(3);
 
-            //Cruiser has a length of 3 (thus 3 coordinates):
-            const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+        //Cruiser has a length of 3 (thus 3 coordinates):
+        const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
 
-            //Serializes to the same string:
-            expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
-        })
+        //Serializes to the same string:
+        expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
+    })
 
-        it("Throws an error if spaces selected are not the same size as the ship", ()=> {
-            const board = gameBoard();
-            //Cruiser has length 3, and should have 3 coordinates
-            expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
-        })
+    it("Throws an error if spaces selected are not the same size as the ship", ()=> {
+        const board = gameBoard();
+        //Cruiser has length 3, and should have 3 coordinates
+        expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
     })
 })
