@@ -74,9 +74,21 @@ export const gameBoard = () => {
 
             if(!board[x][y]) {
                 board[x][y] = "miss";
-            } else if(board[x][y] == "miss") {
-                throw new Error("You already tried that spot, choose another.");
+            } else {
+                if(board[x][y] == "miss") {
+                    throw new Error("You already tried that spot, choose another.");
+                } else if(board[x][y] == "hit") {
+                    throw new Error("You already hit something located there. Choose another spot.");
+                } else {
+                    const ship = selectShip(board[x][y]);
+                    board[x][y] = "hit";
+                    ship.hits();
+                }
             }
         },
+
+        getDestroyer() {
+            return destroyer;
+        }
     }
 }
