@@ -21,11 +21,11 @@ export const ship = (length) => {
 export const gameBoard = () => {
     const board = Array.from({length: 10}, ()=> Array(10).fill(false));
 
-    const aircraftCarrier = ship(5);
-    const battleship = ship(4);
-    const cruiser = ship(3);
-    const submarine = ship(3);
-    const destroyer = ship(2);
+        const aircraftCarrier = ship(5);
+        const battleship = ship(4);
+        const cruiser = ship(3);
+        const submarine = ship(3);
+        const destroyer = ship(2);
 
     const selectShip = (shipname) => {
         if(shipname == "aircraftCarrier") {
@@ -89,6 +89,17 @@ export const gameBoard = () => {
 
         getShip(shipname) {
            return selectShip(shipname);
+        },
+
+        isGameOver() {
+            let sunkShips = 0;
+            if(battleship.isSunk()) ++sunkShips;
+            if(aircraftCarrier.isSunk()) ++sunkShips;
+            if(submarine.isSunk()) ++sunkShips;
+            if(cruiser.isSunk()) ++sunkShips;
+            if(destroyer.isSunk()) ++sunkShips;
+
+            return sunkShips == 5;
         }
     }
 }
