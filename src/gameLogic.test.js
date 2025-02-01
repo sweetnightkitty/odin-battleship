@@ -51,10 +51,15 @@ describe("Game Board factory function", ()=> {
     })
 
     it("Board logs correct values", ()=> {
+        //Empty gameboard
         const board = gameBoard()
         expect(board.getBoard()[5][2]).toBe(false);
+
+        //If board logs an attack on an empty spot
         board.recieveAttack([5, 2]);
         expect(board.getBoard()[5][2]).toBe("miss");
+
+        //If board logs an attack on a spot marked miss:
         expect(()=> board.recieveAttack([5, 2])).toThrow();
     })
 
