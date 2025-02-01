@@ -69,6 +69,31 @@ describe("Game Board factory function", ()=> {
         expect(game.isGameOver()).toBe(false);
 
         //When game is over:
+        const board = game.getBoard();
+        game.placeship("aircraftCarrier", [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]);
+        game.placeship("battleship", [[2, 1], [2, 2], [2, 3], [2, 4]]);
+        game.placeship("submarine", [[3, 1], [3, 2], [3, 3]]);
+        game.placeship("cruiser", [[4, 1], [4, 2], [4, 3]]);
+        game.placeship("destroyer", [[5, 1], [5, 2]]);
+        game.recieveAttack([1, 1]);
+        game.recieveAttack([1, 2]);
+        game.recieveAttack([1, 3]);
+        game.recieveAttack([1, 4]);
+        game.recieveAttack([1, 5]);
+        game.recieveAttack([2, 1]);
+        game.recieveAttack([2, 2]);
+        game.recieveAttack([2, 3]);
+        game.recieveAttack([2, 4]);
+        game.recieveAttack([3, 1]);
+        game.recieveAttack([3, 2]);
+        game.recieveAttack([3, 3]);
+        game.recieveAttack([4, 1]);
+        game.recieveAttack([4, 2]);
+        game.recieveAttack([4, 3]);
+        game.recieveAttack([5, 1]);
+        expect(game.isGameOver()).toBe(false);
+        game.recieveAttack([5, 2]);
+        expect(game.isGameOver()).toBe(true);
     })
 })
 
