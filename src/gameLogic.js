@@ -68,7 +68,6 @@ export const gameBoard = () => {
                 let [x, y] = coordinates[i];
                 board[x][y] = shipname;
             }
-            return ship;
         },
         recieveAttack(coordinate) {
             const [x, y] = coordinate;

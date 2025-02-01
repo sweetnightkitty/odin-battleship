@@ -65,17 +65,6 @@ describe("Game Board factory function", ()=> {
 })
 
 describe("Place Ship function", ()=> {
-    it("Correctly targets the ship object", ()=> {
-        const board = gameBoard();
-        const testCruiser = ship(3);
-
-        //Cruiser has a length of 3 (thus 3 coordinates):
-        const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
-
-        //Serializes to the same string:
-        expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
-    })
-
     it("Does not work with an incorrect ship name", ()=> {
         const game = gameBoard();
         const board = game.getBoard();
