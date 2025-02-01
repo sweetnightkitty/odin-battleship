@@ -51,139 +51,128 @@ describe("Game Board factory function", ()=> {
         expect(board[2][10]).toBeUndefined();
     })
 
-    it("Board logs correct values", ()=> {
-        //Empty gameboard
-        const board = gameBoard()
-        expect(board.getBoard()[5][2]).toBe(false);
+    describe("Place Ship", ()=> {
+        it("Does not work with an incorrect ship name", ()=> {
+            const game = gameBoard();
+            const board = game.getBoard();
 
-        //If board logs an attack on an empty spot
-        board.recieveAttack([5, 2]);
-        expect(board.getBoard()[5][2]).toBe("miss");
+            expect(()=>game.placeship("SS Anne", [1, 1], [2, 2])).toThrow("That's not a valid ship name");
+            expect(board[1][1]).toBe(false);
+        })
 
-        //If board logs an attack on a spot marked miss:
-        expect(()=> board.recieveAttack([5, 2])).toThrow();
+        it("Spaces selected must be the same size as the ship", ()=> {
+            const board = gameBoard();
+            //Cruiser should be 3, and destroyer should be 2 coordinates
+            expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
+            expect(()=> board.placeship("destroyer", [1, 1], [2, 2], [3, 3])).toThrow();
+        })
+
+        it("Places ships on the board", ()=> {
+            const game = gameBoard();
+            const board = game.getBoard();
+            expect(board[1][1]).toBe(false);
+            expect(board[4][4]).toBe(false);
+
+            //Place Cruiser
+            game.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+            expect(board[1][1]).toBe("cruiser");
+
+            //Place Destroyer
+            game.placeship("destroyer", [[4, 4], [5, 5]]);
+            expect(board[4][4]).toBe("destroyer");
+
+        })
+
+        it("Does not allow duplicate coordinates or reassigning", ()=> {
+            const game = gameBoard();
+            const board = game.getBoard();
+
+            //Before placing cruiser
+            expect(board[5][2]).toBe(false);
+            // expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
+
+            //Place cruiser
+            game.placeship("cruiser", [[1, 1], [2, 2], [5, 2]]);
+            expect(board[5][2]).toBe("cruiser");
+
+            //Placing destroyer at the same place
+            expect(()=> game.placeship("destroyer", [[1, 1], [5, 2]])).toThrow();
+        })
     })
 
-    it("is game over", ()=> {
-        const game = gameBoard();
-        expect(game.isGameOver()).toBe(false);
-
-        //When game is over:
-        const board = game.getBoard();
-        game.placeship("aircraftCarrier", [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]);
-        game.placeship("battleship", [[2, 1], [2, 2], [2, 3], [2, 4]]);
-        game.placeship("submarine", [[3, 1], [3, 2], [3, 3]]);
-        game.placeship("cruiser", [[4, 1], [4, 2], [4, 3]]);
-        game.placeship("destroyer", [[5, 1], [5, 2]]);
-        game.recieveAttack([1, 1]);
-        game.recieveAttack([1, 2]);
-        game.recieveAttack([1, 3]);
-        game.recieveAttack([1, 4]);
-        game.recieveAttack([1, 5]);
-        game.recieveAttack([2, 1]);
-        game.recieveAttack([2, 2]);
-        game.recieveAttack([2, 3]);
-        game.recieveAttack([2, 4]);
-        game.recieveAttack([3, 1]);
-        game.recieveAttack([3, 2]);
-        game.recieveAttack([3, 3]);
-        game.recieveAttack([4, 1]);
-        game.recieveAttack([4, 2]);
-        game.recieveAttack([4, 3]);
-        game.recieveAttack([5, 1]);
-        expect(game.isGameOver()).toBe(false);
-        game.recieveAttack([5, 2]);
-        expect(game.isGameOver()).toBe(true);
+    describe("Receive attacks", ()=> {
+        it("Records misses", ()=> {
+            const game = gameBoard();
+            const board = game.getBoard();
+            expect(board[3][3]).toBe(false);
+    
+            game.recieveAttack([3, 3]);
+            expect(board[3][3]).toBe("miss");
+        })
+    
+        it("Records hits", ()=> {
+            const game = gameBoard();
+            const board = game.getBoard();
+            game.placeship("destroyer", [[1, 2], [3, 4]]);
+            game.recieveAttack([3, 4]);
+            expect(board[3][4]).toBe("hit");
+        })
+    
+        it("Throws an error if spot already marked miss or hit", ()=> {
+            const game = gameBoard();
+    
+            //miss case:
+            game.recieveAttack([3, 3]);
+            expect(()=> game.recieveAttack([3, 3])).toThrow();
+    
+            //hit case:
+            game.placeship("destroyer", [[1, 1], [2, 2]]);
+            game.recieveAttack([1, 1]);
+            expect(()=> game.recieveAttack([1, 1])).toThrow();
+    
+        })
+    
+        it("Marks a ship as hit", ()=> {
+            const game = gameBoard();
+    
+            game.placeship("destroyer", [[1, 1], [2, 2]]);
+            game.recieveAttack([1, 1]);
+            expect(game.getShip("destroyer").getHits()).toBe(1);
+    
+        })
     })
-})
-
-describe("Place Ship function", ()=> {
-    it("Does not work with an incorrect ship name", ()=> {
-        const game = gameBoard();
-        const board = game.getBoard();
-
-        expect(()=>game.placeship("SS Anne", [1, 1], [2, 2])).toThrow("That's not a valid ship name");
-        expect(board[1][1]).toBe(false);
-    })
-
-    it("Spaces selected must be the same size as the ship", ()=> {
-        const board = gameBoard();
-        //Cruiser should be 3, and destroyer should be 2 coordinates
-        expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
-        expect(()=> board.placeship("destroyer", [1, 1], [2, 2], [3, 3])).toThrow();
-    })
-
-    it("Places ships on the board", ()=> {
-        const game = gameBoard();
-        const board = game.getBoard();
-        expect(board[1][1]).toBe(false);
-        expect(board[4][4]).toBe(false);
-
-        //Place Cruiser
-        game.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
-        expect(board[1][1]).toBe("cruiser");
-
-        //Place Destroyer
-        game.placeship("destroyer", [[4, 4], [5, 5]]);
-        expect(board[4][4]).toBe("destroyer");
-
-    })
-
-    it("Does not allow duplicate coordinates or reassigning", ()=> {
-        const game = gameBoard();
-        const board = game.getBoard();
-
-        //Before placing cruiser
-        expect(board[5][2]).toBe(false);
-        // expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
-
-        //Place cruiser
-        game.placeship("cruiser", [[1, 1], [2, 2], [5, 2]]);
-        expect(board[5][2]).toBe("cruiser");
-
-        //Placing destroyer at the same place
-        expect(()=> game.placeship("destroyer", [[1, 1], [5, 2]])).toThrow();
-    })
-})
-
-describe("Receive attacks", ()=> {
-    it("Records misses", ()=> {
-        const game = gameBoard();
-        const board = game.getBoard();
-        expect(board[3][3]).toBe(false);
-
-        game.recieveAttack([3, 3]);
-        expect(board[3][3]).toBe("miss");
-    })
-
-    it("Records hits", ()=> {
-        const game = gameBoard();
-        const board = game.getBoard();
-        game.placeship("destroyer", [[1, 2], [3, 4]]);
-        game.recieveAttack([3, 4]);
-        expect(board[3][4]).toBe("hit");
-    })
-
-    it("Throws an error if spot already marked miss or hit", ()=> {
-        const game = gameBoard();
-
-        //miss case:
-        game.recieveAttack([3, 3]);
-        expect(()=> game.recieveAttack([3, 3])).toThrow();
-
-        //hit case:
-        game.placeship("destroyer", [[1, 1], [2, 2]]);
-        game.recieveAttack([1, 1]);
-        expect(()=> game.recieveAttack([1, 1])).toThrow();
-
-    })
-
-    it("Marks a ship as hit", ()=> {
-        const game = gameBoard();
-
-        game.placeship("destroyer", [[1, 1], [2, 2]]);
-        game.recieveAttack([1, 1]);
-        expect(game.getShip("destroyer").getHits()).toBe(1);
-
+    
+    describe("Is Game Over", ()=> {
+        it("is game over", ()=> {
+            const game = gameBoard();
+            expect(game.isGameOver()).toBe(false);
+    
+            //When game is over:
+            const board = game.getBoard();
+            game.placeship("aircraftCarrier", [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]);
+            game.placeship("battleship", [[2, 1], [2, 2], [2, 3], [2, 4]]);
+            game.placeship("submarine", [[3, 1], [3, 2], [3, 3]]);
+            game.placeship("cruiser", [[4, 1], [4, 2], [4, 3]]);
+            game.placeship("destroyer", [[5, 1], [5, 2]]);
+            game.recieveAttack([1, 1]);
+            game.recieveAttack([1, 2]);
+            game.recieveAttack([1, 3]);
+            game.recieveAttack([1, 4]);
+            game.recieveAttack([1, 5]);
+            game.recieveAttack([2, 1]);
+            game.recieveAttack([2, 2]);
+            game.recieveAttack([2, 3]);
+            game.recieveAttack([2, 4]);
+            game.recieveAttack([3, 1]);
+            game.recieveAttack([3, 2]);
+            game.recieveAttack([3, 3]);
+            game.recieveAttack([4, 1]);
+            game.recieveAttack([4, 2]);
+            game.recieveAttack([4, 3]);
+            game.recieveAttack([5, 1]);
+            expect(game.isGameOver()).toBe(false);
+            game.recieveAttack([5, 2]);
+            expect(game.isGameOver()).toBe(true);
+        })
     })
 })
