@@ -76,29 +76,50 @@ describe("Place Ship function", ()=> {
         expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
     })
 
+    it("Does not work with an incorrect ship name", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+
+        expect(()=>game.placeship("SS Anne", [1, 1], [2, 2])).toThrow("That's not a valid ship name");
+        expect(board[1][1]).toBe(false);
+    })
+
     it("Spaces selected must be the same size as the ship", ()=> {
         const board = gameBoard();
-        //Cruiser has length 3, and should have 3 coordinates
+        //Cruiser should be 3, and destroyer should be 2 coordinates
         expect(()=> board.placeship("cruiser", [[1, 1], [2, 2]])).toThrow();
+        expect(()=> board.placeship("destroyer", [1, 1], [2, 2], [3, 3])).toThrow();
+    })
 
-    
-        const placeShipResult = board.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
-        const testCruiser = ship(3);
-        //Serializes to the same string:
-        expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
+    it("Places ships on the board", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+        expect(board[1][1]).toBe(false);
+        expect(board[4][4]).toBe(false);
+
+        //Place Cruiser
+        game.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+        expect(board[1][1]).toBe("cruiser");
+
+        //Place Destroyer
+        game.placeship("destroyer", [[4, 4], [5, 5]]);
+        expect(board[4][4]).toBe("destroyer");
+
     })
 
     it("Does not allow duplicate coordinates or reassigning", ()=> {
         const game = gameBoard();
         const board = game.getBoard();
 
-        //Before hitting [5, 2]
-        expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
+        //Before placing cruiser
+        expect(board[5][2]).toBe(false);
+        // expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
 
-        game.recieveAttack([3, 5]);
-        expect(board[3][5]).toBe("miss");
+        //Place cruiser
+        game.placeship("cruiser", [[1, 1], [2, 2], [5, 2]]);
+        expect(board[5][2]).toBe("cruiser");
 
-        //After hitting [5, 2]
-        expect(()=> game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]])).toThrow();
+        //Placing destroyer at the same place
+        expect(()=> game.placeship("destroyer", [[1, 1], [5, 2]])).toThrow();
     })
 })
