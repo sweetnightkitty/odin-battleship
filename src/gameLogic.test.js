@@ -150,7 +150,7 @@ describe("Receive attacks", ()=> {
 
         game.placeship("destroyer", [[1, 1], [2, 2]]);
         game.recieveAttack([1, 1]);
-        expect(game.getDestroyer().getHits()).toBe(1);
+        expect(game.getShip("destroyer").getHits()).toBe(1);
 
     })
 })

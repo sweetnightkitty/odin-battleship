@@ -87,8 +87,8 @@ export const gameBoard = () => {
             }
         },
 
-        getDestroyer() {
-            return destroyer;
+        getShip(shipname) {
+           return selectShip(shipname);
         }
     }
 }
