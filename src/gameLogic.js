@@ -41,15 +41,22 @@ export const gameBoard = () => {
         }
     }
 
+    const isPositionAvailable = (coordinate) => {
+        const [x, y] = coordinate;
+        if(board[x][y]) return;
+    }
+
     return {
         getBoard() {
             return board;
         },
-        placeship(shipname) {
+        placeship(shipname, coordinates) {
             const ship = selectShip(shipname);
             
-
-
+            //Coordinate is an array, ship is an object with a length property
+            if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
+            
+            //is that position available?
             return ship;
         },
         recieveAttack(coordinate) {
