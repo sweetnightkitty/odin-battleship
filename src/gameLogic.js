@@ -41,9 +41,12 @@ export const gameBoard = () => {
         }
     }
 
-    const isPositionAvailable = (coordinate) => {
-        const [x, y] = coordinate;
-        if(board[x][y]) return;
+    const arePositionSAvailable = (coordinates) => {
+        for(let i = 0; i < coordinates.length; i++) {
+            let [x, y] = coordinates[i];
+            if(board[x][y]) return false;
+        }
+        return true;
     }
 
     return {
@@ -56,7 +59,9 @@ export const gameBoard = () => {
             //Coordinate is an array, ship is an object with a length property
             if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
             
-            //is that position available?
+            //are those positions available?
+            if(!arePositionSAvailable(coordinates)) throw new Error("Some of the positions you selected either don't exist or you already placed a ship there. Try again")
+
             return ship;
         },
         recieveAttack(coordinate) {
