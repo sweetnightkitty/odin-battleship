@@ -63,4 +63,12 @@ describe("Game Board factory function", ()=> {
         expect(()=> board.recieveAttack([5, 2])).toThrow();
     })
 
+    describe("Place Ship function", ()=> {
+        it("Correctly targets the ship object", ()=> {
+            const board = gameBoard();
+            const testCruiser = ship(3);
+            const placeShipResult = board.placeship("cruiser");
+            expect(JSON.stringify(placeShipResult)).toBe(JSON.stringify(testCruiser));
+        })
+    })
 })
