@@ -1,5 +1,5 @@
 import { isWebTarget } from "webpack-dev-server";
-import { gameBoard, ship } from "./gameLogic.js";
+import { gameBoard, player, ship } from "./gameLogic.js";
 
 describe("Ship Factory Function", ()=> {
     it("Ship initializes with correct length", () => {
@@ -174,5 +174,27 @@ describe("Game Board factory function", ()=> {
             game.recieveAttack([5, 2]);
             expect(game.isGameOver()).toBe(true);
         })
+    })
+})
+
+describe("Player", ()=> {
+    it("Saves gameboard to each player", ()=> {
+        const player1 = player();
+        const player1Game = player1.getGameBoard();
+        expect(player1Game.getBoard()[5][5]).toBe(false);
+
+        const player2 = player();
+        const player2Game = player2.getGameBoard();
+        expect(player2Game.getBoard()[5][5]).toBe(false);
+    })
+
+    it("Stores hits on the correct board", ()=> {
+        const player1 = player();
+        const player2 = player();
+        const player1Game = player1.getGameBoard();
+        const player2Game = player2.getGameBoard();
+        player1Game.recieveAttack([5, 5]);
+        expect(player1Game.getBoard()[5][5]).toBe("miss");
+        expect(player2Game.getBoard()[5][5]).toBe(false);
     })
 })
