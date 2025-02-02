@@ -67,6 +67,14 @@ describe("Game Board factory function", ()=> {
             expect(()=> board.placeship("destroyer", [1, 1], [2, 2], [3, 3])).toThrow();
         })
 
+        // it("Must not allow non-linear and adjacent coordinates", ()=> {
+        //     const board = gameBoard();
+        //     board.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
+        //     expect(board.getBoard()[1][1]).toBe("cruiser");
+            
+        //     expect(()=> board.placeship("destroyer", [[3, 3], [5, 5]])).toThrow();
+        // })
+
         it("Places ships on the board", ()=> {
             const game = gameBoard();
             const board = game.getBoard();
@@ -196,5 +204,16 @@ describe("Player", ()=> {
         player1Game.recieveAttack([5, 5]);
         expect(player1Game.getBoard()[5][5]).toBe("miss");
         expect(player2Game.getBoard()[5][5]).toBe(false);
+    })
+})
+
+describe("Is valid placement?", ()=> {
+    it("Places a ship correctly", ()=> {
+        const game = gameBoard();
+        const board = game.getBoard();
+
+        expect(game.isValidPlacement([[1, 1], [1, 2]])).toBe(true);
+        expect(game.isValidPlacement([[1, 1], [5, 5]])).toBe(false);
+        expect(game.isValidPlacement([[1, 3], [2, 3], [3, 3]])).toBe(true);
     })
 })
