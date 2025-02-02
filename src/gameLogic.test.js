@@ -82,11 +82,11 @@ describe("Game Board factory function", ()=> {
             expect(board[4][4]).toBe(false);
 
             //Place Cruiser
-            game.placeship("cruiser", [[1, 1], [2, 2], [3, 3]]);
+            game.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
             expect(board[1][1]).toBe("cruiser");
 
             //Place Destroyer
-            game.placeship("destroyer", [[4, 4], [5, 5]]);
+            game.placeship("destroyer", [[4, 4], [4, 5]]);
             expect(board[4][4]).toBe("destroyer");
 
         })
@@ -96,15 +96,14 @@ describe("Game Board factory function", ()=> {
             const board = game.getBoard();
 
             //Before placing cruiser
-            expect(board[5][2]).toBe(false);
-            // expect(JSON.stringify(game.placeship("cruiser", [[1, 1], [2, 2], [3, 5]]))).toBe(JSON.stringify(ship(3)));
+            expect(board[1][2]).toBe(false);
 
             //Place cruiser
-            game.placeship("cruiser", [[1, 1], [2, 2], [5, 2]]);
-            expect(board[5][2]).toBe("cruiser");
+            game.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
+            expect(board[1][2]).toBe("cruiser");
 
             //Placing destroyer at the same place
-            expect(()=> game.placeship("destroyer", [[1, 1], [5, 2]])).toThrow();
+            expect(()=> game.placeship("destroyer", [[1, 1], [1, 2]])).toThrow();
         })
     })
 
@@ -121,9 +120,9 @@ describe("Game Board factory function", ()=> {
         it("Records hits", ()=> {
             const game = gameBoard();
             const board = game.getBoard();
-            game.placeship("destroyer", [[1, 2], [3, 4]]);
-            game.recieveAttack([3, 4]);
-            expect(board[3][4]).toBe("hit");
+            game.placeship("destroyer", [[1, 2], [1, 3]]);
+            game.recieveAttack([1, 2]);
+            expect(board[1][2]).toBe("hit");
         })
     
         it("Throws an error if spot already marked miss or hit", ()=> {
@@ -134,7 +133,7 @@ describe("Game Board factory function", ()=> {
             expect(()=> game.recieveAttack([3, 3])).toThrow();
     
             //hit case:
-            game.placeship("destroyer", [[1, 1], [2, 2]]);
+            game.placeship("destroyer", [[1, 1], [1, 2]]);
             game.recieveAttack([1, 1]);
             expect(()=> game.recieveAttack([1, 1])).toThrow();
     
@@ -143,7 +142,7 @@ describe("Game Board factory function", ()=> {
         it("Marks a ship as hit", ()=> {
             const game = gameBoard();
     
-            game.placeship("destroyer", [[1, 1], [2, 2]]);
+            game.placeship("destroyer", [[1, 1], [1, 2]]);
             game.recieveAttack([1, 1]);
             expect(game.getShip("destroyer").getHits()).toBe(1);
     
