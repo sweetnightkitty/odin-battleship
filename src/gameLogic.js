@@ -57,6 +57,8 @@ export const gameBoard = () => {
             const ship = selectShip(shipname);
 
             if(!ship) throw new Error ("That's not a valid ship name");
+
+            //Check that the coordinates are correct
             
             //Coordinate is an array, ship is an object with a length property
             if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
@@ -100,7 +102,30 @@ export const gameBoard = () => {
             if(destroyer.isSunk()) {++sunkShips};
 
             return sunkShips == 5;
+        },
+
+    isValidPlacement(coordinates) {
+        let [x, y] = coordinates[0];
+        for(let i = 1; i < coordinates.length; i++) {
+            let [x2, y2] = coordinates[i];
+
+            if(x2 - x == 0) {
+                if(y2 - y != 1) {
+                    return false;
+                }
+            } else if(x2 - x == 1) {
+                if(y2 - y != 0) {
+                    return false;
+                }
+            } else if((x2 - x < 0) || (x2 - x > 1)) {
+                return false;
+            }
+
+            x = x2;
+            y = y2;
         }
+        return true;
+    }
     }
 }
 
