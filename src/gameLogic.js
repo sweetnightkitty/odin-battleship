@@ -103,3 +103,13 @@ export const gameBoard = () => {
         }
     }
 }
+
+export const player = () => {
+    const game = gameBoard();
+
+    return {
+        getGameBoard () {
+            return game;
+        }
+    }
+}
