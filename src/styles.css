@@ -37,6 +37,18 @@ header {
 
 .boards {
     flex: 1;
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+
+.buttons {
+    border-radius: 0;
+    border: .5px solid black;
+    background-color: white;
+}
+.buttons:hover {
+    background-color: lightgrey;
+    cursor: pointer;
 }
 
 footer {
