@@ -1,3 +1,57 @@
-h1 {
-    color: blue;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+header {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px 10px;
+}
+
+.game {
+    flex: 1;
+    display: flex;
+    gap: 55px;
+    justify-content: center;
+    padding: 35px 75px 55px;
+}
+
+.players {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* names here? */
+.names {
+    text-align: center;
+    padding: 8px 0px;
+}
+
+.boards {
+    flex: 1;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+
+/*Temporary borderers to view divs */
+.players {
+    border: 1px solid black;
+}
+
+.boards {
+    background-color: aqua;
 }
