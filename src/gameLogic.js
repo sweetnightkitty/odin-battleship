@@ -49,6 +49,7 @@ export const gameBoard = () => {
         return true;
     }
 
+    //Where coordinates are provided in order from top-bottom or left-right
     const isValidPlacement = (coordinates) => {
         let [x, y] = coordinates[0];
         for(let i = 1; i < coordinates.length; i++) {
@@ -82,6 +83,7 @@ export const gameBoard = () => {
             if(!ship) throw new Error ("That's not a valid ship name");
 
             //Check that the coordinates are correct
+            if(!isValidPlacement(coordinates)) throw new Error("That's not a valid placement.");
             
             //Coordinate is an array, ship is an object with a length property
             if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
