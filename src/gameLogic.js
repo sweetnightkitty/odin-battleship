@@ -49,6 +49,29 @@ export const gameBoard = () => {
         return true;
     }
 
+    const isValidPlacement = (coordinates) => {
+        let [x, y] = coordinates[0];
+        for(let i = 1; i < coordinates.length; i++) {
+            let [x2, y2] = coordinates[i];
+
+            if(x2 - x == 0) {
+                if(y2 - y != 1) {
+                    return false;
+                }
+            } else if(x2 - x == 1) {
+                if(y2 - y != 0) {
+                    return false;
+                }
+            } else if((x2 - x < 0) || (x2 - x > 1)) {
+                return false;
+            }
+
+            x = x2;
+            y = y2;
+        }
+        return true;
+    }
+
     return {
         getBoard() {
             return board;
@@ -104,28 +127,9 @@ export const gameBoard = () => {
             return sunkShips == 5;
         },
 
-    isValidPlacement(coordinates) {
-        let [x, y] = coordinates[0];
-        for(let i = 1; i < coordinates.length; i++) {
-            let [x2, y2] = coordinates[i];
-
-            if(x2 - x == 0) {
-                if(y2 - y != 1) {
-                    return false;
-                }
-            } else if(x2 - x == 1) {
-                if(y2 - y != 0) {
-                    return false;
-                }
-            } else if((x2 - x < 0) || (x2 - x > 1)) {
-                return false;
-            }
-
-            x = x2;
-            y = y2;
+        checkvalid(coordinates) {
+            return isValidPlacement(coordinates);
         }
-        return true;
-    }
     }
 }
 

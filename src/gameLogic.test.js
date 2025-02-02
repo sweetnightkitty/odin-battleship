@@ -210,10 +210,9 @@ describe("Player", ()=> {
 describe("Is valid placement?", ()=> {
     it("Places a ship correctly", ()=> {
         const game = gameBoard();
-        const board = game.getBoard();
 
-        expect(game.isValidPlacement([[1, 1], [1, 2]])).toBe(true);
-        expect(game.isValidPlacement([[1, 1], [5, 5]])).toBe(false);
-        expect(game.isValidPlacement([[1, 3], [2, 3], [3, 3]])).toBe(true);
+        expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
+        expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
+        expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
     })
 })
