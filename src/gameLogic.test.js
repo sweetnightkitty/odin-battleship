@@ -67,13 +67,13 @@ describe("Game Board factory function", ()=> {
             expect(()=> board.placeship("destroyer", [1, 1], [2, 2], [3, 3])).toThrow();
         })
 
-        // it("Must not allow non-linear and adjacent coordinates", ()=> {
-        //     const board = gameBoard();
-        //     board.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
-        //     expect(board.getBoard()[1][1]).toBe("cruiser");
+        it("Must not allow non-linear and adjacent coordinates", ()=> {
+            const board = gameBoard();
+            board.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
+            expect(board.getBoard()[1][1]).toBe("cruiser");
             
-        //     expect(()=> board.placeship("destroyer", [[3, 3], [5, 5]])).toThrow();
-        // })
+            expect(()=> board.placeship("destroyer", [[3, 3], [5, 5]])).toThrow();
+        })
 
         it("Places ships on the board", ()=> {
             const game = gameBoard();
