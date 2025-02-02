@@ -46,7 +46,7 @@ header {
     border: .5px solid black;
     background-color: white;
 }
-.buttons:hover {
+.player-one-buttons:hover, .player-two-buttons:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
