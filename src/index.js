@@ -16,21 +16,20 @@ const playerTWoBoard = playerTwo.getGameBoard().getBoard();
 
 
 //Creates UI buttons for both boards
-playerOneBoard.forEach(row => {
-    row.forEach(cell => {
-        const button = document.createElement("button");
-        button.classList.add("buttons", "player-one-buttons")
-        boardOne.appendChild(button);
-    })
-});
+const displayBoard = (selectPlayer, playererBoard, displayBoard) => {
+    for(let i = 0; i < playererBoard.length; i++) {
+        for(let j = 0; j < playererBoard[i].length; j++) {
+            const button = document.createElement("button");
+            button.classList.add(`player-${selectPlayer}-buttons`, `${i}${j}`);
+            displayBoard.appendChild(button);
+        }
+    }
+}
 
-playerTWoBoard.forEach(row => {
-    row.forEach(cell => {
-        const button = document.createElement("button");
-        button.classList.add("buttons", "player-two-buttons")
-        boardTwo.appendChild(button);
-    })
-})
+displayBoard("one", playerOneBoard, boardOne);
+displayBoard("two", playerTWoBoard, boardTwo);
+
+
 
 
 //Event listeners for each button the game

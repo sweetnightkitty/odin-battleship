@@ -41,7 +41,7 @@ header {
     grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 }
 
-.buttons {
+.player-one-buttons, .player-two-buttons {
     border-radius: 0;
     border: .5px solid black;
     background-color: white;
