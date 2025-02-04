@@ -1,18 +1,15 @@
 import "./styles.css";
 import { player} from "./gameLogic.js";
 
-//On screen boards
+//On screen board
 const boardOne = document.querySelector(".player-one-board");
-const boardTwo = document.querySelector(".player-two-board");
-
 
 //Will handle all player related actions
 const playerOne = player();
-const playerTwo = player();
+const computer = player(); // begin game development against a computer player
 
 //Copies of player's boards
 const playerOneBoard = playerOne.getGameBoard().getBoard();
-const playerTWoBoard = playerTwo.getGameBoard().getBoard();
 
 
 //Creates UI buttons for both boards
@@ -27,23 +24,13 @@ const displayBoard = (selectPlayer, playererBoard, displayBoard) => {
 }
 
 displayBoard("one", playerOneBoard, boardOne);
-displayBoard("two", playerTWoBoard, boardTwo);
-
-
 
 
 //Event listeners for each button the game
 const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
 
 playerOneButtons.forEach(button => {
     button.addEventListener("click", ()=> {
         console.log("player one");
-    })
-})
-
-playerTwoButtons.forEach(button => {
-    button.addEventListener("click", ()=> {
-        console.log("player two");
     })
 })
