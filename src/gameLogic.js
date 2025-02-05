@@ -139,8 +139,20 @@ export const player = () => {
     const game = gameBoard();
 
     return {
-        getGameBoard () {
-            return game;
+        getBoard () {
+            return game.getBoard();
+        },
+
+        recieveAttack(coordinate) {
+            return game.recieveAttack(coordinate);
+        },
+
+        isGameOver() {
+            return game.isGameOver();
+        },
+
+        placeship() {
+            return game.placeship();
         }
     }
 }
