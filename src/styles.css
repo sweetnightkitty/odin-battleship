@@ -52,6 +52,14 @@ header {
     cursor: pointer;
 }
 
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: black;
+}
+
 footer {
     display: flex;
     align-items: center;
