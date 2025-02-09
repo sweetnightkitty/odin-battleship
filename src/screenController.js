@@ -13,6 +13,7 @@ export const screenController = () => {
         activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
     };
 
+
     const applyColor = (x, y, opponentBoard, button) => {
         if(opponentBoard[x][y] == "hit") {
             button.classList.add("hit");
@@ -43,6 +44,16 @@ export const screenController = () => {
                     displayBoard.appendChild(button);
                 }
             }
+
+            //Buttons must be defined AFTER displayBoard generates new buttons.
+            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+
+            //Need to ensure the event listener is added every time new buttons display.
+            playerOneButtons.forEach(button => {
+                button.addEventListener("click", ()=> {
+                    this.playRound(button);
+                })
+            })
         },
 
         resetBoard(displayBoard) {
@@ -64,16 +75,6 @@ export const screenController = () => {
                 alert("Game Over!");
             }
             //switch turns
-
-            //Buttons must be defined AFTER displayBoard generates new buttons.
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-
-            //Need to ensure the event listener is added every time new buttons display.
-            playerOneButtons.forEach(button => {
-                button.addEventListener("click", ()=> {
-                    this.playRound(button);
-                })
-            })
         }
     }
 }

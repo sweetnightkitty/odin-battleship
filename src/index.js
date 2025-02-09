@@ -7,13 +7,13 @@ const display = screenController();
 display.displayBoard();
 
 
-//Event listeners for each button the game
-const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+// //Event listeners for each button the game
+// const playerOneButtons = document.querySelectorAll(".player-one-buttons");
 
-//Runs the first iteration only on load
-playerOneButtons.forEach(button => {
-    button.addEventListener("click", ()=> {
-        display.playRound(button);
-    })
-})
+// //Runs the first iteration only on load
+// playerOneButtons.forEach(button => {
+//     button.addEventListener("click", ()=> {
+//         display.playRound(button);
+//     })
+// })
 
