@@ -1,22 +1,19 @@
 import "./styles.css";
-import { player} from "./gameLogic.js";
 import { screenController } from "./screenController.js";
 
-//On screen board
-const boardOne = document.querySelector(".player-one-board");
 
-const screen = screenController();
-screen.displayBoard(boardOne);
-
-// displayBoard("one", playerOneBoard, boardOne);
+//Screen controller
+const display = screenController();
+display.displayBoard();
 
 
 //Event listeners for each button the game
 const playerOneButtons = document.querySelectorAll(".player-one-buttons");
 
+//Runs the first iteration only on load
 playerOneButtons.forEach(button => {
     button.addEventListener("click", ()=> {
-        console.log("player one");
+        display.playRound(button);
     })
 })
 
