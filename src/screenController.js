@@ -58,7 +58,11 @@ export const screenController = () => {
             //Reset and display new board
             this.resetBoard(playerOneDisplay);
             this.displayBoard(playerOneDisplay);
-            //is game over?
+            
+            //Checks if game is over
+            if(opponent.isGameOver()) {
+                alert("Game Over!");
+            }
             //switch turns
 
             //Buttons must be defined AFTER displayBoard generates new buttons.
