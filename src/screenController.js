@@ -52,6 +52,13 @@ export const screenController = () => {
             playerOneButtons.forEach(button => {
                 button.addEventListener("click", ()=> {
                     this.playRound(button);
+                    this.resetBoard(playerOneDisplay);
+                    this.displayBoard(playerOneDisplay);
+
+                    //Checks if game is over
+                    if(opponent.isGameOver()) {
+                        alert("Game Over!");
+                    }
                 })
             })
         },
@@ -65,15 +72,11 @@ export const screenController = () => {
 
             //Send the attack to the opponent - this works
             opponent.recieveAttack([x, y]);
-
-            //Reset and display new board
-            this.resetBoard(playerOneDisplay);
-            this.displayBoard(playerOneDisplay);
             
-            //Checks if game is over
-            if(opponent.isGameOver()) {
-                alert("Game Over!");
-            }
+            // //Checks if game is over
+            // if(opponent.isGameOver()) {
+            //     alert("Game Over!");
+            // }
             //switch turns
         }
     }
