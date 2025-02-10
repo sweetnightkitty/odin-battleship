@@ -5,14 +5,24 @@ export const screenController = () => {
     const playerTwo = player();
     const playerOneDisplay = document.querySelector(".player-one-board");
 
-    let activePlayer = playerOne;
-    let opponent = playerTwo;
+    const players = [
+        {
+            activePlayer: playerOne,
+            opponent: playerTwo,
+            name: "one"
+        },
 
+        {
+            activePlayer: playerTwo,
+            opponent: playerOne,
+            name: "two"
+        }
+    ]
+
+    let activePlayer = players[0]
     const switchPlayers = () => {
-        opponent = activePlayer;
-        activePlayer = activePlayer === playerOne ? playerTwo : playerOne;
-    };
-
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
 
     const applyColor = (x, y, opponentBoard, button) => {
         if(opponentBoard[x][y] == "hit") {
@@ -22,19 +32,11 @@ export const screenController = () => {
         }
     }
 
-    const getName = () => {
-        if(activePlayer == playerOne) {
-            return "one";
-        } else if(activePlayer == playerTwo) {
-            return "two";
-        }
-    }
-
     return {
         //Creates UI buttons for both boards, playerOne is the default staring player
         displayBoard(displayBoard = playerOneDisplay) {
-            const opponentBoard = opponent.getBoard();
-            const name = getName();
+            const opponentBoard = activePlayer.opponent.getBoard();
+            const name = activePlayer.name;
 
             for(let i = 0; i < opponentBoard.length; i++) {
                 for(let j = 0; j < opponentBoard[i].length; j++) {
@@ -56,7 +58,7 @@ export const screenController = () => {
                     this.displayBoard(playerOneDisplay);
 
                     //Checks if game is over
-                    if(opponent.isGameOver()) {
+                    if(activePlayer.opponent.isGameOver()) {
                         alert("Game Over!");
                     }
                 })
@@ -71,12 +73,8 @@ export const screenController = () => {
             const [x, y] = button.classList[1];
 
             //Send the attack to the opponent - this works
-            opponent.recieveAttack([x, y]);
+            activePlayer.opponent.recieveAttack([x, y]);
             
-            // //Checks if game is over
-            // if(opponent.isGameOver()) {
-            //     alert("Game Over!");
-            // }
             //switch turns
         }
     }
