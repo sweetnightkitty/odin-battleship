@@ -1,5 +1,6 @@
 import { isWebTarget } from "webpack-dev-server";
 import { gameBoard, player, ship } from "./gameLogic.js";
+import { experiments } from "webpack";
 
 describe("Ship Factory Function", ()=> {
     it("Ship initializes with correct length", () => {
@@ -203,6 +204,13 @@ describe("Player", ()=> {
         player1.recieveAttack([5, 5]);
         expect(player1Board[5][5]).toBe("miss");
         expect(player2Board[5][5]).toBe(false);
+    })
+
+    it("Places ships correctly", ()=> {
+        const playerOne = player();
+        expect(playerOne.getBoard()[1][1]).toBe(false);
+        playerOne.placeship("destroyer", [[1, 1], [1, 2]]);
+        expect(playerOne.getBoard()[1][1]).toBe("destroyer");
     })
 
 })
