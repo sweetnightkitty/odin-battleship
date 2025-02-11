@@ -187,23 +187,24 @@ describe("Game Board factory function", ()=> {
 describe("Player", ()=> {
     it("Saves gameboard to each player", ()=> {
         const player1 = player();
-        const player1Game = player1.getGameBoard();
-        expect(player1Game.getBoard()[5][5]).toBe(false);
+        const player1Board = player1.getBoard();
+        expect(player1Board[5][5]).toBe(false);
 
         const player2 = player();
-        const player2Game = player2.getGameBoard();
-        expect(player2Game.getBoard()[5][5]).toBe(false);
+        const player2Board = player2.getBoard();
+        expect(player2Board[5][5]).toBe(false);
     })
 
     it("Stores hits on the correct board", ()=> {
         const player1 = player();
         const player2 = player();
-        const player1Game = player1.getGameBoard();
-        const player2Game = player2.getGameBoard();
-        player1Game.recieveAttack([5, 5]);
-        expect(player1Game.getBoard()[5][5]).toBe("miss");
-        expect(player2Game.getBoard()[5][5]).toBe(false);
+        const player1Board = player1.getBoard();
+        const player2Board = player2.getBoard();
+        player1.recieveAttack([5, 5]);
+        expect(player1Board[5][5]).toBe("miss");
+        expect(player2Board[5][5]).toBe(false);
     })
+
 })
 
 describe("Is valid placement?", ()=> {
