@@ -151,8 +151,8 @@ export const player = () => {
             return game.isGameOver();
         },
 
-        placeship() {
-            return game.placeship();
+        placeship(shipname, coordinates) {
+            return game.placeship(shipname, coordinates);
         }
     }
 }
