@@ -211,8 +211,36 @@ describe("Player", ()=> {
         expect(playerOne.getBoard()[1][1]).toBe(false);
         playerOne.placeship("destroyer", [[1, 1], [1, 2]]);
         expect(playerOne.getBoard()[1][1]).toBe("destroyer");
+
+        playerOne.placeship("cruiser", [[3, 1], [4, 1], [5, 1]]);
+        expect(playerOne.getBoard()[4][1]).toBe("cruiser");
+
+        expect(()=> playerOne.placeship("submarine", [[3, 1], [3, 2], [3, 3]])).toThrow();
     })
 
+    //check if isGameOver works
+    //Place all ships
+    //then sink them all
+    //check if game over is true
+
+    it("isGameOver returns correctly", ()=> {
+        const playerOne = player();
+        expect(playerOne.isGameOver()).toBe(false);
+
+        playerOne.placeship("destroyer", [[1, 1], [1, 2]]);
+        playerOne.placeship("cruiser", [[2, 1], [2, 2], [2, 3]]);
+        playerOne.placeship("submarine", [[3, 1], [3, 2], [3, 3]]);
+        playerOne.placeship("battleship", [[4, 1], [4, 2], [4, 3], [4, 4]]);
+        playerOne.placeship("aircraftCarrier", [[5, 1], [5, 2], [5, 3], [5, 4], [5, 5]]);
+
+        for (let i = 1; i < 6; i++) {
+            for(let j = 1; j < 6; j++) {
+                playerOne.recieveAttack([i, j]);
+            }
+        }
+
+        expect(playerOne.isGameOver()).toBe(true);
+    })
 })
 
 describe("Is valid placement?", ()=> {
