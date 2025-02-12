@@ -106,6 +106,14 @@ describe("Game Board factory function", ()=> {
             //Placing destroyer at the same place
             expect(()=> game.placeship("destroyer", [[1, 1], [1, 2]])).toThrow();
         })
+
+        it("Places a ship correctly", ()=> {
+            const game = gameBoard();
+    
+            expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
+            expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
+            expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
+        })
     })
 
     describe("Receive attacks", ()=> {
@@ -183,6 +191,16 @@ describe("Game Board factory function", ()=> {
             expect(game.isGameOver()).toBe(true);
         })
     })
+
+    describe("Is valid placement?", ()=> {
+        it("Places a ship correctly", ()=> {
+            const game = gameBoard();
+    
+            expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
+            expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
+            expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
+        })
+    })
 })
 
 describe("Player", ()=> {
@@ -218,11 +236,6 @@ describe("Player", ()=> {
         expect(()=> playerOne.placeship("submarine", [[3, 1], [3, 2], [3, 3]])).toThrow();
     })
 
-    //check if isGameOver works
-    //Place all ships
-    //then sink them all
-    //check if game over is true
-
     it("isGameOver returns correctly", ()=> {
         const playerOne = player();
         expect(playerOne.isGameOver()).toBe(false);
@@ -240,15 +253,5 @@ describe("Player", ()=> {
         }
 
         expect(playerOne.isGameOver()).toBe(true);
-    })
-})
-
-describe("Is valid placement?", ()=> {
-    it("Places a ship correctly", ()=> {
-        const game = gameBoard();
-
-        expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
-        expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
-        expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
     })
 })
