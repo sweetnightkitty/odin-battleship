@@ -20,6 +20,16 @@ header {
     padding: 20px 0px 10px;
 }
 
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: 1px dotted yellow;
+    margin-top: 20px;
+    padding: 20px 50px;
+}
+
 .game {
     flex: 1;
     display: flex;
@@ -83,9 +93,10 @@ footer {
 }
 
 
-/* Toogle Screens */
-.game-start {
-    /* visibility: hidden; */
+/* Hidden screens by default */
+
+header {
+    visibility: hidden;
 }
 
 .choose-player {
@@ -129,10 +140,18 @@ footer {
     justify-content: center;
   }
 
-.btn-start {
+.choose-player-modal > .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 35%;
+}
+
+.btn-start, .btn-one-players, .btn-two-players {
     color: white;
     background-color: black;
     font-size: 45px;
     padding: 20px 50px;
     border: 1px dotted yellow;
+    width: 350px;
 }

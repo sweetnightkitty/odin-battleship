@@ -7,7 +7,11 @@
 </head>
 <body>
     <header>
+        <div class="header">
+            <h1 class="header-text"></h1>
+        </div>
     </header>
+    
     <!--Start Game Screen w/modal button-->
     <div class="game-start">
         <div class="modal game-start-modal">
@@ -18,7 +22,14 @@
     </div>
 
     <!--Choose if it's a one or two player game-->
-    <div class="choose-player"></div>
+    <div class="choose-player">
+        <div class="modal choose-player-modal">
+            <div class="modal-content">
+                <button class="btn-one-players"> 1 Player </button>
+                <button class="btn-two-players">2 Players</button>
+            </div>
+        </div>
+    </div>
 
     <!--Player place ships screen w/ submit button -->
     <div class="place-ships"></div>
