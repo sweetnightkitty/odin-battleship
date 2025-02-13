@@ -7,15 +7,23 @@
 </head>
 <body>
     <header>
-        <h1>Battleship!</h1>
     </header>
     <!--Start Game Screen w/modal button-->
-    <div class="game-start"></div>
+    <div class="game-start">
+        <div class="modal game-start-modal">
+            <div class="modal-content">
+                <button class="btn-start">Start</button>
+            </div>
+        </div>
+    </div>
 
-    <!--Player One place ships screen w/ submit button -->
+    <!--Choose if it's a one or two player game-->
+    <div class="choose-player"></div>
+
+    <!--Player place ships screen w/ submit button -->
     <div class="place-ships"></div>
 
-    <!--Player One's board - Gameplay -->
+    <!--Player One's board - Gameplay can be used for both players-->
     <div class="game">
         <div class="players player-one">
             <div class="names player-one-name"><h2>Player One</h2></div>
