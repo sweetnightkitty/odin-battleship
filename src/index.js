@@ -6,14 +6,14 @@ import { screenController } from "./screenController.js";
 const display = screenController();
 display.displayBoard();
 
+const btnStart = document.querySelector(".btn-start");
+const modalStart = document.querySelector(".game-start-modal");
 
-// //Event listeners for each button the game
-// const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+const modalChoosePlayer = document.querySelector(".choose-player");
 
-// //Runs the first iteration only on load
-// playerOneButtons.forEach(button => {
-//     button.addEventListener("click", ()=> {
-//         display.playRound(button);
-//     })
-// })
 
+btnStart.addEventListener("click", ()=> {
+    modalStart.style.visibility = "hidden";
+    modalChoosePlayer.style.visibility = "visible";
+
+})
