@@ -9,15 +9,37 @@ export const screenController = () => {
         {
             activePlayer: playerOne,
             opponent: playerTwo,
-            name: "one"
+            name: "one",
+            display: playerOneDisplay,
         },
 
         {
             activePlayer: playerTwo,
             opponent: playerOne,
-            name: "two"
+            name: "one", //computer playing
+            display: playerOneDisplay // computer playing
         }
     ]
+
+    const computerPlaysRound = () => {
+        //Generate random coordinates
+        const randomX = Math.floor(Math.random() * (0 - 10));
+        const randomY = Math.floor(Math.random() * (0 - 10));
+
+        //Recalculates random coordinate if it was already used
+        if(activePlayer.opponent.getBoard()[randomX][randomY]) {
+            computerAttack();
+        } else {
+            activePlayer.opponent.recieveAttack([randomX, randomY]);
+        }
+
+        //Checks if game is over
+        if(activePlayer.opponent.isGameOver()) {
+            alert("Game Over!");
+        }
+
+        switchPlayers();
+    }
 
     let activePlayer = players[0]
     const switchPlayers = () => {
@@ -61,6 +83,9 @@ export const screenController = () => {
                     if(activePlayer.opponent.isGameOver()) {
                         alert("Game Over!");
                     }
+
+                    switchPlayers();
+
                 })
             })
         },
