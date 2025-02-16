@@ -1,3 +1,8 @@
+:root {
+    --text-background: url("./images/battleship-xbox-one-xbox-series-x-s-xbox-one-xbox-series-x-s-game-microsoft-store-europe-cover.jpg");
+    --ship-background: url("./images/world-of-warships-wargaming-net-ship-explosion-wallpaper.jpg");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,12 +13,17 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-image: url("./images/battleship-xbox-one-xbox-series-x-s-xbox-one-xbox-series-x-s-game-microsoft-store-europe-cover.jpg");
+    background-image: var(--text-background);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     background-color: black;
 }
+
+.ship-bgd {
+    background-image: var(--ship-background);
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -24,8 +34,7 @@ h1 {
     font-size: 60px;
     font-weight: bold;
     color: white;
-    background-color: black;
-    border: 1px dotted yellow;
+    background-color: #173782;
     margin-top: 20px;
     padding: 20px 50px;
 }
@@ -149,9 +158,8 @@ header {
 
 .btn-start, .btn-one-players, .btn-two-players {
     color: white;
-    background-color: black;
+    background-color: #173782;
     font-size: 45px;
     padding: 20px 50px;
-    border: 1px dotted yellow;
     width: 350px;
 }
