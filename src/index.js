@@ -27,6 +27,9 @@ const btnTwoPlayers = document.querySelector(".btn-two-players");
 //place-ships screen
 const placeShips = document.querySelector(".place-ships");
 
+//place-ships-board
+const placeShipsBoard = document.querySelector(".place-ships-board");
+
 //-------------------------------------------------------------------------
 
 //GAME PLAY:
