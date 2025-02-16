@@ -1,10 +1,12 @@
 import "./styles.css";
 import { screenController } from "./screenController.js";
 
+//INITIATE GAME:
+const controller = screenController();
 
-//Screen controller
-const display = screenController();
-display.displayBoard();
+//-------------------------------------------------------------------------
+
+//HTML CONSTANTS:
 
 //Header
 const header = document.querySelector("header");
@@ -25,6 +27,16 @@ const btnTwoPlayers = document.querySelector(".btn-two-players");
 //place-ships screen
 const placeShips = document.querySelector(".place-ships");
 
+//-------------------------------------------------------------------------
+
+//GAME PLAY:
+controller.displayBoard(); //default displays player ones board
+
+//-------------------------------------------------------------------------
+
+//BUTTON EVENTS:
+
+//Clicking start toggles to the Choose Player screen
 btnStart.addEventListener("click", ()=> {
     start.style.visibility = "hidden";
     ChoosePlayer.style.visibility = "visible";
@@ -51,6 +63,7 @@ btnTwoPlayers.addEventListener("click", ()=> {
     //show player one place ships
     placeShips.style.visibility = "visible";
     headerText.textContent = "Place your ships!";
+    body.style.backgroundImage = "var(--ship-background)";
 
     
     //Then show player two place ships
