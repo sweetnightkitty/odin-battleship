@@ -99,63 +99,10 @@ footer {
 
 
 /* Hidden screens by default */
+.game {
+    visibility: visible;
+}
 
 header {
     visibility: hidden;
-}
-
-.choose-player {
-    visibility: hidden;
-}
-
-.place-ships {
-    visibility: hidden;
-}
-
-.game-over {
-    visibility: hidden;
-}
-
-.game {
-    visibility: hidden;
-}
-
-
-.modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    /* background-color: rgb(0,0,0); /* Fallback color */
-    /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
-  }
-
-  /* Modal Content/Box */
-.modal-content {
-    background-color: transparent;
-    margin: 10% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 40%; /* Could be more or less, depending on screen size */
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-.choose-player-modal > .modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 35%;
-}
-
-.btn-start, .btn-one-players, .btn-two-players {
-    color: white;
-    background-color: #173782;
-    font-size: 45px;
-    padding: 20px 50px;
-    width: 350px;
 }
