@@ -68,7 +68,7 @@ const screenController = () => {
     }
 
     return {
-        displayBoard() {
+        displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
             const name = activePlayer.name;
 
@@ -77,7 +77,7 @@ const screenController = () => {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-buttons`, `${i}${j}`);
                     applyColor(i, j, button);
-                    activePlayer.display.appendChild(button);
+                    displayBoard.appendChild(button);
                 }
             }
 
@@ -90,8 +90,8 @@ const screenController = () => {
             playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
 
-        displayShips() {
-            const playerBoard = activePlayer.activePlayer.getBoard();
+        displayShips(displayBoard = activePlayer.shipDisplay) {
+            const playerBoard = activePlayer.activePlayer.getBoard()
             const name = activePlayer.name;
 
             for(let i = 0; i < playerBoard.length; i++) {
@@ -99,7 +99,7 @@ const screenController = () => {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
                     //Need to create color for the ships / hits
-                    activePlayer.shipDisplay.appendChild(button);
+                    displayBoard.appendChild(button);
                 }
             }
         },
@@ -137,62 +137,4 @@ const screenController = () => {
 }
 
 export const controller = screenController();
-
-// export const screenToggler = () => {
-//     const gamePlayerOne = document.querySelector(".game-player-one");
-
-//     const gamePlayerTwo = document.querySelector(".game-player-two");
-
-//     const startRound = document.querySelector(".start-round");
-//     const startRoundBtn = document.querySelector(".start-round-btn");
-//     return {
-//         goToStartRound() {
-//             if(event.target.classList[1] == "end-player-one") {
-//                  //Hide player One
-//                  gamePlayerOne.style.display = "none";
-         
-//                  //Show intermediate screen
-//                  startRound.style.display = "flex";
-         
-//                  //Add a class to the intermediate screen to know who plays next
-//                  if(startRoundBtn.classList.contains("one")) {startRoundBtn.classList.remove("one")};
-//                  startRoundBtn.classList.add("two");
-//                  startRoundBtn.textContent = "Player Two Start";
-         
-//             } else if(event.target.classList[1] == "end-player-two") {
-//                  //Hide Player Two
-//                  gamePlayerTwo.style.display = "none";
-         
-//                  //Shows Intermediate Screen
-//                  startRound.style.display = "flex";
-         
-//                  //Add a class to the intermediate screen to know who plays next
-//                  startRoundBtn.classList.add("one");
-//                  startRoundBtn.classList.remove("two");
-//                  startRoundBtn.textContent = "Player One Start";
-         
-//             }
-//          },
-
-//         nextPlayerRound () {
-//                 //Hide the intermediate screen
-//                 startRound.style.display = "none";
-            
-//                 //Regenerate the game for current active player
-//                 controller.switchPlayers();
-//                 controller.reset("board");
-//                 controller.reset("ships");
-//                 controller.displayBoard();
-//                 controller.displayShips(); // may be an issue
-                
-//                 //Displays the correct person's board:
-//                 const nextPlayer = event.target.classList[1];
-//                 if(nextPlayer == "one") {
-//                     gamePlayerOne.style.display = "flex";
-//                 } else if(nextPlayer == "two") {
-//                     gamePlayerTwo.style.display = "flex";
-//                 }
-//         },
-//     }
-// } 
 
