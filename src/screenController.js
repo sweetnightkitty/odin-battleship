@@ -1,4 +1,4 @@
-import { player } from "./gameLogic";
+import { player, ship } from "./gameLogic";
 
 const screenController = () => {
     const playerOne = player();
@@ -132,7 +132,40 @@ const screenController = () => {
         switchPlayers() {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
-        
+
+        placeship(event) {
+            const shipname = event.target.classList[0];
+            const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
+            // const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+            let limit = 0;
+            const coordinates = [];
+
+            //Limit determines how many coordinates are needed
+            if(shipname == "aircraftCarrier") {limit = 5};
+
+            if(activePlayer.name = "one") {
+                playerOneShipButtons.forEach(button => {
+                    button.addEventListener("click", (event)=> {
+                        //Get the coordinates for each button:
+                        const button = event.target;
+                        const [x, y] = button.classList[1];
+                        coordinates.push([x, y]);
+
+                        //When all coordinates are collected disables buttons and passes to placeship:
+                        if(coordinates.length == limit) {
+                            playerOneShipButtons.forEach(button => button.disabled = true)
+                            activePlayer.activePlayer.placeship(shipname, coordinates);
+                        };
+                    })
+                })
+            }
+
+
+            //if(coordinates.length = limit - 1) {playerOneButtons.forEach(button => button.disabled = true);}
+
+
+            //activePlayer.activePlayer.placeship(shipname, coordinates);
+        },
     }
 }
 
