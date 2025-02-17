@@ -10,11 +10,9 @@ const controller = screenController();
 
 const gamePlayerOne = document.querySelector(".game-player-one");
 const endPlayerOneRound = document.querySelector(".end-player-one");
-const hideShipsOne = document.querySelector(".player-one-ships");
 
 const gamePlayerTwo = document.querySelector(".game-player-two");
 const endPlayerTwoRound = document.querySelector(".end-player-two");
-const hideShipsTwo = document.querySelector(".player-two-ships");
 
 const startRound = document.querySelector(".start-round");
 const startRoundBtn = document.querySelector(".start-round-btn");
@@ -22,12 +20,16 @@ const startRoundBtn = document.querySelector(".start-round-btn");
 //-------------------------------------------------------------------------
 
 //GAME PLAY:
+
+//First initiation -  displays player one by default
 controller.displayBoard(); //Displays the active player's top board (tracks their attacks)
 controller.displayShips(); //Displays the active player's bottom board (their ship placements and hits so far)
 
 //-------------------------------------------------------------------------
 
 //BUTTON EVENTS:
+
+//Toggles between playerOne's UI game, intermediate startRound, and playerTwo's UI game
 endPlayerOneRound.addEventListener("click", goToStartRound);
 endPlayerTwoRound.addEventListener("click", goToStartRound);
 startRoundBtn.addEventListener("click", nextPlayerRound);
