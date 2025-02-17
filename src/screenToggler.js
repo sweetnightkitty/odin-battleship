@@ -2,11 +2,12 @@ import { controller } from "./screenController";
 
 const screenToggler = () => {
     const gamePlayerOne = document.querySelector(".game-player-one");
-
     const gamePlayerTwo = document.querySelector(".game-player-two");
-
     const startRound = document.querySelector(".start-round");
     const startRoundBtn = document.querySelector(".start-round-btn");
+
+    const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
+
     return {
         goToStartRound() {
             if(event.target.classList[1] == "end-player-one") {
@@ -55,6 +56,17 @@ const screenToggler = () => {
                     gamePlayerTwo.style.display = "flex";
                 }
         },
+
+        generateShipPlacementBoard() {
+            controller.displayShips(shipPlacementPlayerOne);
+
+            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+            playerOneButtons.forEach(button => {
+                button.addEventListener("click", ()=> {
+                    console.log('wee');
+                })
+            })
+        }
     }
 } 
 
