@@ -31,6 +31,8 @@ export const screenController = () => {
         }
     ]
 
+    let activePlayer = players[0]
+
     const computerPlaysRound = () => {
         //Generate random coordinates
         const randomX = Math.floor(Math.random() * (0 - 10));
@@ -48,12 +50,6 @@ export const screenController = () => {
             alert("Game Over!");
         }
 
-        switchPlayers();
-    }
-
-    let activePlayer = players[0]
-    const switchPlayers = () => {
-        activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
 
     const applyColor = (x, y, button) => {
@@ -72,7 +68,6 @@ export const screenController = () => {
     }
 
     return {
-        //Creates UI buttons for both boards, playerOne is the default staring player
         displayBoard() {
             const opponentBoard = activePlayer.opponent.getBoard();
             const name = activePlayer.name;
@@ -90,6 +85,7 @@ export const screenController = () => {
             const playerOneButtons = document.querySelectorAll(".player-one-buttons");
             const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
 
+            //Then event listeners can be added on
             playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
             playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
@@ -108,11 +104,13 @@ export const screenController = () => {
             }
         },
 
-        resetBoard(displayBoard) {
-            displayBoard.innerHTML = "";
+        reset(boardType) {
+            if(boardType == "board") {activePlayer.display.innerHTML = ""};
+            if(boardType == "ships") {activePlayer.shipDisplay.innerHTML = ""};
         },
 
         playRound(event) {
+            //Get the coordinates of the attack
             const button = event.target;
             const [x, y] = button.classList[1];
 
@@ -129,7 +127,10 @@ export const screenController = () => {
 
             const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
             playerTwoButtons.forEach(button => button.disabled = true);
+        },
 
+        switchPlayers() {
+            activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
         
     }
