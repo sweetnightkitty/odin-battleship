@@ -1,9 +1,8 @@
 import "./styles.css";
 import { controller } from "./screenController.js";
-import { screenToggler } from "./screenController.js";
+import { toggler } from "./screenToggler.js";
 
-//INITIATES SCREEN TOGGLER:
-const toggler = screenToggler();
+
 
 //-------------------------------------------------------------------------
 
