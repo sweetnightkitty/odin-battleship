@@ -8,6 +8,9 @@ export const screenController = () => {
     const playerOneShips = document.querySelector(".player-one-ships");
     const playerTwoShips = document.querySelector(".player-two-ships");
 
+    const playerOneNotice = document.querySelector(".player-one-notice");
+    const playerTwoNotice = document.querySelector(".player-two-notice");
+
     const players = [
         {
             activePlayer: playerOne,
@@ -15,6 +18,7 @@ export const screenController = () => {
             name: "one",
             display: playerOneDisplay,
             shipDisplay: playerOneShips,
+            notice: playerOneNotice,
         },
 
         {
@@ -23,6 +27,7 @@ export const screenController = () => {
             name: "two", //computer playing
             display: playerTwoDisplay, // computer playing
             shipDisplay: playerTwoShips,
+            notice: playerTwoNotice,
         }
     ]
 
@@ -51,12 +56,19 @@ export const screenController = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
 
-    const applyColor = (x, y, opponentBoard, button) => {
+    const applyColor = (x, y, button) => {
+        const opponentBoard = activePlayer.opponent.getBoard();
         if(opponentBoard[x][y] == "hit") {
             button.classList.add("hit");
         } else if(opponentBoard[x][y] == "miss") {
             button.classList.add("miss");
         }
+    }
+
+    const getNotice = (x, y) => {
+        const opponentBoard = activePlayer.opponent.getBoard();
+        if(opponentBoard[x][y] == "hit") return "It's a hit!";
+        if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
     return {
@@ -69,7 +81,7 @@ export const screenController = () => {
                 for(let j = 0; j < opponentBoard[i].length; j++) {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-buttons`, `${i}${j}`);
-                    applyColor(i, j, opponentBoard, button);
+                    applyColor(i, j, button);
                     activePlayer.display.appendChild(button);
                 }
             }
@@ -78,15 +90,8 @@ export const screenController = () => {
             const playerOneButtons = document.querySelectorAll(".player-one-buttons");
             const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
 
-            //Need to ensure the event listener is added every time new buttons display.
-            playerOneButtons.forEach(button => {
-                button.addEventListener("click", ()=> {
-                    this.playRound(button);
-                    this.resetBoard(playerOneDisplay);
-                    this.displayBoard(playerOneDisplay);
-
-                })
-            })
+            playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
+            playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
 
         displayShips() {
@@ -107,13 +112,24 @@ export const screenController = () => {
             displayBoard.innerHTML = "";
         },
 
-        playRound(button) {
+        playRound(event) {
+            const button = event.target;
             const [x, y] = button.classList[1];
 
-            //Send the attack to the opponent - this works
+            //Send the attack to the opponent
             activePlayer.opponent.recieveAttack([x, y]);
-            
-            //switch turns
+
+            //Displays the results:
+            applyColor(x, y, button);
+            activePlayer.notice.textContent = getNotice(x, y);
+
+            //Disables the buttons to prevent additional attacks
+            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+            playerOneButtons.forEach(button => button.disabled = true);
+
+            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+            playerTwoButtons.forEach(button => button.disabled = true);
+
         },
         
     }
