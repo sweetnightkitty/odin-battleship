@@ -13,8 +13,8 @@ const endPlayerOneRound = document.querySelector(".end-player-one");
 //-------------------------------------------------------------------------
 
 //GAME PLAY:
-controller.displayBoard(); //default displays player ones board
-controller.displayShips();
+controller.displayBoard(); //Displays the active player's top board (tracks their attacks)
+controller.displayShips(); //Displays the active player's bottom board (their ship placements and hits so far)
 
 //-------------------------------------------------------------------------
 
