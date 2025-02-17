@@ -35,7 +35,7 @@ const startRoundBtn = document.querySelector(".start-round-btn");
 //BUTTON EVENTS:
 
 //Toggles between playerOne's UI game, intermediate startRound, and playerTwo's UI game
-endPlayerOneRound.addEventListener("click", toggler.goToStartRound);
-endPlayerTwoRound.addEventListener("click", toggler.goToStartRound);
-startRoundBtn.addEventListener("click", toggler.nextPlayerRound);
+endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
+endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
+startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 

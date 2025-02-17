@@ -9,7 +9,7 @@ const screenToggler = () => {
     const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
 
     return {
-        goToStartRound() {
+        goToStartScreen() {
             if(event.target.classList[1] == "end-player-one") {
                  //Hide player One
                  gamePlayerOne.style.display = "none";
@@ -37,7 +37,7 @@ const screenToggler = () => {
             }
          },
 
-        nextPlayerRound () {
+        goToPlayerBoardScreen () {
                 //Hide the intermediate screen
                 startRound.style.display = "none";
             
@@ -66,7 +66,8 @@ const screenToggler = () => {
                     console.log('wee');
                 })
             })
-        }
+        },
+
     }
 } 
 
