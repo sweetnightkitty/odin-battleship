@@ -53,13 +53,29 @@ h1 {
     padding: 8px 0px;
 }
 
-.boards {
+.boards, .ships {
     flex: 1;
     display: grid;
     grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 }
 
-.player-one-buttons, .player-two-buttons {
+.ships {
+    padding-top: 50px;
+}
+
+.game-submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+.end-round {
+    font-size: 16px;
+    padding: 8px 10px;
+    background-color: white;
+}
+
+.player-one-buttons, .player-two-buttons, .player-one-ship-buttons, .player-two-ship-buttons {
     border-radius: 0;
     border: .5px solid black;
     background-color: white;
@@ -75,6 +91,10 @@ h1 {
 
 .miss {
     background-color: black;
+}
+
+.selected {
+    background-color: orange;
 }
 
 footer {
