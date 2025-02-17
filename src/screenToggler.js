@@ -57,15 +57,10 @@ const screenToggler = () => {
                 }
         },
 
-        generateShipPlacementBoard() {
-            controller.displayShips(shipPlacementPlayerOne);
+        goToShipPlacementBoard() {
+            controller.displayShips(shipPlacementPlayerOne); //Currently only set up for player one
 
             const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            playerOneButtons.forEach(button => {
-                button.addEventListener("click", ()=> {
-                    console.log('wee');
-                })
-            })
         },
 
     }
