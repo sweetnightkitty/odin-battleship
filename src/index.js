@@ -20,7 +20,7 @@ controller.displayShips(); //Displays the active player's bottom board (their sh
 //SHIP PLACEMENT:
 
 //First initiation - displays player one by default
-toggler.generateShipPlacementBoard();
+toggler.goToShipPlacementBoard();
 
 //-------------------------------------------------------------------------
 
