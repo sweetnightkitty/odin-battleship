@@ -67,6 +67,7 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -81,13 +82,8 @@ const screenController = () => {
                 }
             }
 
-            //Buttons must be defined AFTER displayBoard generates new buttons.
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+            this.addEventListeners();
 
-            //Then event listeners can be added on
-            playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
-            playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
 
         displayShips(displayBoard = activePlayer.shipDisplay) {
@@ -145,12 +141,17 @@ const screenController = () => {
 
             if(activePlayer.name = "one") {
                 playerOneShipButtons.forEach(button => {
+
+                    //Adds hover effects only after buttons are active
+                    button.classList.add("hover-effect");
+
                     button.addEventListener("click", (event)=> {
                         //Get the coordinates for each button:
                         const button = event.target;
                         const [x, y] = button.classList[1];
                         coordinates.push([x, y]);
 
+                        button.classList.add("selected");
                         //When all coordinates are collected disables buttons and passes to placeship:
                         if(coordinates.length == limit) {
                             playerOneShipButtons.forEach(button => button.disabled = true)
@@ -159,13 +160,18 @@ const screenController = () => {
                     })
                 })
             }
-
-
-            //if(coordinates.length = limit - 1) {playerOneButtons.forEach(button => button.disabled = true);}
-
-
-            //activePlayer.activePlayer.placeship(shipname, coordinates);
         },
+
+        addEventListeners() {
+            //Buttons must be defined AFTER EVERY time they are generated in dom
+            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
+            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+
+            //Then event listeners can be added on
+            playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
+            playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
+        }
+
     }
 }
 

@@ -152,6 +152,14 @@ h1 {
     justify-content: center;
 }
 
+.hover-effect:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+.selected {
+    background-color: grey;
+}
+
 /*------------------------------------------------------------------------*/
 
 footer {
