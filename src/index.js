@@ -43,15 +43,16 @@ startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //PLACE-SHIPS-SCREEN:
 
+//SHIP BUTTONS
 const aircraftBtn = document.querySelector(".aircraftCarrier");
 const battleshipBtn = document.querySelector(".battleship");
 const cruiserBtn = document.querySelector(".cruiser");
 const submarineBtn = document.querySelector(".submarine");
 const destroyerBtn = document.querySelector(".destroyer");
 
+//BUTTON EVENTS:
 aircraftBtn.addEventListener("click", controller.placeship);
-    //runs a function - same for all ships
-    //indicates a number 5 - based on the ship name/class
-    //Takes in 5 button click inputs
-    //Then disables all buttons
-    //turns these inputs into a list of coordinates to play ship.
+battleshipBtn.addEventListener("click", controller.placeship);
+cruiserBtn.addEventListener("click", controller.placeship);
+submarineBtn.addEventListener("click", controller.placeship);
+destroyerBtn.addEventListener("click", controller.placeship);
