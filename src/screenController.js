@@ -130,34 +130,51 @@ const screenController = () => {
         },
 
         placeship(event) {
+            const ship = event.target;
             const shipname = event.target.classList[0];
+            ship.classList.add("current");
             const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
-            // const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+            const playerTwoShipButtons = document.querySelectorAll(".player-two-buttons");
+            
             let limit = 0;
             const coordinates = [];
 
             //Limit determines how many coordinates are needed
             if(shipname == "aircraftCarrier") {limit = 5};
+            if(shipname == "battleship") {limit = 4};
+            if(shipname == "submarine" || shipname == "cruiser") {limit = 3};
+            if(shipname == "destroyer") {limit = 2};
 
-            if(activePlayer.name = "one") {
+            const handleShipPlacement = (event) => {
+                const [x, y] = event.target.classList[1];
+                coordinates.push([x, y]);
+
+                event.target.classList.add("selected");
+
+                //When all coordinates are collected disables buttons and passes to placeship:
+                if(coordinates.length == limit) {
+                    activePlayer.activePlayer.placeship(shipname, coordinates);
+                    playerOneShipButtons.forEach(button => {
+                        button.removeEventListener("click", handleShipPlacement);
+                        button.classList.remove("hover-effect");
+                    });
+                    ship.classList.remove("current");
+                    ship.classList.add("complete");
+                };
+
+            }
+
+            if(activePlayer.name == "one") {
                 playerOneShipButtons.forEach(button => {
-
                     //Adds hover effects only after buttons are active
                     button.classList.add("hover-effect");
-
-                    button.addEventListener("click", (event)=> {
-                        //Get the coordinates for each button:
-                        const button = event.target;
-                        const [x, y] = button.classList[1];
-                        coordinates.push([x, y]);
-
-                        button.classList.add("selected");
-                        //When all coordinates are collected disables buttons and passes to placeship:
-                        if(coordinates.length == limit) {
-                            playerOneShipButtons.forEach(button => button.disabled = true)
-                            activePlayer.activePlayer.placeship(shipname, coordinates);
-                        };
-                    })
+                    button.addEventListener("click", handleShipPlacement);
+                })
+            } else if(activePlayer.name == "two") {
+                playerTwoShipButtons.forEach(button => {
+                    //Adds hover effects only after buttons are active
+                    button.classList.add("hover-effect");
+                    button.addEventListener("click", handleShipPlacement);
                 })
             }
         },
@@ -170,7 +187,7 @@ const screenController = () => {
             //Then event listeners can be added on
             playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
             playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
-        }
+        },
 
     }
 }
