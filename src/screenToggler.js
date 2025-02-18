@@ -1,15 +1,17 @@
 import { controller } from "./screenController";
 
 const screenToggler = () => {
+    //GAME SCREEN DIVS
     const gamePlayerOne = document.querySelector(".game-player-one");
     const gamePlayerTwo = document.querySelector(".game-player-two");
     const startRound = document.querySelector(".start-round");
     const startRoundBtn = document.querySelector(".start-round-btn");
 
+    //PLACE SHIPS SCREEN DIVS
     const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
 
     return {
-        goToStartScreen() {
+        goToStartScreen(event) {
             if(event.target.classList[1] == "end-player-one") {
                  //Hide player One
                  gamePlayerOne.style.display = "none";
@@ -37,7 +39,7 @@ const screenToggler = () => {
             }
          },
 
-        goToPlayerBoardScreen () {
+        goToPlayerBoardScreen (event) {
                 //Hide the intermediate screen
                 startRound.style.display = "none";
             
