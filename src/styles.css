@@ -207,6 +207,10 @@ footer {
 .place-ships-screen {
     display: flex;
 }
+
+.placement-player-two {
+    display: none;
+}
 .game-player-two, .start-round {
     display: none;
 }
