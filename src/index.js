@@ -56,3 +56,22 @@ battleshipBtn.addEventListener("click", controller.placeship);
 cruiserBtn.addEventListener("click", controller.placeship);
 submarineBtn.addEventListener("click", controller.placeship);
 destroyerBtn.addEventListener("click", controller.placeship);
+
+const submitPlayerOneShips = document.querySelector(".ships-submit-player-one");
+
+submitPlayerOneShips.addEventListener("click", ()=> {
+
+    //Complete class is added after ship is placed: indicates all are placed.
+    if((aircraftBtn.classList.contains("complete")) 
+        && (battleshipBtn.classList.contains("complete"))
+        && (cruiserBtn.classList.contains("complete"))
+        && (submarineBtn.classList.contains("complete"))
+        && (destroyerBtn.classList.contains("complete"))
+    ) {
+        //Yes - toggle next screen
+    } else {    
+        alert("Not all ships are placed, place them all then press submit");
+    };
+
+
+})
