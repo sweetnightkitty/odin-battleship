@@ -1,3 +1,4 @@
+import { ship } from "./gameLogic";
 import { controller } from "./screenController";
 
 const screenToggler = () => {
@@ -9,6 +10,7 @@ const screenToggler = () => {
 
     //PLACE SHIPS SCREEN DIVS
     const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
+    const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
 
     return {
         goToStartScreen(event) {
@@ -59,7 +61,9 @@ const screenToggler = () => {
                 }
         },
 
-        goToShipPlacementBoard() {
+        goToShipPlacementBoard(player) {
+            if(player == "one") {controller.displayShips(shipPlacementPlayerOne)};
+            if(player == "two") {controller.displayShips(shipPlacementPlayerTwo)}
             controller.displayShips(shipPlacementPlayerOne); //Currently only set up for player one
         },
 
