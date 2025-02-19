@@ -63,14 +63,19 @@ const screenToggler = () => {
                 }
         },
 
-        goToShipPlacementBoard(player) {
+        goToShipPlacementBoard(player = "one") {
+            //Player one loads automatically
             if(player == "one") {controller.displayShips(shipPlacementPlayerOne)};
             if(player == "two") {
+                
+                //bc displayShips is based on the current active player:
+                controller.switchPlayers();
+
+                //Arriving from playerOne, so hide's their board.
                 placementPlayerOne.style.display = "none";
                 placementPlayerTwo.style.display = "flex";
                 controller.displayShips(shipPlacementPlayerTwo)
             }
-            controller.displayShips(shipPlacementPlayerOne); //Currently only set up for player one
         },
 
     }
