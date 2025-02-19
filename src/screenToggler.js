@@ -9,6 +9,8 @@ const screenToggler = () => {
     const startRoundBtn = document.querySelector(".start-round-btn");
 
     //PLACE SHIPS SCREEN DIVS
+    const placementPlayerOne = document.querySelector(".placement-player-one");
+    const placementPlayerTwo = document.querySelector(".placement-player-two");
     const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
     const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
 
@@ -63,7 +65,11 @@ const screenToggler = () => {
 
         goToShipPlacementBoard(player) {
             if(player == "one") {controller.displayShips(shipPlacementPlayerOne)};
-            if(player == "two") {controller.displayShips(shipPlacementPlayerTwo)}
+            if(player == "two") {
+                placementPlayerOne.style.display = "none";
+                placementPlayerTwo.style.display = "flex";
+                controller.displayShips(shipPlacementPlayerTwo)
+            }
             controller.displayShips(shipPlacementPlayerOne); //Currently only set up for player one
         },
 

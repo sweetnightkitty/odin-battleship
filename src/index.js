@@ -69,6 +69,7 @@ submitPlayerOneShips.addEventListener("click", ()=> {
         && (destroyerBtn.classList.contains("complete"))
     ) {
         //Yes - toggle next screen
+        toggler.goToShipPlacementBoard("two");
     } else {    
         alert("Not all ships are placed, place them all then press submit");
     };
