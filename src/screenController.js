@@ -134,7 +134,7 @@ const screenController = () => {
             const shipname = event.target.classList[0];
             ship.classList.add("current");
             const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
-            const playerTwoShipButtons = document.querySelectorAll(".player-two-buttons");
+            const playerTwoShipButtons = document.querySelectorAll(".player-two-ship-buttons");
             
             let limit = 0;
             const coordinates = [];
