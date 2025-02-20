@@ -84,7 +84,7 @@ const screenController = () => {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
                     //Need to create color for the ships / hits
-
+                    if(playerBoard[i][j]) {button.classList.add("selected")}; // mark ships
                     displayBoard.appendChild(button);
                 }
             }
@@ -130,9 +130,63 @@ const screenController = () => {
             displayDiv.appendChild(destroyer);
 
            //Add event listeners here
+           aircraftCarrier.addEventListener("click", this.userPlacesShip);
+           battleship.addEventListener("click", this.userPlacesShip);
+           cruiser.addEventListener("click", this.userPlacesShip);
+           submarine.addEventListener("click", this.userPlacesShip);
+           destroyer.addEventListener("click", this.userPlacesShip);
 
         },
 
+        userPlacesShip(event) {
+            const ship = event.target;
+            const shipname = event.target.classList[0];
+            ship.classList.add("current");
+            const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
+            const playerTwoShipButtons = document.querySelectorAll(".player-two-ship-buttons");
+            
+            let limit = 0;
+            const coordinates = [];
+
+            //Limit determines how many coordinates are needed
+            if(shipname == "aircraftCarrier") {limit = 5};
+            if(shipname == "battleship") {limit = 4};
+            if(shipname == "submarine" || shipname == "cruiser") {limit = 3};
+            if(shipname == "destroyer") {limit = 2};
+
+            const handleShipPlacement = (event) => {
+                const [x, y] = event.target.classList[1];
+                coordinates.push([x, y]);
+
+                event.target.classList.add("selected");
+
+                //When all coordinates are collected disables buttons and passes to placeship:
+                if(coordinates.length == limit) {
+                    activePlayer.activePlayer.placeship(shipname, coordinates);
+                    playerOneShipButtons.forEach(button => {
+                        button.removeEventListener("click", handleShipPlacement);
+                        button.classList.remove("hover-effect");
+                    });
+                    ship.classList.remove("current");
+                    ship.classList.add("complete");
+                };
+
+            }
+
+            if(activePlayer.name == "one") {
+                playerOneShipButtons.forEach(button => {
+                    //Adds hover effects only after buttons are active
+                    button.classList.add("hover-effect");
+                    button.addEventListener("click", handleShipPlacement);
+                })
+            } else if(activePlayer.name == "two") {
+                playerTwoShipButtons.forEach(button => {
+                    //Adds hover effects only after buttons are active
+                    button.classList.add("hover-effect");
+                    button.addEventListener("click", handleShipPlacement);
+                })
+            }
+        },
     }
 }
 
