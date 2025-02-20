@@ -115,8 +115,6 @@ const screenController = () => {
             submarine.textContent = "Submarine";
             destroyer.textContent = "Destroyer";
             
-            const name = activePlayer.name
-            
             aircraftCarrier.classList.add("aircraftCarrier");
             battleship.classList.add("battleship");
             cruiser.classList.add("cruiser");
@@ -163,10 +161,18 @@ const screenController = () => {
                 //When all coordinates are collected disables buttons and passes to placeship:
                 if(coordinates.length == limit) {
                     activePlayer.activePlayer.placeship(shipname, coordinates);
-                    playerOneShipButtons.forEach(button => {
-                        button.removeEventListener("click", handleShipPlacement);
-                        button.classList.remove("hover-effect");
-                    });
+
+                    if(activePlayer.name == "one") {
+                        playerOneShipButtons.forEach(button => {
+                            button.removeEventListener("click", handleShipPlacement);
+                            button.classList.remove("hover-effect");
+                        });
+                    } else if(activePlayer.name = "two") {
+                        playerTwoShipButtons.forEach(button => {
+                            button.removeEventListener("click", handleShipPlacement);
+                            button.classList.remove("hover-effect");
+                        })
+                    }
                     ship.classList.remove("current");
                     ship.classList.add("complete");
                 };
