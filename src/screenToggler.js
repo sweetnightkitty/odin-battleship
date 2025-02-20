@@ -7,7 +7,7 @@ const screenToggler = () => {
     const placeShipsScreen = document.querySelector(".place-ships-screen");
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
-    
+
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
     const gamePlayerOne = document.querySelector(".game-player-one");
@@ -16,6 +16,19 @@ const screenToggler = () => {
     const startRoundBtn = document.querySelector(".start-round-btn");
 
     return {
+        goToShipPlacementScreenTwo() {
+            //hide placement one
+            shipPlacementScreenOne.style.display = "none";
+
+            //display placement two
+            shipPlacementScreenTwo.style.display = "flex";
+        },
+
+        startGame() {
+            placeShipsScreen.style.display = "none";
+            gameScreen.style.display = "flex";
+        },
+
         goToStartScreen(event) {
             if(event.target.classList[1] == "end-player-one") {
                  //Hide player One
@@ -62,19 +75,6 @@ const screenToggler = () => {
                 } else if(nextPlayer == "two") {
                     gamePlayerTwo.style.display = "flex";
                 }
-        },
-
-        goToShipPlacementScreenTwo() {
-            //hide placement one
-            shipPlacementScreenOne.style.display = "none";
-
-            //display placement two
-            shipPlacementScreenTwo.style.display = "flex";
-        },
-
-        startGame() {
-            placeShipsScreen.style.display = "none";
-            gameScreen.style.display = "flex";
         },
 
     }
