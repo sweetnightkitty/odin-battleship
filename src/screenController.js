@@ -8,6 +8,8 @@ const screenController = () => {
     const playerTwoDisplay = document.querySelector(".player-two-board");
     const playerOneShipDisplay = document.querySelector(".player-one-ships");
     const playerTwoShipDisplay = document.querySelector(".player-two-ships");
+    const playerOneShipPlacement = document.querySelector(".placement-boards-player-one");
+    const playerTwoShipPlacement = document.querySelector(".placement-boards-player-two");
 
     const playerOneNotice = document.querySelector(".player-one-notice");
     const playerTwoNotice = document.querySelector(".player-two-notice");
@@ -20,6 +22,7 @@ const screenController = () => {
             display: playerOneDisplay, // Displays players attacks
             shipDisplay: playerOneShipDisplay, //Displays the locations of their ships
             notice: playerOneNotice,
+            shipPlacement: playerOneShipPlacement,
         },
 
         {
@@ -29,6 +32,7 @@ const screenController = () => {
             display: playerTwoDisplay, // computer playing
             shipDisplay: playerTwoShipDisplay,
             notice: playerTwoNotice,
+            shipPlacement: playerTwoShipPlacement,
         }
     ]
 
@@ -68,7 +72,7 @@ const screenController = () => {
 
         },
 
-        displayShips(displayBoard = activePlayer.shipDisplay) {
+        displayShips(displayBoard = activePlayer.shipDisplay, displayPlacement = activePlayer.shipPlacement) {
             const playerBoard = activePlayer.activePlayer.getBoard()
             const name = activePlayer.name;
 
@@ -78,13 +82,17 @@ const screenController = () => {
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
                     //Need to create color for the ships / hits
                     displayBoard.appendChild(button);
+                    displayPlacement.appendChild(button);
                 }
             }
         },
 
         reset(boardType) {
             if(boardType == "board") {activePlayer.display.innerHTML = ""};
-            if(boardType == "ships") {activePlayer.shipDisplay.innerHTML = ""};
+            if(boardType == "ships") {
+                activePlayer.shipDisplay.innerHTML = "";
+                activePlayer.shipPlacement.innerHTML = "";
+            };
         },
 
         switchPlayers() {

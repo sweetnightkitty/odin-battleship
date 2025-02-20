@@ -24,6 +24,8 @@ const screenToggler = () => {
 
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
+            controller.switchPlayers();
+            controller.displayShips();
             controller.generateShipButtons(shipButtonsTwo);
         },
 
