@@ -26,13 +26,6 @@ startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //-------------------------------------------------------------------------
 
-//GAME PLAY:
-
-//First initiation -  displays player one by default
-controller.displayBoard(); //Displays the active player's top board (tracks their attacks)
-
-//-------------------------------------------------------------------------
-
 //FIRST SCREEN = PLACE SHIPS ONE - FIRST INITIATION:
 
 const shipButtonsOne = document.querySelector(".ship-buttons-one");

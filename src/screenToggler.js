@@ -35,6 +35,7 @@ const screenToggler = () => {
             placeShipsScreen.style.display = "none";
             gameScreen.style.display = "flex";
             controller.switchPlayers(); // Switch from player 2 (Placement) to player 1
+            controller.displayBoard();
             controller.displayShips(gamePlayerOneShips);
             
         },
