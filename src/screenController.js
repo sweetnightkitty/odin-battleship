@@ -51,6 +51,7 @@ const screenController = () => {
     }
 
 
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -90,6 +91,32 @@ const screenController = () => {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
 
+        generateShipButtons(displayDiv) {
+            const aircraftCarrier = document.createElement("button");
+            const battleship = document.createElement("button");
+            const cruiser = document.createElement("button");
+            const submarine = document.createElement("button");
+            const destroyer = document.createElement("button");
+
+            aircraftCarrier.textContent = "Aircraft Carrier";
+            battleship.textContent = "Battleship";
+            cruiser.textContent = "Cruiser";
+            submarine.textContent = "Submarine";
+            destroyer.textContent = "Destroyer";
+
+            aircraftCarrier.classList.add("aircraftCarrier");
+            battleship.classList.add("battleship");
+            cruiser.classList.add("cruiser");
+            submarine.classList.add("submarine");
+            destroyer.classList.add("destroyer");
+
+            displayDiv.appendChild(aircraftCarrier);
+            displayDiv.appendChild(battleship);
+            displayDiv.appendChild(cruiser);
+            displayDiv.appendChild(submarine);
+            displayDiv.appendChild(destroyer);
+
+        }
     }
 }
 

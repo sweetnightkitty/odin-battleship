@@ -8,6 +8,8 @@ const screenToggler = () => {
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
 
+    const shipButtonsTwo = document.querySelector(".ship-buttons-two");
+
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
     const gamePlayerOne = document.querySelector(".game-player-one");
@@ -22,6 +24,7 @@ const screenToggler = () => {
 
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
+            controller.generateShipButtons(shipButtonsTwo);
         },
 
         startGame() {
