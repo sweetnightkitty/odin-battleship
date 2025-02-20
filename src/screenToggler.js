@@ -3,12 +3,14 @@ import { controller } from "./screenController";
 
 const screenToggler = () => {
     //GAME SCREEN DIVS
+    const gameScreen = document.querySelector(".game-screen");
     const gamePlayerOne = document.querySelector(".game-player-one");
     const gamePlayerTwo = document.querySelector(".game-player-two");
     const startRound = document.querySelector(".start-round");
     const startRoundBtn = document.querySelector(".start-round-btn");
 
     //PLACE SHIPS SCREEN DIVS
+    const placeShipsScreen = document.querySelector(".place-ships-screen");
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
 
@@ -67,6 +69,11 @@ const screenToggler = () => {
 
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
+        },
+
+        startGame() {
+            placeShipsScreen.style.display = "none";
+            gameScreen.style.display = "flex";
         },
 
     }
