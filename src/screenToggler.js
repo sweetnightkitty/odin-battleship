@@ -13,8 +13,8 @@ const screenToggler = () => {
     const gameScreen = document.querySelector(".game-screen");
     const gamePlayerOneScreen = document.querySelector(".game-player-one");
     const gamePlayerTwoScreen = document.querySelector(".game-player-two");
-
     const startRoundScreen = document.querySelector(".start-round");
+
     const startRoundBtn = document.querySelector(".start-round-btn");
     const gamePlayerOneShips = document.querySelector(".player-one-ships");
     const gamePlayerTwoShips = document.querySelector(".player-two-ships");

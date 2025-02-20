@@ -54,6 +54,9 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
+    const woo = () => {
+        console.log("woo");
+    }
 
 
     return {
@@ -111,7 +114,9 @@ const screenController = () => {
             cruiser.textContent = "Cruiser";
             submarine.textContent = "Submarine";
             destroyer.textContent = "Destroyer";
-
+            
+            const name = activePlayer.name
+            
             aircraftCarrier.classList.add("aircraftCarrier");
             battleship.classList.add("battleship");
             cruiser.classList.add("cruiser");
@@ -124,7 +129,10 @@ const screenController = () => {
             displayDiv.appendChild(submarine);
             displayDiv.appendChild(destroyer);
 
-        }
+           //Add event listeners here
+
+        },
+
     }
 }
 
