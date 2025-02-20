@@ -54,11 +54,6 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
-    const woo = () => {
-        console.log("woo");
-    }
-
-
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
