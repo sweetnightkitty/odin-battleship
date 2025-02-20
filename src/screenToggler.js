@@ -9,10 +9,8 @@ const screenToggler = () => {
     const startRoundBtn = document.querySelector(".start-round-btn");
 
     //PLACE SHIPS SCREEN DIVS
-    const placementPlayerOne = document.querySelector(".placement-player-one");
-    const placementPlayerTwo = document.querySelector(".placement-player-two");
-    const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
-    const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
+    const shipPlacementScreenOne = document.querySelector(".placement-player-one");
+    const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
 
     return {
         goToStartScreen(event) {
@@ -63,19 +61,12 @@ const screenToggler = () => {
                 }
         },
 
-        goToShipPlacementBoard(player = "one") {
-            //Player one loads automatically
-            if(player == "one") {controller.displayShips(shipPlacementPlayerOne)};
-            if(player == "two") {
-                
-                //bc displayShips is based on the current active player:
-                controller.switchPlayers();
+        goToShipPlacementScreenTwo() {
+            //hide placement one
+            shipPlacementScreenOne.style.display = "none";
 
-                //Arriving from playerOne, so hide's their board.
-                placementPlayerOne.style.display = "none";
-                placementPlayerTwo.style.display = "flex";
-                controller.displayShips(shipPlacementPlayerTwo)
-            }
+            //display placement two
+            shipPlacementScreenTwo.style.display = "flex";
         },
 
     }

@@ -35,3 +35,11 @@ startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 //-------------------------------------------------------------------------
 
 //PLACE-SHIPS-SCREEN:
+
+//BUTTONS:
+
+const submitShipsOne = document.querySelector(".ships-submit-player-one");
+
+//BUTTON EVENTS:
+
+submitShipsOne.addEventListener("click", toggler.goToShipPlacementScreenTwo);
