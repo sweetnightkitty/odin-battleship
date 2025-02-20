@@ -16,6 +16,8 @@ const screenToggler = () => {
     const gamePlayerTwo = document.querySelector(".game-player-two");
     const startRound = document.querySelector(".start-round");
     const startRoundBtn = document.querySelector(".start-round-btn");
+    const gamePlayerOneShips = document.querySelector(".player-one-ships");
+    const gamePlayerTwoShips = document.querySelector(".player-two-ships");
 
     return {
         goToShipPlacementScreenTwo() {
@@ -24,7 +26,7 @@ const screenToggler = () => {
 
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
-            controller.switchPlayers();
+            controller.switchPlayers(); //Switch from player 1 to player 2
             controller.displayShips();
             controller.generateShipButtons(shipButtonsTwo);
         },
@@ -32,6 +34,9 @@ const screenToggler = () => {
         startGame() {
             placeShipsScreen.style.display = "none";
             gameScreen.style.display = "flex";
+            controller.switchPlayers(); // Switch from player 2 (Placement) to player 1
+            controller.displayShips(gamePlayerOneShips);
+            
         },
 
         goToStartScreen(event) {
@@ -69,16 +74,18 @@ const screenToggler = () => {
                 //Regenerate the game for current active player
                 controller.switchPlayers();
                 controller.reset("board");
-                controller.reset("ships");
                 controller.displayBoard();
-                controller.displayShips();
                 
                 //Displays the correct person's board:
                 const nextPlayer = event.target.classList[1];
                 if(nextPlayer == "one") {
                     gamePlayerOne.style.display = "flex";
+                    controller.reset("ships");
+                    controller.displayShips(gamePlayerOneShips);
                 } else if(nextPlayer == "two") {
                     gamePlayerTwo.style.display = "flex";
+                    controller.reset("ships");
+                    controller.displayShips(gamePlayerTwoShips);
                 }
         },
 

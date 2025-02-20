@@ -72,7 +72,7 @@ const screenController = () => {
 
         },
 
-        displayShips(displayBoard = activePlayer.shipDisplay, displayPlacement = activePlayer.shipPlacement) {
+        displayShips(displayBoard = activePlayer.shipPlacement) {
             const playerBoard = activePlayer.activePlayer.getBoard()
             const name = activePlayer.name;
 
@@ -81,8 +81,8 @@ const screenController = () => {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
                     //Need to create color for the ships / hits
+
                     displayBoard.appendChild(button);
-                    displayPlacement.appendChild(button);
                 }
             }
         },
