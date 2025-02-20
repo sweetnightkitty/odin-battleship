@@ -42,6 +42,10 @@ h1 {
 
 /*------------------------------------------------------------------------*/
 
+/* SELECT PLAYERS SCREEN */
+
+
+/*------------------------------------------------------------------------*/
 
 /* PLAY ROUND SCREENS */
 .game-screen {
@@ -209,7 +213,7 @@ footer {
     display: none;
 }
 .place-ships-screen {
-    display: flex;
+    display: none;
 }
 
 .placement-player-two {

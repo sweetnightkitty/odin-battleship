@@ -2,6 +2,14 @@ import "./styles.css";
 import { controller } from "./screenController.js";
 import { toggler } from "./screenToggler.js";
 
+//SELECT-PLAYERS-SCREN:
+
+const twoPlayerGame = document.querySelector(".btn-two-player-game");
+
+twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne); //need a toggler function to go to place ships one
+
+//-------------------------------------------------------------------------
+
 //PLACE-SHIPS-SCREEN:
 
 const submitShipsOne = document.querySelector(".ships-submit-player-one");
@@ -28,6 +36,6 @@ startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //FIRST SCREEN = PLACE SHIPS ONE - FIRST INITIATION:
 
-const shipButtonsOne = document.querySelector(".ship-buttons-one");
-controller.displayShips();
-controller.generateShipButtons(shipButtonsOne);
+// const shipButtonsOne = document.querySelector(".ship-buttons-one");
+// controller.displayShips();
+// controller.generateShipButtons(shipButtonsOne);

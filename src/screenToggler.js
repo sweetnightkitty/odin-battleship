@@ -3,10 +3,14 @@ import { controller } from "./screenController";
 
 const screenToggler = () => {
 
+    //SELECT PLAYERS SCREEN
+    const selectPlayersScreen = document.querySelector(".select-players-screen");
+
     //PLACE SHIPS SCREENS
     const placeShipsScreen = document.querySelector(".place-ships-screen");
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
+    const shipButtonsOne = document.querySelector(".ship-buttons-one");
     const shipButtonsTwo = document.querySelector(".ship-buttons-two");
 
     //GAME SCREEN DIVS
@@ -20,6 +24,16 @@ const screenToggler = () => {
     const gamePlayerTwoShips = document.querySelector(".player-two-ships");
 
     return {
+        goToShipPlacementScreenOne() {
+            //hide select players screen
+            selectPlayersScreen.style.display = "none";
+
+            //display placement one
+            placeShipsScreen.style.display = "flex";
+            controller.displayShips();
+            controller.generateShipButtons(shipButtonsOne);
+        },
+
         goToShipPlacementScreenTwo() {
             //hide placement one
             shipPlacementScreenOne.style.display = "none";
