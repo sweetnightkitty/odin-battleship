@@ -3,10 +3,11 @@ import { player, ship } from "./gameLogic";
 const screenController = () => {
     const playerOne = player();
     const playerTwo = player();
+
     const playerOneDisplay = document.querySelector(".player-one-board");
     const playerTwoDisplay = document.querySelector(".player-two-board");
-    const playerOneShips = document.querySelector(".player-one-ships");
-    const playerTwoShips = document.querySelector(".player-two-ships");
+    const playerOneShipDisplay = document.querySelector(".player-one-ships");
+    const playerTwoShipDisplay = document.querySelector(".player-two-ships");
 
     const playerOneNotice = document.querySelector(".player-one-notice");
     const playerTwoNotice = document.querySelector(".player-two-notice");
@@ -16,8 +17,8 @@ const screenController = () => {
             activePlayer: playerOne,
             opponent: playerTwo,
             name: "one",
-            display: playerOneDisplay,
-            shipDisplay: playerOneShips,
+            display: playerOneDisplay, // Displays players attacks
+            shipDisplay: playerOneShipDisplay, //Displays the locations of their ships
             notice: playerOneNotice,
         },
 
@@ -26,31 +27,13 @@ const screenController = () => {
             opponent: playerOne,
             name: "two", //computer playing
             display: playerTwoDisplay, // computer playing
-            shipDisplay: playerTwoShips,
+            shipDisplay: playerTwoShipDisplay,
             notice: playerTwoNotice,
         }
     ]
 
     let activePlayer = players[0]
 
-    const computerPlaysRound = () => {
-        //Generate random coordinates
-        const randomX = Math.floor(Math.random() * (0 - 10));
-        const randomY = Math.floor(Math.random() * (0 - 10));
-
-        //Recalculates random coordinate if it was already used
-        if(activePlayer.opponent.getBoard()[randomX][randomY]) {
-            computerAttack();
-        } else {
-            activePlayer.opponent.recieveAttack([randomX, randomY]);
-        }
-
-        //Checks if game is over
-        if(activePlayer.opponent.isGameOver()) {
-            alert("Game Over!");
-        }
-
-    }
 
     const applyColor = (x, y, button) => {
         const opponentBoard = activePlayer.opponent.getBoard();
@@ -82,8 +65,6 @@ const screenController = () => {
                 }
             }
 
-            this.addEventListeners();
-
         },
 
         displayShips(displayBoard = activePlayer.shipDisplay) {
@@ -105,88 +86,8 @@ const screenController = () => {
             if(boardType == "ships") {activePlayer.shipDisplay.innerHTML = ""};
         },
 
-        playRound(event) {
-            //Get the coordinates of the attack
-            const button = event.target;
-            const [x, y] = button.classList[1];
-
-            //Send the attack to the opponent
-            activePlayer.opponent.recieveAttack([x, y]);
-
-            //Displays the results:
-            applyColor(x, y, button);
-            activePlayer.notice.textContent = getNotice(x, y);
-
-            //Disables the buttons to prevent additional attacks
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            playerOneButtons.forEach(button => button.disabled = true);
-
-            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
-            playerTwoButtons.forEach(button => button.disabled = true);
-        },
-
         switchPlayers() {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
-        },
-
-        placeship(event) {
-            const ship = event.target;
-            const shipname = event.target.classList[0];
-            ship.classList.add("current");
-            const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
-            const playerTwoShipButtons = document.querySelectorAll(".player-two-ship-buttons");
-            
-            let limit = 0;
-            const coordinates = [];
-
-            //Limit determines how many coordinates are needed
-            if(shipname == "aircraftCarrier") {limit = 5};
-            if(shipname == "battleship") {limit = 4};
-            if(shipname == "submarine" || shipname == "cruiser") {limit = 3};
-            if(shipname == "destroyer") {limit = 2};
-
-            const handleShipPlacement = (event) => {
-                const [x, y] = event.target.classList[1];
-                coordinates.push([x, y]);
-
-                event.target.classList.add("selected");
-
-                //When all coordinates are collected disables buttons and passes to placeship:
-                if(coordinates.length == limit) {
-                    activePlayer.activePlayer.placeship(shipname, coordinates);
-                    playerOneShipButtons.forEach(button => {
-                        button.removeEventListener("click", handleShipPlacement);
-                        button.classList.remove("hover-effect");
-                    });
-                    ship.classList.remove("current");
-                    ship.classList.add("complete");
-                };
-
-            }
-
-            if(activePlayer.name == "one") {
-                playerOneShipButtons.forEach(button => {
-                    //Adds hover effects only after buttons are active
-                    button.classList.add("hover-effect");
-                    button.addEventListener("click", handleShipPlacement);
-                })
-            } else if(activePlayer.name == "two") {
-                playerTwoShipButtons.forEach(button => {
-                    //Adds hover effects only after buttons are active
-                    button.classList.add("hover-effect");
-                    button.addEventListener("click", handleShipPlacement);
-                })
-            }
-        },
-
-        addEventListeners() {
-            //Buttons must be defined AFTER EVERY time they are generated in dom
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
-
-            //Then event listeners can be added on
-            playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
-            playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
 
     }

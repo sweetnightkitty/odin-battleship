@@ -52,7 +52,7 @@ const screenToggler = () => {
                 controller.reset("board");
                 controller.reset("ships");
                 controller.displayBoard();
-                controller.displayShips(); // may be an issue
+                controller.displayShips();
                 
                 //Displays the correct person's board:
                 const nextPlayer = event.target.classList[1];

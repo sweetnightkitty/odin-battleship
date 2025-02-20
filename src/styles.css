@@ -199,6 +199,10 @@ footer {
     border: 1px solid blue;
 }
 
+.placement-player-one {
+    border: 1px solid orange;
+}
+
 /* Hidden screens by default */
 
 .game-screen {
