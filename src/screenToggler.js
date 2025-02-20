@@ -2,17 +2,18 @@ import { ship } from "./gameLogic";
 import { controller } from "./screenController";
 
 const screenToggler = () => {
+
+    //PLACE SHIPS SCREEN DIVS
+    const placeShipsScreen = document.querySelector(".place-ships-screen");
+    const shipPlacementScreenOne = document.querySelector(".placement-player-one");
+    const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
+    
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
     const gamePlayerOne = document.querySelector(".game-player-one");
     const gamePlayerTwo = document.querySelector(".game-player-two");
     const startRound = document.querySelector(".start-round");
     const startRoundBtn = document.querySelector(".start-round-btn");
-
-    //PLACE SHIPS SCREEN DIVS
-    const placeShipsScreen = document.querySelector(".place-ships-screen");
-    const shipPlacementScreenOne = document.querySelector(".placement-player-one");
-    const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
 
     return {
         goToStartScreen(event) {
