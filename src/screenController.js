@@ -1,4 +1,5 @@
 import { player, ship } from "./gameLogic";
+import { toggler } from "./screenToggler";
 
 const screenController = () => {
     const playerOne = player();
@@ -10,6 +11,9 @@ const screenController = () => {
 
     const playerOneNotice = document.querySelector(".player-one-notice");
     const playerTwoNotice = document.querySelector(".player-two-notice");
+
+    const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
+    const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
 
     const players = [
         {
@@ -82,7 +86,7 @@ const screenController = () => {
                 }
             }
 
-            this.addEventListeners();
+            this.addEventListenersCoordinates();
 
         },
 
@@ -98,11 +102,15 @@ const screenController = () => {
                     displayBoard.appendChild(button);
                 }
             }
+
+            this.addEventListenersShips();
         },
 
         reset(boardType) {
             if(boardType == "board") {activePlayer.display.innerHTML = ""};
             if(boardType == "ships") {activePlayer.shipDisplay.innerHTML = ""};
+            if(boardType == "shipsOne") {shipPlacementPlayerOne.innerHTML = ""};
+            if(boardType == "shipsTwo") {shipPlacementPlayerTwo.innerHTML = ""};
         },
 
         playRound(event) {
@@ -171,6 +179,7 @@ const screenController = () => {
                     button.addEventListener("click", handleShipPlacement);
                 })
             } else if(activePlayer.name == "two") {
+                console.log("works");
                 playerTwoShipButtons.forEach(button => {
                     //Adds hover effects only after buttons are active
                     button.classList.add("hover-effect");
@@ -179,7 +188,7 @@ const screenController = () => {
             }
         },
 
-        addEventListeners() {
+        addEventListenersCoordinates() {
             //Buttons must be defined AFTER EVERY time they are generated in dom
             const playerOneButtons = document.querySelectorAll(".player-one-buttons");
             const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
@@ -188,6 +197,54 @@ const screenController = () => {
             playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
             playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
         },
+
+        addEventListenersShips() {
+            //SHIP BUTTONS
+            const aircraftBtn = document.querySelector(".aircraftCarrier");
+            const battleshipBtn = document.querySelector(".battleship");
+            const cruiserBtn = document.querySelector(".cruiser");
+            const submarineBtn = document.querySelector(".submarine");
+            const destroyerBtn = document.querySelector(".destroyer");
+            const submitPlayerOneShips = document.querySelector(".ships-submit-player-one");
+            const submitPlayerTwoShips = document.querySelector(".ships-submit-player-two");
+
+            //BUTTON EVENTS:
+            aircraftBtn.addEventListener("click", this.placeship);
+            battleshipBtn.addEventListener("click", this.placeship);
+            cruiserBtn.addEventListener("click", this.placeship);
+            submarineBtn.addEventListener("click", this.placeship);
+            destroyerBtn.addEventListener("click", this.placeship);
+
+            submitPlayerOneShips.addEventListener("click", ()=> {
+                //Complete class is added after ship is placed: indicates all are placed.
+                if((aircraftBtn.classList.contains("complete")) 
+                    && (battleshipBtn.classList.contains("complete"))
+                    && (cruiserBtn.classList.contains("complete"))
+                    && (submarineBtn.classList.contains("complete"))
+                    && (destroyerBtn.classList.contains("complete"))
+                ) {
+                    //Yes - toggle next screen
+                    toggler.goToShipPlacementBoard("two");
+                } else {    
+                    alert("Not all ships are placed, place them all then press submit");
+                };
+            });
+
+            submitPlayerTwoShips.addEventListener("click", ()=> {
+                //Complete class is added after ship is placed: indicates all are placed.
+                if((aircraftBtn.classList.contains("complete")) 
+                    && (battleshipBtn.classList.contains("complete"))
+                    && (cruiserBtn.classList.contains("complete"))
+                    && (submarineBtn.classList.contains("complete"))
+                    && (destroyerBtn.classList.contains("complete"))
+                ) {
+                    //Yes - toggle next screen
+                    alert("You did not yet make that toggle but good work!");
+                } else {    
+                    alert("Not all ships are placed, place them all then press submit");
+                };
+            })
+        }
 
     }
 }

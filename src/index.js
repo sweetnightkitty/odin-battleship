@@ -43,36 +43,36 @@ startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //PLACE-SHIPS-SCREEN:
 
-//SHIP BUTTONS
-const aircraftBtn = document.querySelector(".aircraftCarrier");
-const battleshipBtn = document.querySelector(".battleship");
-const cruiserBtn = document.querySelector(".cruiser");
-const submarineBtn = document.querySelector(".submarine");
-const destroyerBtn = document.querySelector(".destroyer");
+// //SHIP BUTTONS
+// const aircraftBtn = document.querySelector(".aircraftCarrier");
+// const battleshipBtn = document.querySelector(".battleship");
+// const cruiserBtn = document.querySelector(".cruiser");
+// const submarineBtn = document.querySelector(".submarine");
+// const destroyerBtn = document.querySelector(".destroyer");
 
-//BUTTON EVENTS:
-aircraftBtn.addEventListener("click", controller.placeship);
-battleshipBtn.addEventListener("click", controller.placeship);
-cruiserBtn.addEventListener("click", controller.placeship);
-submarineBtn.addEventListener("click", controller.placeship);
-destroyerBtn.addEventListener("click", controller.placeship);
+// //BUTTON EVENTS:
+// aircraftBtn.addEventListener("click", controller.placeship);
+// battleshipBtn.addEventListener("click", controller.placeship);
+// cruiserBtn.addEventListener("click", controller.placeship);
+// submarineBtn.addEventListener("click", controller.placeship);
+// destroyerBtn.addEventListener("click", controller.placeship);
 
 const submitPlayerOneShips = document.querySelector(".ships-submit-player-one");
 
-submitPlayerOneShips.addEventListener("click", ()=> {
+// submitPlayerOneShips.addEventListener("click", ()=> {
 
-    //Complete class is added after ship is placed: indicates all are placed.
-    if((aircraftBtn.classList.contains("complete")) 
-        && (battleshipBtn.classList.contains("complete"))
-        && (cruiserBtn.classList.contains("complete"))
-        && (submarineBtn.classList.contains("complete"))
-        && (destroyerBtn.classList.contains("complete"))
-    ) {
-        //Yes - toggle next screen
-        toggler.goToShipPlacementBoard("two");
-    } else {    
-        alert("Not all ships are placed, place them all then press submit");
-    };
+//     //Complete class is added after ship is placed: indicates all are placed.
+//     if((aircraftBtn.classList.contains("complete")) 
+//         && (battleshipBtn.classList.contains("complete"))
+//         && (cruiserBtn.classList.contains("complete"))
+//         && (submarineBtn.classList.contains("complete"))
+//         && (destroyerBtn.classList.contains("complete"))
+//     ) {
+//         //Yes - toggle next screen
+//         toggler.goToShipPlacementBoard("two");
+//     } else {    
+//         alert("Not all ships are placed, place them all then press submit");
+//     };
 
 
-})
+// })

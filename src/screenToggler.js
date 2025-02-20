@@ -14,6 +14,8 @@ const screenToggler = () => {
     const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
     const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
 
+
+
     return {
         goToStartScreen(event) {
             if(event.target.classList[1] == "end-player-one") {
@@ -65,17 +67,19 @@ const screenToggler = () => {
 
         goToShipPlacementBoard(player = "one") {
             //Player one loads automatically
-            if(player == "one") {controller.displayShips(shipPlacementPlayerOne)};
+            if(player == "one") {
+                controller.displayShips(shipPlacementPlayerOne)
+            };
             if(player == "two") {
-                
                 //bc displayShips is based on the current active player:
                 controller.switchPlayers();
 
                 //Arriving from playerOne, so hide's their board.
                 placementPlayerOne.style.display = "none";
                 placementPlayerTwo.style.display = "flex";
-                controller.displayShips(shipPlacementPlayerTwo)
+                controller.displayShips(shipPlacementPlayerTwo);
             }
+
         },
 
     }
