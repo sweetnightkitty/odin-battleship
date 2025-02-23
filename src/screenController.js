@@ -39,15 +39,31 @@ const screenController = () => {
     let activePlayer = players[0]
 
 
-    const applyColor = (x, y, button) => {
-        const opponentBoard = activePlayer.opponent.getBoard();
-        if(opponentBoard[x][y] == "hit") {
-            button.classList.add("hit");
-            disableCoordinate(button);
+    const applyColor = (x, y, button, board = activePlayer.opponent.getBoard()) => {
 
-        } else if(opponentBoard[x][y] == "miss") {
-            button.classList.add("miss");
-            disableCoordinate(button);
+        //HANDLES COLOR FOR DISPLAY SHIPS
+        if(board == "ships") {
+            board = activePlayer.activePlayer.getBoard();
+
+            if(board[x][y] == "hit") {
+                button.classList.remove("selected");
+                button.classList.add("hit");
+            } else if(board[x][y] == "miss") {
+                //Don't want to display all the misses
+                button.classList.remove("selected");
+            }
+        }
+
+        //HANDLES COLOR FOR DISPLAY BOARD - uses board default
+        else {
+            if(board[x][y] == "hit") {
+                button.classList.add("hit");
+                disableCoordinate(button);
+    
+            } else if(board[x][y] == "miss") {
+                button.classList.add("miss");
+                disableCoordinate(button);
+            }
         }
     }
 
@@ -60,10 +76,7 @@ const screenController = () => {
     const userSelectsAttack = (event) => {
         const [x, y] = event.target.classList[1];
 
-        //Prevents multiple attacks from being made in one round
         disableAllCoordinateBtns();
-
-        //Sends the attack to opponent
         activePlayer.opponent.recieveAttack([x, y]);
 
         const notice = getNotice(x, y); //Need to put this somewhere in dom
@@ -79,7 +92,6 @@ const screenController = () => {
                 disableCoordinate(button);
             })
         }
-
         if(activePlayer.name == "two") {
             const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
             playerTwoBtns.forEach(button => {
@@ -118,8 +130,13 @@ const screenController = () => {
                 for(let j = 0; j < playerBoard[i].length; j++) {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
-                    //Need to create color for the ships / hits
-                    if(playerBoard[i][j]) {button.classList.add("selected")}; // mark ships
+                    
+                    //Marks ships that are selected
+                    if(playerBoard[i][j]) {button.classList.add("selected")};
+
+                    //Need to mark the hits only
+                    applyColor(i, j, button, "ships");
+
                     displayBoard.appendChild(button);
                 }
             }
