@@ -5,7 +5,8 @@ import { toggler } from "./screenToggler.js";
 //SELECT-PLAYERS-SCREN:
 
 const twoPlayerGame = document.querySelector(".btn-two-player-game");
-
+const headerText = document.querySelector(".header-text");
+headerText.textContent = "Choose How Many Players";
 twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne); //need a toggler function to go to place ships one
 
 //-------------------------------------------------------------------------

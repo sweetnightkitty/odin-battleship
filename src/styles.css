@@ -44,6 +44,34 @@ h1 {
 
 /* SELECT PLAYERS SCREEN */
 
+.select-players-screen {
+    flex: 1;
+    display: flex;
+}
+
+
+  /* Modal Content/Box */
+.select-players-btns-container {
+    background-color: transparent;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+.btn-one-player-game, .btn-two-player-game {
+    color: white;
+    background-color: #173782;
+    font-size: 45px;
+    padding: 20px 50px;
+    width: 350px;
+}
+
 
 /*------------------------------------------------------------------------*/
 
@@ -221,11 +249,4 @@ footer {
 }
 .game-player-two, .start-round {
     display: none;
-}
-
-
-
-
-header {
-    visibility: hidden;
 }

@@ -3,6 +3,9 @@ import { controller } from "./screenController";
 
 const screenToggler = () => {
 
+    //HEADER
+    const header = document.querySelector("header");
+
     //SELECT PLAYERS SCREEN
     const selectPlayersScreen = document.querySelector(".select-players-screen");
 
@@ -27,6 +30,8 @@ const screenToggler = () => {
         goToShipPlacementScreenOne() {
             //hide select players screen
             selectPlayersScreen.style.display = "none";
+            header.style.visibility = "hidden";
+            header.innerHTML = "";
 
             //display placement one
             placeShipsScreen.style.display = "flex";
