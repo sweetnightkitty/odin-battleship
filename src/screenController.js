@@ -43,11 +43,11 @@ const screenController = () => {
         const opponentBoard = activePlayer.opponent.getBoard();
         if(opponentBoard[x][y] == "hit") {
             button.classList.add("hit");
-            disableUsedCoordinate(button);
+            disableCoordinate(button);
 
         } else if(opponentBoard[x][y] == "miss") {
             button.classList.add("miss");
-            disableUsedCoordinate(button);
+            disableCoordinate(button);
         }
     }
 
@@ -73,23 +73,22 @@ const screenController = () => {
     }
 
     const disableAllCoordinateBtns = () => {
-        const playerOneBtns = document.querySelectorAll(".player-one-buttons");
-        const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
-
         if(activePlayer.name == "one") {
+            const playerOneBtns = document.querySelectorAll(".player-one-buttons");
             playerOneBtns.forEach(button => {
-                button.removeEventListener("click", userSelectsAttack);
+                disableCoordinate(button);
             })
         }
 
         if(activePlayer.name == "two") {
+            const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
             playerTwoBtns.forEach(button => {
-                button.removeEventListener("click", userSelectsAttack);
+                disableCoordinate(button);
             })
         }
     }
 
-    const disableUsedCoordinate = (button) => {
+    const disableCoordinate = (button) => {
         button.removeEventListener("click", userSelectsAttack);
         button.classList.remove("hover");
     };
