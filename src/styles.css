@@ -145,8 +145,18 @@ h1 {
 .end-round {
     font-size: 16px;
     padding: 8px 10px;
-    background-color: white;
+    color: white;
+    background-color: #173782;
 }
+
+.start-round-btn {
+    color: white;
+    background-color: #173782;
+    font-size: 45px;
+    padding: 20px 50px;
+    width: 450px;
+}
+
 
 /*------------------------------------------------------------------------*/
 
@@ -203,6 +213,12 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+.ships-submit-player-one, .ships-submit-player-two {
+    color: white;
+    background-color: #173782;
+}
+
 
 /* Hover over place ship board */
 .hover-effect:hover {
