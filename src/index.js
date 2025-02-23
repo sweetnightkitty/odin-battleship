@@ -2,12 +2,15 @@ import "./styles.css";
 import { controller } from "./screenController.js";
 import { toggler } from "./screenToggler.js";
 
-//SELECT-PLAYERS-SCREN:
+//START BATTLESHIP SCREEN
+
+const startBattleshipBtn = document.querySelector(".start-game-btn");
+startBattleshipBtn.addEventListener("click", toggler.goToSelectPlayersScreen);
+
+//SELECT-PLAYERS-SCREEN:
 
 const twoPlayerGame = document.querySelector(".btn-two-player-game");
-const headerText = document.querySelector(".header-text");
-headerText.textContent = "Choose How Many Players";
-twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne); //need a toggler function to go to place ships one
+twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
 //-------------------------------------------------------------------------
 
