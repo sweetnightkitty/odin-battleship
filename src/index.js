@@ -1,6 +1,6 @@
 import "./styles.css";
-import { controller } from "./screenController.js";
 import { toggler } from "./screenToggler.js";
+
 
 //START BATTLESHIP SCREEN
 
@@ -37,9 +37,3 @@ endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
 startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //-------------------------------------------------------------------------
-
-//FIRST SCREEN = PLACE SHIPS ONE - FIRST INITIATION:
-
-// const shipButtonsOne = document.querySelector(".ship-buttons-one");
-// controller.displayShips();
-// controller.generateShipButtons(shipButtonsOne);

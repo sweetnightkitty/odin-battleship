@@ -24,6 +24,7 @@ header {
     display: flex;
     justify-content: center;
     padding: 20px 0px 10px;
+    min-height: 30px;
 }
 
 h1 {
@@ -269,5 +270,9 @@ footer {
     display: none;
 }
 .game-player-two, .start-round {
+    display: none;
+}
+
+.header-text {
     display: none;
 }

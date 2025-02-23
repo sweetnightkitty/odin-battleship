@@ -4,7 +4,7 @@ import { controller } from "./screenController";
 const screenToggler = () => {
 
     //HEADER
-    const header = document.querySelector("header");
+    const headerTextContainer = document.querySelector(".header-text");
 
     //START BATTLESHIP SCREEN
     const startBattleshipScreen = document.querySelector(".start-battleship-screen");
@@ -36,13 +36,13 @@ const screenToggler = () => {
             
             //display select players screen
             selectPlayersScreen.style.display = "flex";
+            headerTextContainer.style.display = "block";
         },
 
         goToShipPlacementScreenOne() {
             //hide select players screen
             selectPlayersScreen.style.display = "none";
-            header.style.visibility = "hidden";
-            header.innerHTML = "";
+            headerTextContainer.style.display = "none";
 
             //display placement one
             placeShipsScreen.style.display = "flex";
