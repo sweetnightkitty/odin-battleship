@@ -193,7 +193,7 @@ h1 {
     grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 }
 
-.ship-buttons {
+.ship-buttons-one, .ship-buttons-two {
     display: flex;
     justify-content: center;
     padding: 20px 0;
