@@ -102,6 +102,9 @@ h1 {
     padding: 35px 250px 55px;
 }
 
+.notices {
+    min-height: 20px;
+}
 .game-player-one, .game-player-two {
     flex: 1;
     display: flex;
@@ -253,23 +256,6 @@ footer {
     font-weight: bold;
 }
 
-
-/*Temporary borderers to view divs */
-.players {
-    border: 1px solid black;
-}
-
-.boards {
-    background-color: aqua;
-}
-
-.place-ships-screen {
-    border: 1px solid blue;
-}
-
-.placement-player-one {
-    border: 1px solid orange;
-}
 
 /* Hidden screens by default */
 .select-players-screen {
