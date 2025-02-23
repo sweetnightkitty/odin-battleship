@@ -43,14 +43,11 @@ const screenController = () => {
         const opponentBoard = activePlayer.opponent.getBoard();
         if(opponentBoard[x][y] == "hit") {
             button.classList.add("hit");
-
-            // prevents reselecting a used btn -> create a second fn to prevent btn activation?
-            // needs to disable hover
-            button.removeEventListener("click", userSelectsAttack); 
+            disableUsedCoordinate(button);
 
         } else if(opponentBoard[x][y] == "miss") {
             button.classList.add("miss");
-            button.removeEventListener("click", userSelectsAttack); // prevents selecting a used btn
+            disableUsedCoordinate(button);
         }
     }
 
@@ -63,19 +60,8 @@ const screenController = () => {
     const userSelectsAttack = (event) => {
         const [x, y] = event.target.classList[1];
 
-        console.log(activePlayer.name);
-        //Disables btns so no more than one move can be made
-        if(activePlayer.name = "one") {
-            const playerOneBtns = document.querySelectorAll(".player-one-buttons");
-            playerOneBtns.forEach(button => {
-                button.removeEventListener("click", userSelectsAttack);
-            })
-        } if(activePlayer.name = "two") {
-            const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
-            playerTwoBtns.forEach(button => {
-                button.removeEventListener("click", userSelectsAttack);
-            });
-        }
+        //Prevents multiple attacks from being made in one round
+        disableAllCoordinateBtns();
 
         //Sends the attack to opponent
         activePlayer.opponent.recieveAttack([x, y]);
@@ -86,6 +72,28 @@ const screenController = () => {
         applyColor(x, y, event.target);
     }
 
+    const disableAllCoordinateBtns = () => {
+        const playerOneBtns = document.querySelectorAll(".player-one-buttons");
+        const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
+
+        if(activePlayer.name == "one") {
+            playerOneBtns.forEach(button => {
+                button.removeEventListener("click", userSelectsAttack);
+            })
+        }
+
+        if(activePlayer.name == "two") {
+            playerTwoBtns.forEach(button => {
+                button.removeEventListener("click", userSelectsAttack);
+            })
+        }
+    }
+
+    const disableUsedCoordinate = (button) => {
+        button.removeEventListener("click", userSelectsAttack);
+        button.classList.remove("hover");
+    };
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -94,7 +102,7 @@ const screenController = () => {
             for(let i = 0; i < opponentBoard.length; i++) {
                 for(let j = 0; j < opponentBoard[i].length; j++) {
                     const button = document.createElement("button");
-                    button.classList.add(`player-${name}-buttons`, `${i}${j}`);
+                    button.classList.add(`player-${name}-buttons`, `${i}${j}`, `hover`);
                     button.addEventListener("click", userSelectsAttack);
                     applyColor(i, j, button);
                     displayBoard.appendChild(button);
