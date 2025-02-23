@@ -73,20 +73,24 @@ const screenToggler = () => {
 
         goToStartScreen(event) {
             if(event.target.classList[1] == "end-player-one") {
-                 //Hide player One
-                 gamePlayerOneScreen.style.display = "none";
+                //Hide player One
+                gamePlayerOneScreen.style.display = "none";
+                const playerOneNotice = document.querySelector(".player-one-notice");
+                playerOneNotice.textContent = "";
          
-                 //Show intermediate screen
-                 startRoundScreen.style.display = "flex";
+                //Show intermediate screen
+                startRoundScreen.style.display = "flex";
          
-                 //Add a class to the intermediate screen to know who plays next
-                 if(startRoundBtn.classList.contains("one")) {startRoundBtn.classList.remove("one")};
-                 startRoundBtn.classList.add("two");
-                 startRoundBtn.textContent = "Player Two Start";
+                //Add a class to the intermediate screen to know who plays next
+                if(startRoundBtn.classList.contains("one")) {startRoundBtn.classList.remove("one")};
+                startRoundBtn.classList.add("two");
+                startRoundBtn.textContent = "Player Two Start";
          
             } else if(event.target.classList[1] == "end-player-two") {
                  //Hide Player Two
                  gamePlayerTwoScreen.style.display = "none";
+                 const playerTwoNotice = document.querySelector(".player-two-notice");
+                 playerTwoNotice.textContent = "";
          
                  //Shows Intermediate Screen
                  startRoundScreen.style.display = "flex";

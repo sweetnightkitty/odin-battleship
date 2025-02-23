@@ -80,6 +80,7 @@ const screenController = () => {
         activePlayer.opponent.recieveAttack([x, y]);
 
         const notice = getNotice(x, y); //Need to put this somewhere in dom
+        activePlayer.notice.textContent = notice;
 
         //Btn color immediately changes to reflect hit/miss
         applyColor(x, y, event.target);
