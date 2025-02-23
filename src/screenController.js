@@ -43,8 +43,14 @@ const screenController = () => {
         const opponentBoard = activePlayer.opponent.getBoard();
         if(opponentBoard[x][y] == "hit") {
             button.classList.add("hit");
+
+            // prevents reselecting a used btn -> create a second fn to prevent btn activation?
+            // needs to disable hover
+            button.removeEventListener("click", userSelectsAttack); 
+
         } else if(opponentBoard[x][y] == "miss") {
             button.classList.add("miss");
+            button.removeEventListener("click", userSelectsAttack); // prevents selecting a used btn
         }
     }
 
@@ -52,6 +58,32 @@ const screenController = () => {
         const opponentBoard = activePlayer.opponent.getBoard();
         if(opponentBoard[x][y] == "hit") return "It's a hit!";
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
+    }
+
+    const userSelectsAttack = (event) => {
+        const [x, y] = event.target.classList[1];
+
+        console.log(activePlayer.name);
+        //Disables btns so no more than one move can be made
+        if(activePlayer.name = "one") {
+            const playerOneBtns = document.querySelectorAll(".player-one-buttons");
+            playerOneBtns.forEach(button => {
+                button.removeEventListener("click", userSelectsAttack);
+            })
+        } if(activePlayer.name = "two") {
+            const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
+            playerTwoBtns.forEach(button => {
+                button.removeEventListener("click", userSelectsAttack);
+            });
+        }
+
+        //Sends the attack to opponent
+        activePlayer.opponent.recieveAttack([x, y]);
+
+        const notice = getNotice(x, y); //Need to put this somewhere in dom
+
+        //Btn color immediately changes to reflect hit/miss
+        applyColor(x, y, event.target);
     }
 
     return {
@@ -63,6 +95,7 @@ const screenController = () => {
                 for(let j = 0; j < opponentBoard[i].length; j++) {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-buttons`, `${i}${j}`);
+                    button.addEventListener("click", userSelectsAttack);
                     applyColor(i, j, button);
                     displayBoard.appendChild(button);
                 }
@@ -188,8 +221,7 @@ const screenController = () => {
                 })
             }
         },
-    }
-}
+
+}};
 
 export const controller = screenController();
-

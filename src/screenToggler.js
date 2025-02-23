@@ -29,6 +29,7 @@ const screenToggler = () => {
     const gamePlayerOneShips = document.querySelector(".player-one-ships");
     const gamePlayerTwoShips = document.querySelector(".player-two-ships");
 
+
     return {
         goToSelectPlayersScreen() {
             //Hide start battleship screen
