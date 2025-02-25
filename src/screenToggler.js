@@ -123,6 +123,31 @@ const screenToggler = () => {
                     controller.displayShips(gamePlayerTwoShips);
                 }
         },
+
+        reloadPlayerOneGame () {
+            controller.reset("board");
+            controller.displayBoard();
+
+            controller.reset("ships");
+            controller.displayShips(gamePlayerOneShips);
+        },
+
+        goToPlayerOneNextRound() {
+            //Switches to "player 2" which is the computer:
+            controller.switchPlayers();
+
+            //Computer takes a turn in the background:
+            controller.computerTurn();
+
+            //Switches back to player 1
+            controller.switchPlayers();
+
+            //Reloads the board for player 1
+            controller.reset("board");
+            controller.reset("ships");
+            controller.displayBoard();
+            controller.displayShips(gamePlayerOneShips);
+        },
     }
 } 
 

@@ -106,6 +106,18 @@ const screenController = () => {
         button.classList.remove("hover");
     };
 
+    const generateRandomCoordinates = () => {
+        const x = Math.floor(Math.random() * (10));
+        const y = Math.floor(Math.random() * (10));
+
+        //Recalculates random coordinate if it was already used
+        if((activePlayer.opponent.getBoard()[x][y]) == "hit" || (activePlayer.opponent.getBoard()[x][y]) == "miss") {
+            return generateRandomCoordinates();
+        } else {
+            return [x, y];
+        }
+    };
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -248,21 +260,14 @@ const screenController = () => {
         },
 
         computerTurn() {
-            //Generate random coordinates
-            const x = Math.floor(Math.random() * (10));
-            const y = Math.floor(Math.random() * (10));
-    
-            //Recalculates random coordinate if it was already used
-            if((activePlayer.opponent.getBoard()[x][y]) == "hit" || (activePlayer.opponent.getBoard()[x][y]) == "miss") {
-                this.computerTurn();
-            } else {
-                activePlayer.opponent.recieveAttack([x, y]);
-            }
+            const [x, y] = generateRandomCoordinates();
+            activePlayer.opponent.recieveAttack([x, y]);
 
             // //Checks if game is over
             // if(activePlayer.opponent.isGameOver()) {
             //     alert("Game Over!");
             // }
+
         },
 
 }};
