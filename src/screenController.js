@@ -247,6 +247,24 @@ const screenController = () => {
             }
         },
 
+        computerTurn() {
+            //Generate random coordinates
+            const x = Math.floor(Math.random() * (10));
+            const y = Math.floor(Math.random() * (10));
+    
+            //Recalculates random coordinate if it was already used
+            if((activePlayer.opponent.getBoard()[x][y]) == "hit" || (activePlayer.opponent.getBoard()[x][y]) == "miss") {
+                this.computerTurn();
+            } else {
+                activePlayer.opponent.recieveAttack([x, y]);
+            }
+
+            // //Checks if game is over
+            // if(activePlayer.opponent.isGameOver()) {
+            //     alert("Game Over!");
+            // }
+        },
+
 }};
 
 export const controller = screenController();

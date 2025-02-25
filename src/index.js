@@ -32,13 +32,21 @@ startBattleshipBtn.addEventListener("click", toggler.goToSelectPlayersScreen);
 onePlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
+const executeComputerRound = ()=> {
+    controller.switchPlayers();
+    controller.computerTurn();
+    controller.switchPlayers();
+}
+
 
 const executeOnePlayerGame = ()=> {
     submitShipsOne.addEventListener("click", toggler.startGame);
     
     //User will press this, to launch computer's turn in the background:
     endPlayerOneRound.textContent = "Done";
+
 }
+
 
 const executeTwoPlayerGame = ()=> {
     //Switch to player 2, so they can place their ships:
