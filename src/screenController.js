@@ -73,6 +73,24 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
+    const TogglePassDoneBtns = (action)=>{
+        let button;
+        
+        if(activePlayer.name == "one") {
+            const endPlayerOneRound = document.querySelector(".end-player-one");
+            button = endPlayerOneRound;
+        }
+
+        if(activePlayer.name == "two") {
+            //disable player two end round btn
+            const endPlayerTwoRound = document.querySelector(".end-player-two");
+            button = endPlayerTwoRound;
+        }
+
+        if(action == "enable") {button.disabled = false};
+        if(action == "disable") {button.disabled = true};
+    }
+
     const userSelectsAttack = (event) => {
         const [x, y] = event.target.classList[1];
 
@@ -84,6 +102,8 @@ const screenController = () => {
 
         //Btn color immediately changes to reflect hit/miss
         applyColor(x, y, event.target);
+
+        TogglePassDoneBtns("enable");
     }
 
     const disableAllCoordinateBtns = () => {
@@ -132,6 +152,8 @@ const screenController = () => {
                     displayBoard.appendChild(button);
                 }
             }
+
+            TogglePassDoneBtns("disable");
 
         },
 
