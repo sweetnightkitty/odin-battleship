@@ -1,4 +1,5 @@
 import { player, ship } from "./gameLogic";
+import { toggler } from "./screenToggler";
 
 const screenController = () => {
     const playerOne = player();
@@ -73,22 +74,47 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
-    const TogglePassDoneBtns = (action)=>{
-        let button;
-        
-        if(activePlayer.name == "one") {
-            const endPlayerOneRound = document.querySelector(".end-player-one");
-            button = endPlayerOneRound;
+    const getAlert = ()=> { alert("Take a turn first!")};
+
+    const TogglePassDoneBtns = (action, players)=>{
+        const endPlayerOneRound = document.querySelector(".end-player-one");
+        const endPlayerTwoRound = document.querySelector(".end-player-two");
+
+        //When action = "enable" this is the only way to determine whether it's a one/two player game
+        if(endPlayerOneRound.textContent == "Done") {players = "one"};
+        if(endPlayerOneRound.textContent == "Pass") {players = "two"};
+
+        //ONE PLAYER GAME TOGGLES:
+        if((action == "enable") && (players == "one")) {
+            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
+        }
+        if((action == "disable") && (players == "one")) {
+            endPlayerOneRound.removeEventListener("click", toggler.goToPlayerOneNextRound);
+            endPlayerOneRound.addEventListener("click", getAlert);
         }
 
-        if(activePlayer.name == "two") {
-            //disable player two end round btn
-            const endPlayerTwoRound = document.querySelector(".end-player-two");
-            button = endPlayerTwoRound;
+        //TWO PLAYER GAME TOGGLES
+        //Player One Toggles:
+        if((action == "enable") && (players == "two") && (activePlayer.name == "one")) {
+            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
+        }
+        if((action == "disable") && (players == "two") && (activePlayer.name == "one")) {
+            endPlayerOneRound.removeEventListener("click", toggler.goToStartScreen);
+            endPlayerOneRound.addEventListener("click", getAlert);
         }
 
-        if(action == "enable") {button.disabled = false};
-        if(action == "disable") {button.disabled = true};
+        //Player Two Toggles:
+        if((action == "enable") && (players == "two") && (activePlayer.name == "two")) {
+            endPlayerTwoRound.removeEventListener("click", getAlert);
+            endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
+        }
+        if((action == "disable") && (players == "two") && (activePlayer.name == "two")) {
+            endPlayerTwoRound.removeEventListener("click", toggler.goToStartScreen);
+            endPlayerTwoRound.addEventListener("click", getAlert);
+        }
+
     }
 
     const userSelectsAttack = (event) => {
@@ -290,6 +316,10 @@ const screenController = () => {
             //     alert("Game Over!");
             // }
 
+        },
+
+        executePassDoneToggle(action, players) {
+            TogglePassDoneBtns(action, players);
         },
 
 }};

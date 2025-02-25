@@ -34,7 +34,7 @@ twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
 
 const executeOnePlayerGame = ()=> {
-    submitShipsOne.addEventListener("click", toggler.startGame);
+    submitShipsOne.addEventListener("click", toggler.startOnePlayerGame);
     
     endPlayerOneRound.textContent = "Done"; //Better UX
     endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
@@ -47,7 +47,7 @@ const executeTwoPlayerGame = ()=> {
 
     //Switch back to player 1, and start game from player 1's turn:
     submitShipsTwo.addEventListener("click", controller.switchPlayers); 
-    submitShipsTwo.addEventListener("click", toggler.startGame);
+    submitShipsTwo.addEventListener("click", toggler.startTwoPlayerGame);
 
     //Toggles gameplay between player 1, 2, and an intermediate pass screen
     endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);

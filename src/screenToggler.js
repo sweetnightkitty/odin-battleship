@@ -29,6 +29,12 @@ const screenToggler = () => {
     const gamePlayerOneShips = document.querySelector(".player-one-ships");
     const gamePlayerTwoShips = document.querySelector(".player-two-ships");
 
+    const startGame = ()=> {
+        placeShipsScreen.style.display = "none";
+        gameScreen.style.display = "flex";
+        controller.displayBoard();
+        controller.displayShips(gamePlayerOneShips);
+    }
 
     return {
         goToSelectPlayersScreen() {
@@ -62,12 +68,14 @@ const screenToggler = () => {
             controller.generateShipButtons(shipButtonsTwo);
         },
 
-        startGame() {
-            placeShipsScreen.style.display = "none";
-            gameScreen.style.display = "flex";
-            controller.displayBoard();
-            controller.displayShips(gamePlayerOneShips);
-            
+        startOnePlayerGame() {
+            startGame();
+            controller.executePassDoneToggle("disable", "one");
+        },
+
+        startTwoPlayerGame() {
+            startGame();
+            controller.executePassDoneToggle("disable", "two");
         },
 
         goToStartScreen(event) {
@@ -110,6 +118,7 @@ const screenToggler = () => {
                 controller.switchPlayers();
                 controller.reset("board");
                 controller.displayBoard();
+                controller.executePassDoneToggle("disable", "two");
                 
                 //Displays the correct person's board:
                 const nextPlayer = event.target.classList[1];
@@ -146,6 +155,7 @@ const screenToggler = () => {
             controller.reset("board");
             controller.reset("ships");
             controller.displayBoard();
+            controller.executePassDoneToggle("disable", "one");
             controller.displayShips(gamePlayerOneShips);
         },
     }
