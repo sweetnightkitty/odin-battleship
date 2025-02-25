@@ -35,6 +35,8 @@ twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
 const executeOnePlayerGame = ()=> {
     submitShipsOne.addEventListener("click", toggler.startGame);
+    
+    //User will press this, to launch computer's turn in the background:
     endPlayerOneRound.textContent = "Done";
 }
 
