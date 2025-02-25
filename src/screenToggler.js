@@ -40,6 +40,7 @@ const screenToggler = () => {
             headerTextContainer.style.display = "block";
         },
 
+        //For Two Player Games
         goToShipPlacementScreenOne() {
             //hide select players screen
             selectPlayersScreen.style.display = "none";
@@ -65,7 +66,6 @@ const screenToggler = () => {
         startGame() {
             placeShipsScreen.style.display = "none";
             gameScreen.style.display = "flex";
-            controller.switchPlayers(); // Switch from player 2 (Placement) to player 1
             controller.displayBoard();
             controller.displayShips(gamePlayerOneShips);
             
@@ -124,7 +124,6 @@ const screenToggler = () => {
                     controller.displayShips(gamePlayerTwoShips);
                 }
         },
-
     }
 } 
 
