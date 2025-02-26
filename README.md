@@ -108,7 +108,7 @@ For a more detailed guide to downloading and working with Jest see: https://jest
 
 ### Fetch Branches
 
-When working with this project you will need to work on the "rework-UI" branch.
+When working with this project you will need to work on the "redo-screen" branch.
 
 In order to access this branch first fetch all branches:
 
@@ -116,10 +116,10 @@ In order to access this branch first fetch all branches:
 git fetch --all
 ```
 
-Then checkout to the rework-UI branch with
+Then checkout to the redo-screen branch with
 
 ```
-git checkout rework-UI
+git checkout redo-screen
 ``` 
 
 
