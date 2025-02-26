@@ -201,8 +201,6 @@ const screenController = () => {
                     displayBoard.appendChild(button);
                 }
             }
-
-            this.addEventListenersShips();
         },
 
         reset(boardType) {
