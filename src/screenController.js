@@ -15,9 +15,6 @@ const screenController = () => {
     const playerOneNotice = document.querySelector(".player-one-notice");
     const playerTwoNotice = document.querySelector(".player-two-notice");
 
-    const shipPlacementPlayerOne = document.querySelector(".placement-boards-player-one");
-    const shipPlacementPlayerTwo = document.querySelector(".placement-boards-player-two");
-
     const players = [
         {
             activePlayer: playerOne,
