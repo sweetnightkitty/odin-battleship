@@ -4,7 +4,7 @@
 
 This project is a practice project that was built in accordance with the ODIN Project Battleship assignment to practice working with graphs and test driven development with Jest.
 
-Check out the Assignment guidelines for this project:
+**Check out the Assignment guidelines for this project:**
 
 https://www.theodinproject.com/lessons/node-path-javascript-battleship
 
@@ -20,21 +20,33 @@ For a more in-depth understanding of how to play read: https://en.wikipedia.org/
 
 There are 5 different ships in the game battleship with specific names and lengths associated with them. For ease of understanding, all ships in this project are given a class name based on their in-game names. 
 
+Ship names are listed exactly as they appear in the code.
+
 You will likely want to refer to this information often:
 
-- Aircraft Carrier          length: 5
-- Battleship                length: 4
-- Crusier                   length: 3
-- Submarine                 length: 3
-- Destroyer                 length: 2
+|  **Ship Name**  | **Length** |
+| --------------- | ---------- |
+| aircraftCarrier |      5     |
+| battleship      |      4     |
+| cruiser         |      3     |
+| submarine       |      3     |
+| destroyer       |      2     |
 
-You may need to refere
 
 ## Getting Started
 
-Ensure you have Node.js installed before getting started. You can download it from https://nodejs.org/en
+Before getting started make sure you have the latest version of npm installed.
 
-Clone the repository and download the following dependencies:
+I recommend downloading Node Version Manager (NVM) first and then downloading Node.
+
+**For quick and easy instructions on how to download nvm and set up node:** https://www.theodinproject.com/lessons/foundations-installing-node-js
+
+Next clone the repository
+```
+git clone git@github.com:sweetnightkitty/odin-battleship.git
+```
+
+and download the following dependencies:
 
 ### Webpack
 
@@ -44,17 +56,17 @@ npm install --save-dev webpack webpack-cli
 ```
 and download the following:
 
-HTML Plugin
+**HTML Plugin**
 ```
 npm install --save-dev html-webpack-plugin
 ```
 
-HTML Loader
+**HTML Loader**
 ```
 npm install --save-dev html-loader
 ```
 
-CSS-Loader
+**CSS-Loader**
 ```
 npm install --save-dev style-loader css-loader
 
@@ -80,3 +92,17 @@ npm install --save-dev babel-jest @babel/core @babel/preset-env
 ```
 
 For a more detailed guide to downloading and working with Jest see: https://jestjs.io/docs/getting-started
+
+## Development Roadmap
+
+At the moment, this game is in development. Please refer to the detailed list below of current development status and known issues before getting started.
+
+### Placing ships on the board
+
+At the moment, placing ships on the game board are done manually by clicking coordinates. So for example when placing the battleship, which has a length of 4, the user must click 4 buttons on the gameboard in chronological horizontal, or vertical order. 
+
+When selecting buttons horizontally, they MUST BE from left to right and when selecting buttons vertically they MUST BE from top to bottom.
+
+Selecting buttons right to left, or bottom to top will throw an error, as well as picking buttons that are not adjacent. 
+
+This is obviously not very user-friendly and a temporary feature. It will later be replaced with a drag and drop style of placement, or another user-friendly alternative. 
