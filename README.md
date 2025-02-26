@@ -4,7 +4,7 @@
 
 This project is a practice project that was built in accordance with the ODIN Project Battleship assignment to practice working with graphs and test driven development with Jest.
 
-### Check out the Assignment guidelines for this project:
+Check out the Assignment guidelines for this project:
 
 https://www.theodinproject.com/lessons/node-path-javascript-battleship
 
@@ -16,9 +16,11 @@ The game battleship is a 2 player game, where each player has a total of 5 seper
 
 For a more in-depth understanding of how to play read: https://en.wikipedia.org/wiki/Battleship_(game) 
 
-### Ships:
+## A Note on Ships:
 
-There are a total of 5 ships in the game battleship with the corresponding length values:
+There are 5 different ships in the game battleship with specific names and lengths associated with them. For ease of understanding, all ships in this project are given a class name based on their in-game names. 
+
+You will likely want to refer to this information often:
 
 - Aircraft Carrier          length: 5
 - Battleship                length: 4
@@ -26,30 +28,55 @@ There are a total of 5 ships in the game battleship with the corresponding lengt
 - Submarine                 length: 3
 - Destroyer                 length: 2
 
+You may need to refere
+
 ## Getting Started
 
 Ensure you have Node.js installed before getting started. You can download it from https://nodejs.org/en
 
-Clone the repoistory and download the following dependencies:
+Clone the repository and download the following dependencies:
 
 ### Webpack
 
-For detailed guide on installing and working with Webpack : https://webpack.js.org/guides/installation/
+Download Webpack locally with
+```
+npm install --save-dev webpack webpack-cli
+```
+and download the following:
 
-Download Webpack locally, and then install the following loaders:
+HTML Plugin
+```
+npm install --save-dev html-webpack-plugin
+```
+
+HTML Loader
+```
+npm install --save-dev html-loader
+```
 
 CSS-Loader
-````
+```
 npm install --save-dev style-loader css-loader
 
 ```
+For a more detailed guide on installing and working with Webpack see : https://webpack.js.org/guides/installation/
 
+### Jest & Babel (Optional)
 
+One aim of this project was to practice implementing test-driven development when writing the game logic. Jest was the assigned testing framework for this project, and was utilized to write tests when developing the gameLogic.js module. 
 
-### Technologies Used
+If you wish to run, or write additional tests you will need to download Jest & Babel:
 
-- Webpack - module bundler
+Install the latest version of Jest:
 
-- [Jest ](https://jestjs.io/docs/getting-started)- Testing Framework
+```
+npm init jest@latest
+``` 
 
-- Babel -   
+Then install Babel with
+
+```
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+```
+
+For a more detailed guide to downloading and working with Jest see: https://jestjs.io/docs/getting-started
