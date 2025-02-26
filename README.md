@@ -93,6 +93,23 @@ npm install --save-dev babel-jest @babel/core @babel/preset-env
 
 For a more detailed guide to downloading and working with Jest see: https://jestjs.io/docs/getting-started
 
+### Fetch Branches
+
+When working with this project you will need to work on the "rework-UI" branch.
+
+In order to access this branch first fetch all branches:
+
+```
+git fetch --all
+```
+
+Then checkout to the rework-UI branch with
+
+```
+git checkout rework-UI
+``` 
+
+
 ## Development Roadmap
 
 At the moment, this game is in development. Please refer to the detailed list below of current development status and known issues before getting started.
