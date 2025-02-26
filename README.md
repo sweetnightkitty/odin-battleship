@@ -8,6 +8,8 @@ This project is a practice project that was built in accordance with the ODIN Pr
 
 https://www.theodinproject.com/lessons/node-path-javascript-battleship
 
+
+
 ## How to Play Battleship:
 
 A brief synopsis if you're not familiar with the game battleship: 
@@ -15,6 +17,8 @@ A brief synopsis if you're not familiar with the game battleship:
 The game battleship is a 2 player game, where each player has a total of 5 seperate ships of varying lengths that they must place anywhere on their gameboard. Players take turns calling out a location on their opponent's board, to launch an attack. Players announce 'hit' when their opponent's guess hits one of their ships, or "miss". Gameplay concludes when one player successfully sinks all of their opponent's ships.  
 
 For a more in-depth understanding of how to play read: https://en.wikipedia.org/wiki/Battleship_(game) 
+
+
 
 ## A Note on Ships:
 
@@ -33,6 +37,7 @@ You will likely want to refer to this information often:
 | destroyer       |      2     |
 
 
+
 ## Getting Started
 
 Before getting started make sure you have the latest version of npm installed.
@@ -48,6 +53,7 @@ git clone git@github.com:sweetnightkitty/odin-battleship.git
 
 and download the following dependencies:
 
+
 ### Webpack
 
 Download Webpack locally with
@@ -56,15 +62,18 @@ npm install --save-dev webpack webpack-cli
 ```
 and download the following:
 
+
 **HTML Plugin**
 ```
 npm install --save-dev html-webpack-plugin
 ```
 
+
 **HTML Loader**
 ```
 npm install --save-dev html-loader
 ```
+
 
 **CSS-Loader**
 ```
@@ -72,6 +81,9 @@ npm install --save-dev style-loader css-loader
 
 ```
 For a more detailed guide on installing and working with Webpack see : https://webpack.js.org/guides/installation/
+
+
+
 
 ### Jest & Babel (Optional)
 
@@ -93,6 +105,7 @@ npm install --save-dev babel-jest @babel/core @babel/preset-env
 
 For a more detailed guide to downloading and working with Jest see: https://jestjs.io/docs/getting-started
 
+
 ### Fetch Branches
 
 When working with this project you will need to work on the "rework-UI" branch.
@@ -110,9 +123,21 @@ git checkout rework-UI
 ``` 
 
 
+### Local Server
+
+After sucessfully cloning the repo, and accessing the correct branch in order to launch the program locally you will need to run the webpack server using the command
+
+```
+npm run serve
+```
+and then the program will load at http://localhost:8080/ 
+
+
+
 ## Development Roadmap
 
 At the moment, this game is in development. Please refer to the detailed list below of current development status and known issues before getting started.
+
 
 ### Placing ships on the board
 
@@ -126,20 +151,25 @@ This is obviously not very user-friendly and a temporary feature. It will later 
 
 Also, when a ship is placed, it is still possible to click on other ships, or to press submit. This essentially means there is no checks in place to ensure a ship is placed correctly before another ship is selected, and no checks in place to prevent the user from continuing on in the game without placing their ships. 
 
+**Outstanding Tasks**
 - [ ] Disable other ship buttons while the current ship is being placed.
 - [ ] Prevent user from submitting ships until ALL ships are placed.
 - [ ] Create modals that pop-up to explain to user how to interact with buttons.
 - [ ] Change the method for placing ships to something user-friendly and intuititve. 
 
+
 ### Announcing Sunk Ships and Game Over
 
 At the moment, there is no logic that announces to players when a ship has been sunk or that the game is over. As such, the gameplay will continue on indefinitely without end.  In the case of the 1-player version, this will lead to a "maximum call stack exceeded" error, as the computer player will eventually exhaust all possible coordinates to play. 
 
-    - [ ] Alert users when they sunk a single ship.
-    - [ ] Check when the game is over and notify users of the winner with a modal that provides the option to play again.
+**Outstanding Tasks**
+- [ ] Alert users when they sunk a single ship.
+- [ ] Check when the game is over and notify users of the winner with a modal that provides the option to play again.
+
 
 ### Appearance & Design
 
+**Outstanding Tasks**
 - [ ] Add title row and column that contains letters for the x-axis and numbers for the y-axis. 
 - [ ] Update formating for "It's a hit!" "It's a miss!" messaginging (div.notices);
 - [ ] Modal screen that pops-up with a relevant explanation to replace all errors, or to appear when user clicks deactivated buttons.
