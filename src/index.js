@@ -1,78 +1,60 @@
 import "./styles.css";
-
-//CONTROLS - controls UI Game displays
+import { toggler } from "./screenToggler.js";
 import { controller } from "./screenController.js";
 
-//TOGGLER - Toggles all game play screens
-import { toggler } from "./screenToggler.js";
+//BUTTONS
 
+//START-BATTLESHIP-SCREEN:
+const startBattleshipBtn = document.querySelector(".start-game-btn");
 
-//-------------------------------------------------------------------------
+//SELECT-PLAYERS-SCREEN:
+const onePlayerGame = document.querySelector(".btn-one-player-game");
+const twoPlayerGame = document.querySelector(".btn-two-player-game");
 
-//GAME PLAY:
+//PLACE-SHIPS-SCREENS:
+const submitShipsOne = document.querySelector(".ships-submit-player-one");
+const submitShipsTwo = document.querySelector(".ships-submit-player-two");
 
-//First initiation -  displays player one by default
-controller.displayBoard(); //Displays the active player's top board (tracks their attacks)
-controller.displayShips(); //Displays the active player's bottom board (their ship placements and hits so far)
-
-//-------------------------------------------------------------------------
-
-//SHIP PLACEMENT:
-
-//First initiation - displays player one by default
-toggler.goToShipPlacementBoard();
-
-//-------------------------------------------------------------------------
-
-//GAME-SCREEN:
-
-//BUTTONS:
-
+//GAME-SCREENS:
 const endPlayerOneRound = document.querySelector(".end-player-one");
 const endPlayerTwoRound = document.querySelector(".end-player-two");
+
+//INTERMEDIATE SCREEN: This screen appears after each player ends their round, 
+//this prevents viewers from seeing each other's game board.
 const startRoundBtn = document.querySelector(".start-round-btn");
-
-//BUTTON EVENTS:
-
-//Toggles between playerOne's UI game, intermediate startRound, and playerTwo's UI game
-endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
-endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
-startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 
 //-------------------------------------------------------------------------
 
-//PLACE-SHIPS-SCREEN:
+//START-BATTLESHIP-SCREEN / USER CLICKS "START"
+startBattleshipBtn.addEventListener("click", toggler.goToSelectPlayersScreen);
 
-// //SHIP BUTTONS
-// const aircraftBtn = document.querySelector(".aircraftCarrier");
-// const battleshipBtn = document.querySelector(".battleship");
-// const cruiserBtn = document.querySelector(".cruiser");
-// const submarineBtn = document.querySelector(".submarine");
-// const destroyerBtn = document.querySelector(".destroyer");
-
-// //BUTTON EVENTS:
-// aircraftBtn.addEventListener("click", controller.placeship);
-// battleshipBtn.addEventListener("click", controller.placeship);
-// cruiserBtn.addEventListener("click", controller.placeship);
-// submarineBtn.addEventListener("click", controller.placeship);
-// destroyerBtn.addEventListener("click", controller.placeship);
-
-const submitPlayerOneShips = document.querySelector(".ships-submit-player-one");
-
-// submitPlayerOneShips.addEventListener("click", ()=> {
-
-//     //Complete class is added after ship is placed: indicates all are placed.
-//     if((aircraftBtn.classList.contains("complete")) 
-//         && (battleshipBtn.classList.contains("complete"))
-//         && (cruiserBtn.classList.contains("complete"))
-//         && (submarineBtn.classList.contains("complete"))
-//         && (destroyerBtn.classList.contains("complete"))
-//     ) {
-//         //Yes - toggle next screen
-//         toggler.goToShipPlacementBoard("two");
-//     } else {    
-//         alert("Not all ships are placed, place them all then press submit");
-//     };
+//Regardless of 1 vs 2 player game, next screen is Player one places their ships:
+onePlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
+twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
 
-// })
+const executeOnePlayerGame = ()=> {
+    submitShipsOne.addEventListener("click", toggler.startOnePlayerGame);
+    
+    endPlayerOneRound.textContent = "Done"; //Better UX
+    endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
+}
+
+const executeTwoPlayerGame = ()=> {
+    //Switch to player 2, so they can place their ships:
+    submitShipsOne.addEventListener("click", controller.switchPlayers);
+    submitShipsOne.addEventListener("click", toggler.goToShipPlacementScreenTwo);
+
+    //Switch back to player 1, and start game from player 1's turn:
+    submitShipsTwo.addEventListener("click", controller.switchPlayers); 
+    submitShipsTwo.addEventListener("click", toggler.startTwoPlayerGame);
+
+    //Toggles gameplay between player 1, 2, and an intermediate pass screen
+    endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
+    endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
+    startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
+}
+
+
+onePlayerGame.addEventListener("click", executeOnePlayerGame);
+twoPlayerGame.addEventListener("click", executeTwoPlayerGame);

@@ -24,6 +24,7 @@ header {
     display: flex;
     justify-content: center;
     padding: 20px 0px 10px;
+    min-height: 30px;
 }
 
 h1 {
@@ -35,38 +36,99 @@ h1 {
     padding: 20px 50px;
 }
 
-.names {
+h2 {
     text-align: center;
     padding: 8px 0px;
 }
 
+/* ALL SCREENS: BECAUSE ALL SCREENS ARE CONTENT WRAPPERS */
+.start-battleship-screen, .select-players-screen, .game-screen, .place-ships-screen, .placement, .game-player-one, .game-player-two, .start-round {
+    flex: 1;
+}
+
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 /*------------------------------------------------------------------------*/
 
+/* BLUE BUTTONS */
 
-/* PLAY ROUND SCREENS */
-.game-screen {
-    flex: 1;
-    display: flex;
-    padding: 35px 250px 55px;
+
+/* BIG BUTTONS */
+.start-game-btn, .btn-one-player-game, .btn-two-player-game, .start-round-btn {
+    color: white;
+    background-color: #173782;
+    font-size: 45px;
+    padding: 20px 50px;
+    width: 350px;
 }
 
-.game-player-one, .game-player-two {
-    flex: 1;
-    display: flex;
+.start-round-btn {
+    width: 450px;
 }
 
-.start-round {
-    flex: 1;
-    display: flex;
+/* SMALL BUTTONS */
+
+.ships-submit-player-one, .ships-submit-player-two, .end-round {
+    color: white;
+    background-color: #173782;
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* START BATTLESHIP SCREEN */
+
+.start-battleship-screen {
     align-items: center;
     justify-content: center;
 }
 
-.start-round-btn {
-    font-size: 16px;
-    background-color: white;
-    padding: 8px 12px;
+/*------------------------------------------------------------------------*/
+
+/* SELECT PLAYERS SCREEN */
+
+
+  /* Modal Content/Box */
+.select-players-btns-container {
+    background-color: transparent;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+
+/*------------------------------------------------------------------------*/
+
+/* PLAY ROUND SCREENS */
+.game-screen {
+    padding: 35px 250px 55px;
 }
+
+.notices {
+    min-height: 20px;
+}
+
+.start-round {
+    align-items: center;
+    justify-content: center;
+}
+
 
 .players {
     flex: 1;
@@ -90,11 +152,6 @@ h1 {
     padding: 10px 0px;
 }
 
-.end-round {
-    font-size: 16px;
-    padding: 8px 10px;
-    background-color: white;
-}
 
 /*------------------------------------------------------------------------*/
 
@@ -105,33 +162,22 @@ h1 {
     border: .5px solid black;
     background-color: white;
 }
-.player-one-buttons:hover, .player-two-buttons:hover {
+.hover:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
 
-.hit {
-    background-color: red;
-}
-
-.miss {
-    background-color: black;
-}
 
 /*------------------------------------------------------------------------*/
 
 /* PLACE SHIPS SCREEN */
 
 .place-ships-screen{
-    flex: 1;
-    display: flex;
     padding: 35px 250px 55px;
     justify-content: center;
 }
 
 .placement {
-    flex: 1;
-    display: flex;
     flex-direction: column;
 }
 
@@ -141,7 +187,7 @@ h1 {
     grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 }
 
-.ship-buttons {
+.ship-buttons-one, .ship-buttons-two {
     display: flex;
     justify-content: center;
     padding: 20px 0;
@@ -152,71 +198,48 @@ h1 {
     justify-content: center;
 }
 
+
 /* Hover over place ship board */
 .hover-effect:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
 
-/* Color of placed ships on the board*/
+
+/*------------------------------------------------------------------------*/
+
+/* TOGGLE COLORS */
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: black;
+}
+
+/* SHIP PLACEMENT COLORS*/
 .selected {
     background-color: grey;
 }
 
-/* Color of ship button that's currently being placed */
 .current {
     background-color: green;
 }
 
-/* Color of ship button after it's been placed */
 .complete {
     background-color: gray;
 }
 
 /*------------------------------------------------------------------------*/
 
-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-
-/*Temporary borderers to view divs */
-.players {
-    border: 1px solid black;
-}
-
-.boards {
-    background-color: aqua;
-}
-
-.place-ships-screen {
-    border: 1px solid blue;
-}
-
-/* Hidden screens by default */
-
-.game-screen {
-    display: none;
-}
-.place-ships-screen {
+/* SCREENS VISIBLE BY DEFAULT */
+.start-battleship-screen, .placement, .game-player-one {
     display: flex;
 }
 
-.placement-player-two {
+/* SCREENS HIDDEN BY DEFUALT */
+.select-players-screen, .place-ships-screen, .placement-player-two, .game-screen, .game-player-two, .start-round, .header-text {
     display: none;
 }
-.game-player-two, .start-round {
-    display: none;
-}
 
-
-
-header {
-    visibility: hidden;
-}

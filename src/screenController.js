@@ -4,10 +4,13 @@ import { toggler } from "./screenToggler";
 const screenController = () => {
     const playerOne = player();
     const playerTwo = player();
+
     const playerOneDisplay = document.querySelector(".player-one-board");
     const playerTwoDisplay = document.querySelector(".player-two-board");
-    const playerOneShips = document.querySelector(".player-one-ships");
-    const playerTwoShips = document.querySelector(".player-two-ships");
+    const playerOneShipDisplay = document.querySelector(".player-one-ships");
+    const playerTwoShipDisplay = document.querySelector(".player-two-ships");
+    const playerOneShipPlacement = document.querySelector(".placement-boards-player-one");
+    const playerTwoShipPlacement = document.querySelector(".placement-boards-player-two");
 
     const playerOneNotice = document.querySelector(".player-one-notice");
     const playerTwoNotice = document.querySelector(".player-two-notice");
@@ -20,9 +23,10 @@ const screenController = () => {
             activePlayer: playerOne,
             opponent: playerTwo,
             name: "one",
-            display: playerOneDisplay,
-            shipDisplay: playerOneShips,
+            display: playerOneDisplay, // Displays players attacks
+            shipDisplay: playerOneShipDisplay, //Displays the locations of their ships
             notice: playerOneNotice,
+            shipPlacement: playerOneShipPlacement,
         },
 
         {
@@ -30,38 +34,40 @@ const screenController = () => {
             opponent: playerOne,
             name: "two", //computer playing
             display: playerTwoDisplay, // computer playing
-            shipDisplay: playerTwoShips,
+            shipDisplay: playerTwoShipDisplay,
             notice: playerTwoNotice,
+            shipPlacement: playerTwoShipPlacement,
         }
     ]
 
     let activePlayer = players[0]
 
-    const computerPlaysRound = () => {
-        //Generate random coordinates
-        const randomX = Math.floor(Math.random() * (0 - 10));
-        const randomY = Math.floor(Math.random() * (0 - 10));
 
-        //Recalculates random coordinate if it was already used
-        if(activePlayer.opponent.getBoard()[randomX][randomY]) {
-            computerAttack();
-        } else {
-            activePlayer.opponent.recieveAttack([randomX, randomY]);
+    const applyColor = (x, y, button, board = activePlayer.opponent.getBoard()) => {
+
+        //HANDLES COLOR FOR DISPLAY SHIPS
+        if(board == "ships") {
+            board = activePlayer.activePlayer.getBoard();
+
+            if(board[x][y] == "hit") {
+                button.classList.remove("selected");
+                button.classList.add("hit");
+            } else if(board[x][y] == "miss") {
+                //Don't want to display all the misses
+                button.classList.remove("selected");
+            }
         }
 
-        //Checks if game is over
-        if(activePlayer.opponent.isGameOver()) {
-            alert("Game Over!");
-        }
-
-    }
-
-    const applyColor = (x, y, button) => {
-        const opponentBoard = activePlayer.opponent.getBoard();
-        if(opponentBoard[x][y] == "hit") {
-            button.classList.add("hit");
-        } else if(opponentBoard[x][y] == "miss") {
-            button.classList.add("miss");
+        //HANDLES COLOR FOR DISPLAY BOARD - uses board default
+        else {
+            if(board[x][y] == "hit") {
+                button.classList.add("hit");
+                disableCoordinate(button);
+    
+            } else if(board[x][y] == "miss") {
+                button.classList.add("miss");
+                disableCoordinate(button);
+            }
         }
     }
 
@@ -71,6 +77,95 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
+    const getAlert = ()=> { alert("Take a turn first!")};
+
+    const TogglePassDoneBtns = (action, players)=>{
+        const endPlayerOneRound = document.querySelector(".end-player-one");
+        const endPlayerTwoRound = document.querySelector(".end-player-two");
+
+        //When action = "enable" this is the only way to determine whether it's a one/two player game
+        if(endPlayerOneRound.textContent == "Done") {players = "one"};
+        if(endPlayerOneRound.textContent == "Pass") {players = "two"};
+
+        //ONE PLAYER GAME TOGGLES:
+        if((action == "enable") && (players == "one")) {
+            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
+        }
+        if((action == "disable") && (players == "one")) {
+            endPlayerOneRound.removeEventListener("click", toggler.goToPlayerOneNextRound);
+            endPlayerOneRound.addEventListener("click", getAlert);
+        }
+
+        //TWO PLAYER GAME TOGGLES
+        //Player One Toggles:
+        if((action == "enable") && (players == "two") && (activePlayer.name == "one")) {
+            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
+        }
+        if((action == "disable") && (players == "two") && (activePlayer.name == "one")) {
+            endPlayerOneRound.removeEventListener("click", toggler.goToStartScreen);
+            endPlayerOneRound.addEventListener("click", getAlert);
+        }
+
+        //Player Two Toggles:
+        if((action == "enable") && (players == "two") && (activePlayer.name == "two")) {
+            endPlayerTwoRound.removeEventListener("click", getAlert);
+            endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
+        }
+        if((action == "disable") && (players == "two") && (activePlayer.name == "two")) {
+            endPlayerTwoRound.removeEventListener("click", toggler.goToStartScreen);
+            endPlayerTwoRound.addEventListener("click", getAlert);
+        }
+
+    }
+
+    const userSelectsAttack = (event) => {
+        const [x, y] = event.target.classList[1];
+
+        disableAllCoordinateBtns();
+        activePlayer.opponent.recieveAttack([x, y]);
+
+        const notice = getNotice(x, y); //Need to put this somewhere in dom
+        activePlayer.notice.textContent = notice;
+
+        //Btn color immediately changes to reflect hit/miss
+        applyColor(x, y, event.target);
+
+        TogglePassDoneBtns("enable");
+    }
+
+    const disableAllCoordinateBtns = () => {
+        if(activePlayer.name == "one") {
+            const playerOneBtns = document.querySelectorAll(".player-one-buttons");
+            playerOneBtns.forEach(button => {
+                disableCoordinate(button);
+            })
+        }
+        if(activePlayer.name == "two") {
+            const playerTwoBtns = document.querySelectorAll(".player-two-buttons");
+            playerTwoBtns.forEach(button => {
+                disableCoordinate(button);
+            })
+        }
+    }
+
+    const disableCoordinate = (button) => {
+        button.removeEventListener("click", userSelectsAttack);
+        button.classList.remove("hover");
+    };
+
+    const generateRandomCoordinates = () => {
+        const x = Math.floor(Math.random() * (10));
+        const y = Math.floor(Math.random() * (10));
+
+        //Recalculates random coordinate if it was already used
+        if((activePlayer.opponent.getBoard()[x][y]) == "hit" || (activePlayer.opponent.getBoard()[x][y]) == "miss") {
+            return generateRandomCoordinates();
+        } else {
+            return [x, y];
+        }
+    };
 
     return {
         displayBoard(displayBoard = activePlayer.display) {
@@ -80,17 +175,18 @@ const screenController = () => {
             for(let i = 0; i < opponentBoard.length; i++) {
                 for(let j = 0; j < opponentBoard[i].length; j++) {
                     const button = document.createElement("button");
-                    button.classList.add(`player-${name}-buttons`, `${i}${j}`);
+                    button.classList.add(`player-${name}-buttons`, `${i}${j}`, `hover`);
+                    button.addEventListener("click", userSelectsAttack);
                     applyColor(i, j, button);
                     displayBoard.appendChild(button);
                 }
             }
 
-            this.addEventListenersCoordinates();
+            TogglePassDoneBtns("disable");
 
         },
 
-        displayShips(displayBoard = activePlayer.shipDisplay) {
+        displayShips(displayBoard = activePlayer.shipPlacement) {
             const playerBoard = activePlayer.activePlayer.getBoard()
             const name = activePlayer.name;
 
@@ -98,7 +194,13 @@ const screenController = () => {
                 for(let j = 0; j < playerBoard[i].length; j++) {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
-                    //Need to create color for the ships / hits
+                    
+                    //Marks ships that are selected
+                    if(playerBoard[i][j]) {button.classList.add("selected")};
+
+                    //Need to mark the hits only
+                    applyColor(i, j, button, "ships");
+
                     displayBoard.appendChild(button);
                 }
             }
@@ -108,36 +210,51 @@ const screenController = () => {
 
         reset(boardType) {
             if(boardType == "board") {activePlayer.display.innerHTML = ""};
-            if(boardType == "ships") {activePlayer.shipDisplay.innerHTML = ""};
-            if(boardType == "shipsOne") {shipPlacementPlayerOne.innerHTML = ""};
-            if(boardType == "shipsTwo") {shipPlacementPlayerTwo.innerHTML = ""};
-        },
-
-        playRound(event) {
-            //Get the coordinates of the attack
-            const button = event.target;
-            const [x, y] = button.classList[1];
-
-            //Send the attack to the opponent
-            activePlayer.opponent.recieveAttack([x, y]);
-
-            //Displays the results:
-            applyColor(x, y, button);
-            activePlayer.notice.textContent = getNotice(x, y);
-
-            //Disables the buttons to prevent additional attacks
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            playerOneButtons.forEach(button => button.disabled = true);
-
-            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
-            playerTwoButtons.forEach(button => button.disabled = true);
+            if(boardType == "ships") {
+                activePlayer.shipDisplay.innerHTML = "";
+                activePlayer.shipPlacement.innerHTML = "";
+            };
         },
 
         switchPlayers() {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
 
-        placeship(event) {
+        generateShipButtons(displayDiv) {
+            const aircraftCarrier = document.createElement("button");
+            const battleship = document.createElement("button");
+            const cruiser = document.createElement("button");
+            const submarine = document.createElement("button");
+            const destroyer = document.createElement("button");
+
+            aircraftCarrier.textContent = "Aircraft Carrier";
+            battleship.textContent = "Battleship";
+            cruiser.textContent = "Cruiser";
+            submarine.textContent = "Submarine";
+            destroyer.textContent = "Destroyer";
+            
+            aircraftCarrier.classList.add("aircraftCarrier");
+            battleship.classList.add("battleship");
+            cruiser.classList.add("cruiser");
+            submarine.classList.add("submarine");
+            destroyer.classList.add("destroyer");
+
+            displayDiv.appendChild(aircraftCarrier);
+            displayDiv.appendChild(battleship);
+            displayDiv.appendChild(cruiser);
+            displayDiv.appendChild(submarine);
+            displayDiv.appendChild(destroyer);
+
+           //Add event listeners here
+           aircraftCarrier.addEventListener("click", this.userPlacesShip);
+           battleship.addEventListener("click", this.userPlacesShip);
+           cruiser.addEventListener("click", this.userPlacesShip);
+           submarine.addEventListener("click", this.userPlacesShip);
+           destroyer.addEventListener("click", this.userPlacesShip);
+
+        },
+
+        userPlacesShip(event) {
             const ship = event.target;
             const shipname = event.target.classList[0];
             ship.classList.add("current");
@@ -162,10 +279,18 @@ const screenController = () => {
                 //When all coordinates are collected disables buttons and passes to placeship:
                 if(coordinates.length == limit) {
                     activePlayer.activePlayer.placeship(shipname, coordinates);
-                    playerOneShipButtons.forEach(button => {
-                        button.removeEventListener("click", handleShipPlacement);
-                        button.classList.remove("hover-effect");
-                    });
+
+                    if(activePlayer.name == "one") {
+                        playerOneShipButtons.forEach(button => {
+                            button.removeEventListener("click", handleShipPlacement);
+                            button.classList.remove("hover-effect");
+                        });
+                    } else if(activePlayer.name = "two") {
+                        playerTwoShipButtons.forEach(button => {
+                            button.removeEventListener("click", handleShipPlacement);
+                            button.classList.remove("hover-effect");
+                        })
+                    }
                     ship.classList.remove("current");
                     ship.classList.add("complete");
                 };
@@ -188,66 +313,21 @@ const screenController = () => {
             }
         },
 
-        addEventListenersCoordinates() {
-            //Buttons must be defined AFTER EVERY time they are generated in dom
-            const playerOneButtons = document.querySelectorAll(".player-one-buttons");
-            const playerTwoButtons = document.querySelectorAll(".player-two-buttons");
+        computerTurn() {
+            const [x, y] = generateRandomCoordinates();
+            activePlayer.opponent.recieveAttack([x, y]);
 
-            //Then event listeners can be added on
-            playerOneButtons.forEach(button => button.addEventListener("click", this.playRound));
-            playerTwoButtons.forEach(button => button.addEventListener("click", this.playRound));
+            // //Checks if game is over
+            // if(activePlayer.opponent.isGameOver()) {
+            //     alert("Game Over!");
+            // }
+
         },
 
-        addEventListenersShips() {
-            //SHIP BUTTONS
-            const aircraftBtn = document.querySelector(".aircraftCarrier");
-            const battleshipBtn = document.querySelector(".battleship");
-            const cruiserBtn = document.querySelector(".cruiser");
-            const submarineBtn = document.querySelector(".submarine");
-            const destroyerBtn = document.querySelector(".destroyer");
-            const submitPlayerOneShips = document.querySelector(".ships-submit-player-one");
-            const submitPlayerTwoShips = document.querySelector(".ships-submit-player-two");
+        executePassDoneToggle(action, players) {
+            TogglePassDoneBtns(action, players);
+        },
 
-            //BUTTON EVENTS:
-            aircraftBtn.addEventListener("click", this.placeship);
-            battleshipBtn.addEventListener("click", this.placeship);
-            cruiserBtn.addEventListener("click", this.placeship);
-            submarineBtn.addEventListener("click", this.placeship);
-            destroyerBtn.addEventListener("click", this.placeship);
-
-            submitPlayerOneShips.addEventListener("click", ()=> {
-                //Complete class is added after ship is placed: indicates all are placed.
-                if((aircraftBtn.classList.contains("complete")) 
-                    && (battleshipBtn.classList.contains("complete"))
-                    && (cruiserBtn.classList.contains("complete"))
-                    && (submarineBtn.classList.contains("complete"))
-                    && (destroyerBtn.classList.contains("complete"))
-                ) {
-                    //Yes - toggle next screen
-                    toggler.goToShipPlacementBoard("two");
-                } else {    
-                    alert("Not all ships are placed, place them all then press submit");
-                };
-            });
-
-            submitPlayerTwoShips.addEventListener("click", ()=> {
-                //Complete class is added after ship is placed: indicates all are placed.
-                if((aircraftBtn.classList.contains("complete")) 
-                    && (battleshipBtn.classList.contains("complete"))
-                    && (cruiserBtn.classList.contains("complete"))
-                    && (submarineBtn.classList.contains("complete"))
-                    && (destroyerBtn.classList.contains("complete"))
-                ) {
-                    //Yes - toggle next screen
-                    alert("You did not yet make that toggle but good work!");
-                } else {    
-                    alert("Not all ships are placed, place them all then press submit");
-                };
-            })
-        }
-
-    }
-}
+}};
 
 export const controller = screenController();
-

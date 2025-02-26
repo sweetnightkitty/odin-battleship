@@ -7,24 +7,32 @@
 </head>
 <body>
     <header>
-        <div class="header">
-            <h1 class="header-text"></h1>
+        <div class="header-text">
+            <h1>Choose How Many Players</h1>
         </div>
     </header>
+
+    <!-- START BATTLESHIP SCREEN-->
+     <div class="start-battleship-screen">
+        <button class="start-game-btn">Start</button>
+     </div>
+
+    <!-- SELECT PLAYERS SCREEN-->
+    <div class="select-players-screen"> <!--Choose-player-->
+        <div class="select-players-btns-container">
+            <button class="btn-one-player-game">1 Player</button> <!--btn-one-players-->
+            <button class="btn-two-player-game">2 Players</button><!-- btn-two-players -->
+        </div>
+    </div>
 
     <!--PLACE SHIPS SCREEN-->
     <div class="place-ships-screen">
 
         <!-- PLAYER ONE SCREEN-->
         <div class="placement placement-player-one">
-            <div class="names player-one-name"><h2>Player One</h2></div>
+            <div class="names player-one-name"><h2>Player One Place Your Ships</h2></div>
             <div class="placement-boards placement-boards-player-one"></div>
-        <div class="ship-buttons">
-            <button class="aircraftCarrier">Aircraft Carrier</button>
-            <button class="battleship">Battleship</button>
-            <button class="cruiser">Cruiser</button>
-            <button class="submarine">Submarine</button>
-            <button class="destroyer">Destroyer</button>
+        <div class="ship-buttons-one">
         </div>
         <div class="ships-submit">
             <button class="ships-submit-btn ships-submit-player-one">Submit</button>
@@ -35,20 +43,13 @@
         <div class="placement placement-player-two">
             <div class="names player-two-name"><h2>Player Two Place Your Ships!</h2></div>
             <div class="placement-boards placement-boards-player-two"></div>
-            <div class="ship-buttons">
-                <button class="aircraftCarrier">Aircraft Carrier</button>
-                <button class="battleship">Battleship</button>
-                <button class="cruiser">Cruiser</button>
-                <button class="submarine">Submarine</button>
-                <button class="destroyer">Destroyer</button>
+            <div class="ship-buttons-two">
             </div>
             <div class="ships-submit">
                 <button class="ships-submit-btn ships-submit-player-two">Submit</button>
             </div>
         </div>
-    </div>
-
-    
+    </div> 
 
     <!-- PLAY ROUND SCREENS-->
     <div class="game-screen">
@@ -83,9 +84,6 @@
             <button class="start-round-btn">Start</button>
         </div>
     </div>
-
-
-
 
 
     <footer><span>Copyright 2025 Sara Toth</span></footer>
