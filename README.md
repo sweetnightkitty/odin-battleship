@@ -104,23 +104,6 @@ npm install --save-dev babel-jest @babel/core @babel/preset-env
 For a more detailed guide to downloading and working with Jest see: https://jestjs.io/docs/getting-started
 
 
-### Fetch Branches
-
-When working with this project you will need to work on the "redo-screen" branch.
-
-In order to access this branch first fetch all branches:
-
-```
-git fetch --all
-```
-
-Then checkout to the redo-screen branch with
-
-```
-git checkout redo-screen
-``` 
-
-
 ### Local Server
 
 After sucessfully cloning the repo, and accessing the correct branch in order to launch the program locally you will need to run the webpack server using the command
