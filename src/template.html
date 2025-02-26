@@ -7,53 +7,84 @@
 </head>
 <body>
     <header>
-        <div class="header">
-            <h1 class="header-text"></h1>
+        <div class="header-text">
+            <h1>Choose How Many Players</h1>
         </div>
     </header>
-    
-    <!--Start Game Screen w/modal button-->
-    <div class="game-start">
-        <div class="modal game-start-modal">
-            <div class="modal-content">
-                <button class="btn-start">Start</button>
+
+    <!-- START BATTLESHIP SCREEN-->
+     <div class="start-battleship-screen">
+        <button class="start-game-btn">Start</button>
+     </div>
+
+    <!-- SELECT PLAYERS SCREEN-->
+    <div class="select-players-screen"> <!--Choose-player-->
+        <div class="select-players-btns-container">
+            <button class="btn-one-player-game">1 Player</button> <!--btn-one-players-->
+            <button class="btn-two-player-game">2 Players</button><!-- btn-two-players -->
+        </div>
+    </div>
+
+    <!--PLACE SHIPS SCREEN-->
+    <div class="place-ships-screen">
+
+        <!-- PLAYER ONE SCREEN-->
+        <div class="placement placement-player-one">
+            <div class="names player-one-name"><h2>Player One Place Your Ships</h2></div>
+            <div class="placement-boards placement-boards-player-one"></div>
+        <div class="ship-buttons-one">
+        </div>
+        <div class="ships-submit">
+            <button class="ships-submit-btn ships-submit-player-one">Submit</button>
+        </div>
+        </div>
+
+        <!-- PLAYER TWO SCREEN-->
+        <div class="placement placement-player-two">
+            <div class="names player-two-name"><h2>Player Two Place Your Ships!</h2></div>
+            <div class="placement-boards placement-boards-player-two"></div>
+            <div class="ship-buttons-two">
+            </div>
+            <div class="ships-submit">
+                <button class="ships-submit-btn ships-submit-player-two">Submit</button>
             </div>
         </div>
-    </div>
+    </div> 
 
-    <!--Choose if it's a one or two player game-->
-    <div class="choose-player">
-        <div class="modal choose-player-modal">
-            <div class="modal-content">
-                <button class="btn-one-players"> 1 Player </button>
-                <button class="btn-two-players">2 Players</button>
+    <!-- PLAY ROUND SCREENS-->
+    <div class="game-screen">
+        <!--Player One's board-->
+        <div class="game game-player-one">
+            <div class="players player-one">
+                <div class="names player-one-name"><h2>Player One</h2></div>
+                <div class="notices player-one-notice"></div>
+                <div class="boards player-one-board"></div>
+                <div class="ships player-one-ships"></div>
+                <div class="game-submit">
+                    <button class="end-round end-player-one">Pass</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--Player place ships screen w/ submit button -->
-    <div class="place-ships">
-        <div class="place-ship-board"></div>
-        <div class="ship-buttons">
-            <button class="aircraft-carrier"></button>
-            <button class="battleship"></button>
-            <button class="cruiser"></button>
-            <button class="submarine"></button>
-            <button class="destroyer"></button>
-        </div>
-        <button class="place-ships-submit">Submit</button>
-    </div>
-
-    <!--Player One's board - Gameplay can be used for both players-->
-    <div class="game">
-        <div class="players player-one">
-            <div class="names player-one-name"><h2>Player One</h2></div>
-            <div class="boards player-one-board"></div>
+        <!--Player Two's board-->
+        <div class="game game-player-two">
+            <div class="players player-two">
+                <div class="names player-two-name"><h2>Player Two</h2></div>
+                <div class="notices player-two-notice"></div>
+                <div class="boards player-two-board"></div>
+                <div class="ships player-two-ships"></div>
+                <div class="game-submit">
+                    <button class="end-round end-player-two">Pass</button>
+                </div>
+            </div>
+        </div> 
+        
+        <!--Intermediate Start Screen-->
+        <div class="start-round">
+            <button class="start-round-btn">Start</button>
         </div>
     </div>
 
-    <!--Game Over screen with modal and play again btn-->
-    <div class="game-over"></div>
 
     <footer><span>Copyright 2025 Sara Toth</span></footer>
 </body>

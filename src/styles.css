@@ -13,21 +13,18 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-image: var(--text-background);
+    background-image: var(--ship-background);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     background-color: black;
 }
 
-.ship-bgd {
-    background-image: var(--ship-background);
-}
-
 header {
     display: flex;
     justify-content: center;
     padding: 20px 0px 10px;
+    min-height: 30px;
 }
 
 h1 {
@@ -39,47 +36,16 @@ h1 {
     padding: 20px 50px;
 }
 
-.game {
-    flex: 1;
-    display: flex;
-    padding: 35px 250px 55px;
-}
-
-.players {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* names here? */
-.names {
+h2 {
     text-align: center;
     padding: 8px 0px;
 }
 
-.boards {
+/* ALL SCREENS: BECAUSE ALL SCREENS ARE CONTENT WRAPPERS */
+.start-battleship-screen, .select-players-screen, .game-screen, .place-ships-screen, .placement, .game-player-one, .game-player-two, .start-round {
     flex: 1;
-    display: grid;
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
 }
 
-.player-one-buttons {
-    border-radius: 0;
-    border: .5px solid black;
-    background-color: white;
-}
-.player-one-buttons:hover {
-    background-color: lightgrey;
-    cursor: pointer;
-}
-
-.hit {
-    background-color: red;
-}
-
-.miss {
-    background-color: black;
-}
 
 footer {
     display: flex;
@@ -91,75 +57,189 @@ footer {
     font-weight: bold;
 }
 
+/*------------------------------------------------------------------------*/
 
-/*Temporary borderers to view divs */
-.players {
-    border: 1px solid black;
-}
-
-.boards {
-    background-color: aqua;
-}
+/* BLUE BUTTONS */
 
 
-/* Hidden screens by default */
-
-header {
-    visibility: hidden;
-}
-
-.choose-player {
-    visibility: hidden;
-}
-
-.place-ships {
-    visibility: hidden;
-}
-
-.game-over {
-    visibility: hidden;
-}
-
-.game {
-    visibility: hidden;
-}
-
-
-.modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    /* background-color: rgb(0,0,0); /* Fallback color */
-    /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
-  }
-
-  /* Modal Content/Box */
-.modal-content {
-    background-color: transparent;
-    margin: 10% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 40%; /* Could be more or less, depending on screen size */
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-.choose-player-modal > .modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 35%;
-}
-
-.btn-start, .btn-one-players, .btn-two-players {
+/* BIG BUTTONS */
+.start-game-btn, .btn-one-player-game, .btn-two-player-game, .start-round-btn {
     color: white;
     background-color: #173782;
     font-size: 45px;
     padding: 20px 50px;
     width: 350px;
 }
+
+.start-round-btn {
+    width: 450px;
+}
+
+/* SMALL BUTTONS */
+
+.ships-submit-player-one, .ships-submit-player-two, .end-round {
+    color: white;
+    background-color: #173782;
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* START BATTLESHIP SCREEN */
+
+.start-battleship-screen {
+    align-items: center;
+    justify-content: center;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* SELECT PLAYERS SCREEN */
+
+
+  /* Modal Content/Box */
+.select-players-btns-container {
+    background-color: transparent;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+
+/*------------------------------------------------------------------------*/
+
+/* PLAY ROUND SCREENS */
+.game-screen {
+    padding: 35px 250px 55px;
+}
+
+.notices {
+    min-height: 20px;
+}
+
+.start-round {
+    align-items: center;
+    justify-content: center;
+}
+
+
+.players {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.boards, .ships {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+
+.ships {
+    padding-top: 50px;
+}
+
+.game-submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+
+/*------------------------------------------------------------------------*/
+
+/* GAME BOARD BUTTON STYLES */
+
+.player-one-buttons, .player-two-buttons, .player-one-ship-buttons, .player-two-ship-buttons {
+    border-radius: 0;
+    border: .5px solid black;
+    background-color: white;
+}
+.hover:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+
+/*------------------------------------------------------------------------*/
+
+/* PLACE SHIPS SCREEN */
+
+.place-ships-screen{
+    padding: 35px 250px 55px;
+    justify-content: center;
+}
+
+.placement {
+    flex-direction: column;
+}
+
+.placement-boards {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+}
+
+.ship-buttons-one, .ship-buttons-two {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    gap: 10px;
+}
+.ships-submit {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Hover over place ship board */
+.hover-effect:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+
+/*------------------------------------------------------------------------*/
+
+/* TOGGLE COLORS */
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: black;
+}
+
+/* SHIP PLACEMENT COLORS*/
+.selected {
+    background-color: grey;
+}
+
+.current {
+    background-color: green;
+}
+
+.complete {
+    background-color: gray;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* SCREENS VISIBLE BY DEFAULT */
+.start-battleship-screen, .placement, .game-player-one {
+    display: flex;
+}
+
+/* SCREENS HIDDEN BY DEFUALT */
+.select-players-screen, .place-ships-screen, .placement-player-two, .game-screen, .game-player-two, .start-round, .header-text {
+    display: none;
+}
+

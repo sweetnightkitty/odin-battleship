@@ -37,7 +37,6 @@ You will likely want to refer to this information often:
 | destroyer       |      2     |
 
 
-
 ## Getting Started
 
 Before getting started make sure you have the latest version of npm installed.
@@ -81,7 +80,6 @@ npm install --save-dev style-loader css-loader
 
 ```
 For a more detailed guide on installing and working with Webpack see : https://webpack.js.org/guides/installation/
-
 
 
 
