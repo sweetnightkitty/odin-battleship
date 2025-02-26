@@ -18,9 +18,9 @@ For a more in-depth understanding of how to play read: https://en.wikipedia.org/
 
 ## A Note on Ships:
 
-There are 5 different ships in the game battleship with specific names and lengths associated with them. For ease of understanding, all ships in this project are given a class name based on their in-game names. 
+There are 5 different ships in the game battleship with specific names and lengths associated with them. For ease of understanding, all ships in this project are named based on their in-game names. 
 
-Ship names are listed exactly as they appear in the code.
+Ship names are listed exactly as they are named (as variables) in the code.
 
 You will likely want to refer to this information often:
 
