@@ -103,6 +103,8 @@ footer {
     background-color: var(--bright-gray-transparent);
     font-size: 16px;
     padding: 8px 10px;
+    margin-bottom: 10px;
+    flex-shrink: 1;
 }
 
 /*------------------------------------------------------------------------*/
@@ -202,7 +204,6 @@ footer {
     border-radius: 0;
     border: .5px solid rgb(2, 20, 36);
     background-color: var(--dark-blue-transparent);
-    /* rgb(189,225,253); */
 }
 .hover:hover {
     background-color: var(--dark-blue);
@@ -230,7 +231,7 @@ footer {
 }
 
 .placement-layout {
-    padding-left: 135px;
+    padding-left: 285px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -238,16 +239,14 @@ footer {
 
 .placement-boards {
     display: grid;
-    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
 }
 
 .ship-buttons-one, .ship-buttons-two {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 20px 0;
-    gap: 10px;
+    justify-content: flex-start;
 }
 
 
@@ -291,6 +290,26 @@ footer {
 
 /*------------------------------------------------------------------------*/
 
+/* SHIP BUTTON SIZES */
+
+.aircraftCarrier {
+    width: 250px;
+    margin-top: 130px;
+}
+
+.battleship {
+    width: 200px;
+}
+
+.cruiser, .submarine {
+    width: 150px;
+}
+
+.destroyer {
+    width: 100px;
+}
+/*------------------------------------------------------------------------*/
+
 /* SCREENS VISIBLE BY DEFAULT */
 .start-battleship-screen, .placement, .game-player-one {
     display: flex;
@@ -300,4 +319,5 @@ footer {
 .select-players-screen, .place-ships-screen, .placement-player-two, .game-screen, .game-player-two, .start-round, .header-text {
     display: none;
 }
+
 
