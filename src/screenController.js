@@ -223,10 +223,10 @@ const screenController = () => {
             const destroyer = document.createElement("button");
 
             aircraftCarrier.setAttribute('draggable', true);
-            battleship.setAttribute('draggable', false);
-            cruiser.setAttribute('draggable', false);
-            submarine.setAttribute('draggable', false);
-            destroyer.setAttribute('draggable', false);
+            battleship.setAttribute('draggable', true);
+            cruiser.setAttribute('draggable', true);
+            submarine.setAttribute('draggable', true);
+            destroyer.setAttribute('draggable', true);
 
             aircraftCarrier.textContent = "Aircraft Carrier";
             battleship.textContent = "Battleship";
