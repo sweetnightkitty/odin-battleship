@@ -32,9 +32,8 @@
         <div class="placement placement-player-one">
             <div class="names player-one-name"><h2>Player One Place Your Ships</h2></div>
             <div class="placement-boards placement-boards-player-one"></div>
-        <div class="ship-buttons-one">
-        </div>
-        <div class="ships-submit">
+            <div class="ship-buttons-one"></div>
+            <div class="ships-submit">
             <button class="ships-submit-btn ships-submit-player-one">Submit</button>
         </div>
         </div>
@@ -56,10 +55,20 @@
         <!--Player One's board-->
         <div class="game game-player-one">
             <div class="players player-one">
-                <div class="names player-one-name"><h2>Player One</h2></div>
-                <div class="notices player-one-notice"></div>
-                <div class="boards player-one-board"></div>
-                <div class="ships player-one-ships"></div>
+                <div class="game-header">
+                    <div class="names player-one-name"><h2>Player One</h2></div>
+                    <div class="notices player-one-notice"></div>
+                </div>
+                <div class="game-boards">
+                    <div>
+                        <h3>Attacks</h3>
+                        <div class="boards player-one-board"></div>
+                    </div>
+                    <div>
+                        <h3>Your Ships</h3>
+                        <div class="ships player-one-ships"></div>
+                    </div>
+                </div>
                 <div class="game-submit">
                     <button class="end-round end-player-one">Pass</button>
                 </div>
@@ -69,10 +78,20 @@
         <!--Player Two's board-->
         <div class="game game-player-two">
             <div class="players player-two">
-                <div class="names player-two-name"><h2>Player Two</h2></div>
-                <div class="notices player-two-notice"></div>
-                <div class="boards player-two-board"></div>
-                <div class="ships player-two-ships"></div>
+                <div class="game-header">
+                    <div class="names player-two-name"><h2>Player Two</h2></div>
+                    <div class="notices player-two-notice"></div>
+                </div>
+                <div class="game-boards">
+                    <div>
+                        <h3>Attacks</h3>
+                        <div class="boards player-two-board"></div>
+                    </div>
+                    <div>
+                        <h3>Your Ships</h3>
+                        <div class="ships player-two-ships"></div>
+                    </div>
+                </div>
                 <div class="game-submit">
                     <button class="end-round end-player-two">Pass</button>
                 </div>

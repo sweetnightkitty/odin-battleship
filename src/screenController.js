@@ -228,11 +228,11 @@ const screenController = () => {
             submarine.textContent = "Submarine";
             destroyer.textContent = "Destroyer";
             
-            aircraftCarrier.classList.add("aircraftCarrier");
-            battleship.classList.add("battleship");
-            cruiser.classList.add("cruiser");
-            submarine.classList.add("submarine");
-            destroyer.classList.add("destroyer");
+            aircraftCarrier.classList.add("aircraftCarrier", "ship");
+            battleship.classList.add("battleship", "ship");
+            cruiser.classList.add("cruiser", "ship");
+            submarine.classList.add("submarine", "ship");
+            destroyer.classList.add("destroyer", "ship");
 
             displayDiv.appendChild(aircraftCarrier);
             displayDiv.appendChild(battleship);
