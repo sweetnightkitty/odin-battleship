@@ -223,14 +223,28 @@ footer {
     flex-direction: column;
 }
 
+.placement-display {
+    display: flex;
+    gap: 40px;
+    justify-content: center
+}
+
+.placement-layout {
+    padding-left: 135px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .placement-boards {
-    flex: 1;
     display: grid;
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
 }
 
 .ship-buttons-one, .ship-buttons-two {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 20px 0;
     gap: 10px;
