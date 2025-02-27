@@ -54,6 +54,7 @@ h3 {
     padding-bottom: 10px;
 }
 
+
 /* ALL SCREENS: BECAUSE ALL SCREENS ARE CONTENT WRAPPERS */
 .start-battleship-screen, .select-players-screen, .game-screen, .place-ships-screen, .placement, .game-player-one, .game-player-two, .start-round {
     flex: 1;
@@ -234,13 +235,14 @@ footer {
     padding-left: 285px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
 }
 
 .placement-boards {
     display: grid;
-    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border: 2px outset var(--dark-blue);
+    margin-bottom: 30px;
 }
 
 .ship-buttons-one, .ship-buttons-two {
@@ -308,6 +310,29 @@ footer {
 .destroyer {
     width: 100px;
 }
+/*------------------------------------------------------------------------*/
+
+/* X-AXIS */
+
+.x-axis {
+    display: grid;
+    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border: 2px outset var(--dark-blue);
+    border-bottom: hidden;
+}
+
+.letter {
+    border: .5px solid black;
+    background-color: var(--gray-transparent);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: var(--dark-blue);
+}
+
 /*------------------------------------------------------------------------*/
 
 /* SCREENS VISIBLE BY DEFAULT */
