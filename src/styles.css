@@ -174,13 +174,15 @@ footer {
 .players {
     display: flex;
     flex-direction: column;
-    width: 900px;
+    width: 950px;
 }
 
 .game-boards {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    /* Combination of these two make it look more visually balanced than a simple justify-content: center does*/
+    justify-content: flex-start;
+    gap: 35px;
 }
 .boards, .ships {
     flex: 1;
