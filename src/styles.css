@@ -265,7 +265,7 @@ footer {
 /* Hover over place ship board */
 .hover-effect:hover {
     background-color: lightgrey;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 
