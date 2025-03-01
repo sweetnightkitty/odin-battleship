@@ -237,8 +237,8 @@ footer {
     flex-direction: column;
 
     /* Visually, the centered game does not look centered due to ship buttons on the side */
-    /* Originally calculated 285px recenters the board, minus 42.5 (the width of the y-axis */
-    padding-left: 242.5px;
+    /* Ship buttons width is 200px, so offset by that value */
+    padding-left: 200px;
 }
 
 .placement-boards {
