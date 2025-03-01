@@ -51,8 +51,8 @@ h2 {
 
 h3 {
     text-align: center;
-    padding-bottom: 10px;
 }
+
 
 /* ALL SCREENS: BECAUSE ALL SCREENS ARE CONTENT WRAPPERS */
 .start-battleship-screen, .select-players-screen, .game-screen, .place-ships-screen, .placement, .game-player-one, .game-player-two, .start-round {
@@ -174,13 +174,15 @@ footer {
 .players {
     display: flex;
     flex-direction: column;
-    width: 900px;
+    width: 950px;
 }
 
 .game-boards {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    /* Combination of these two make it look more visually balanced than a simple justify-content: center*/
+    justify-content: flex-start;
+    gap: 35px;
 }
 .boards, .ships {
     flex: 1;
@@ -214,7 +216,7 @@ footer {
 
 /*------------------------------------------------------------------------*/
 
-/* PLACE SHIPS SCREEN */
+/* PLACE SHIPS SCREEN */ 
 
 .place-ships-screen{
     padding: 35px 250px 55px;
@@ -232,16 +234,20 @@ footer {
 }
 
 .placement-layout {
-    padding-left: 285px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+
+    /* Visually, the centered game does not look centered due to ship buttons on the side */
+    /* Originally calculated 285px recenters the board, minus 42.5 (the width of the y-axis */
+    padding-left: 242.5px;
 }
 
 .placement-boards {
     display: grid;
-    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border: 2px outset var(--dark-blue);
+    margin-bottom: 30px;
 }
 
 .ship-buttons-one, .ship-buttons-two {
@@ -260,7 +266,7 @@ footer {
 /* Hover over place ship board */
 .hover-effect:hover {
     background-color: lightgrey;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 
@@ -310,6 +316,61 @@ footer {
 .destroyer {
     width: 100px;
 }
+/*------------------------------------------------------------------------*/
+
+/* X-AXIS */
+
+.x-axis {
+    display: grid;
+    /* First column accomodates borders/offsets y-axis width */
+    grid-template-columns: 42px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border: 2px outset rgb(0, 0, 0, 0); /* To preserve alignment with the board grid */
+    border-bottom: hidden;
+}
+
+.letter {
+    border: .5px solid rgb(0, 0, 0, 0);
+    width: 40px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 18px;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* Y-AXIS */
+
+.placement-y-axis, .boards-y-axis, .ships-y-axis {
+    display: flex;
+}
+
+.y-axis {
+    display: grid;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border-top: 1.5px solid rgb(0, 0, 0, 0); /* Preserves alignment with board grid */
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    border: .5px solid rgb(0, 0, 0, 0); /* Preserves alignment with board grid */
+    border-right: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+    padding-right: 2px;
+}
+
+/* SHIFT TITLE AND BUTTON TO ALIGN WITH BOARD GRID (NOT INCLUDING Y AXIS)*/
+
+    /* 42.5px is the total width of the y-axis */
+    .ships-submit, .placement > .names {
+        padding-left: 42.5px;
+    }
+
 /*------------------------------------------------------------------------*/
 
 /* SCREENS VISIBLE BY DEFAULT */
