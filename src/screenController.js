@@ -371,10 +371,28 @@ export const controller = screenController();
 
 //Test function**
 function positionDestroyer(targetButton) {
+    const board = document.querySelectorAll(".player-one-ship-buttons");
+    const boardSize = 10; // Assuming a 10x10 grid
+    const shipLength = 2;
+
+    const index = Array.from(board).indexOf(targetButton);
+    if (index === -1) return; // Safety check
+
+    let isValidPlacement = false;
+    //Checks if overflows the right edge
+    if (index % boardSize <= boardSize - shipLength) {
+        isValidPlacement = true;
+    }
+
+    if (!isValidPlacement) {
+        alert("Invalid placement! The ship would overflow the board.");
+        return;
+    }
+
     const rect = targetButton.getBoundingClientRect();
     const destroyer = document.querySelector(".destroyer");
     
-    // Move the battleship to align with the dropped button
+    // Move the Destroyer to align with the dropped button
     destroyer.style.position = "absolute";
     destroyer.style.left = `${rect.left}px`;
     destroyer.style.top = `${rect.top}px`;
