@@ -101,11 +101,10 @@ footer {
 
 .ship {
     background-color: var(--bright-gray-transparent);
-    font-size: 16px;
-    padding: 8px 10px;
+    font-size: 14px;
+    padding: 8px;
     margin-bottom: 10px;
     flex-shrink: 1;
-    height: 50px;
 }
 
 /*------------------------------------------------------------------------*/
@@ -299,22 +298,27 @@ footer {
 
 /* SHIP BUTTON SIZES */
 
+/* One grid button is 40px x 40px */
 
 .aircraftCarrier {
-    width: 250px;
+    height: 40px;
+    width: 200px; /* Length 5, x 40px */
     margin-top: 130px;
 }
 
 .battleship {
-    width: 200px;
+    height: 40px;
+    width: 160px; /* Length 4, x 40px */
 }
 
 .cruiser, .submarine {
-    width: 150px;
+    height: 40px;
+    width: 120px; /* Length 3, x 40px */
 }
 
 .destroyer {
-    width: 100px;
+    height: 40px;
+    width: 80px; /* Length 2, x 40px */
 }
 /*------------------------------------------------------------------------*/
 
