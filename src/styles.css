@@ -51,7 +51,6 @@ h2 {
 
 h3 {
     text-align: center;
-    padding-bottom: 10px;
 }
 
 
@@ -180,7 +179,7 @@ footer {
 .game-boards {
     display: flex;
     align-items: center;
-    /* Combination of these two make it look more visually balanced than a simple justify-content: center does*/
+    /* Combination of these two make it look more visually balanced than a simple justify-content: center*/
     justify-content: flex-start;
     gap: 35px;
 }
@@ -327,7 +326,7 @@ footer {
 .letter {
     border: .5px solid rgb(0, 0, 0, 0);
     width: 40px;
-    height: 40px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
