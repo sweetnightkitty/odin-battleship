@@ -255,6 +255,8 @@ footer {
 .ships-submit {
     display: flex;
     justify-content: center;
+    /* 42.5px is the total width of the y-axis, so this shifts submit btn to be centered under the game board grid*/
+    padding-left: 42.5px;
 }
 
 
@@ -316,19 +318,46 @@ footer {
 
 .x-axis {
     display: grid;
-    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    border: 2px outset rgb(255, 255, 255, 0); /* To preserve alignment with the board grid */
+    /* First column accomodates borders/offsets y-axis width */
+    grid-template-columns: 42px 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border: 2px outset rgb(0, 0, 0, 0); /* To preserve alignment with the board grid */
     border-bottom: hidden;
 }
 
 .letter {
-    border: .5px solid hidden;
+    border: .5px solid rgb(0, 0, 0, 0);
     width: 40px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     font-size: 18px;
+}
+
+/*------------------------------------------------------------------------*/
+
+/* Y-AXIS */
+
+.placement-y-axis {
+    display: flex;
+}
+
+.y-axis {
+    display: grid;
+    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    border-top: 1.5px solid rgb(0, 0, 0, 0); /* Preserves alignment with board grid */
+}
+
+.number {
+    width: 40px;
+    height: 40px;
+    border: .5px solid rgb(0, 0, 0, 0); /* Preserves alignment with board grid */
+    border-right: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+    padding-right: 2px;
 }
 
 /*------------------------------------------------------------------------*/
