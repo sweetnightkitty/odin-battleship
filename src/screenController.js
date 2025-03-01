@@ -164,6 +164,18 @@ const screenController = () => {
         }
     };
 
+    //DRAG DROP FUNCT **
+    const dragDropShip = (event) =>{
+        event.preventDefault();
+        const shipType = event.dataTransfer.getData("ship");
+
+        if(shipType == "destroyer") {
+            console.log(event.target);
+            positionDestroyer(event.target);
+            
+        }
+    }
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -175,6 +187,7 @@ const screenController = () => {
                     button.classList.add(`player-${name}-buttons`, `${i}${j}`, `hover`);
                     button.addEventListener("click", userSelectsAttack);
                     applyColor(i, j, button);
+
                     displayBoard.appendChild(button);
                 }
             }
@@ -192,10 +205,20 @@ const screenController = () => {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
                     
-                    //Marks ships that are selected
+                    //BTN EVENT LISTENRES**
+
+                    //Allows drag and drop
+                    button.addEventListener("dragover", (event)=>{
+                        event.preventDefault();
+                    })
+
+                    button.addEventListener("drop", dragDropShip);
+
+                    //ORIGINAL FUNTIONS DISABLED TEMP**
+                    // //Marks ships that are selected
                     if(playerBoard[i][j]) {button.classList.add("selected")};
 
-                    //Need to mark the hits only
+                    // //Need to mark the hits only
                     applyColor(i, j, button, "ships");
 
                     displayBoard.appendChild(button);
@@ -252,6 +275,18 @@ const screenController = () => {
            cruiser.addEventListener("click", this.userPlacesShip);
            submarine.addEventListener("click", this.userPlacesShip);
            destroyer.addEventListener("click", this.userPlacesShip);
+
+           //Handles dragging destroyer**
+           destroyer.addEventListener("dragstart", (event) =>{
+            event.dataTransfer.setData("ship", "destroyer");
+            setTimeout(() => {
+                destroyer.style.display = "none"; // Hide the original during drag
+            }, 0);
+           });
+
+           destroyer.addEventListener("dragend", () => {
+                destroyer.style.display = "block"; // Show it again after drop
+        });
 
         },
 
@@ -332,3 +367,16 @@ const screenController = () => {
 }};
 
 export const controller = screenController();
+
+
+//Test function**
+function positionDestroyer(targetButton) {
+    const rect = targetButton.getBoundingClientRect();
+    const destroyer = document.querySelector(".destroyer");
+    
+    // Move the battleship to align with the dropped button
+    destroyer.style.position = "absolute";
+    destroyer.style.left = `${rect.left}px`;
+    destroyer.style.top = `${rect.top}px`;
+    destroyer.style.width = `${rect.width * 2}px`; // Adjust for 2-space ship
+}
