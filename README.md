@@ -151,7 +151,7 @@ At the moment, there is no logic that announces to players when a ship has been 
 ### Appearance & Design
 
 **Outstanding Tasks**
-- [ ] Add title row and column that contains letters for the x-axis and numbers for the y-axis. 
+- [x] Add title row and column that contains letters for the x-axis and numbers for the y-axis. 
 - [ ] Update styling for "It's a hit!" "It's a miss!" messaginging (div.notices);
 - [ ] Modal screen that pops-up with a relevant explanation to replace all errors, or to appear when user clicks deactivated buttons.
 - [ ] In 1 player game mode user journey is not clear.
