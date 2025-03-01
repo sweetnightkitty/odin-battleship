@@ -255,8 +255,6 @@ footer {
 .ships-submit {
     display: flex;
     justify-content: center;
-    /* 42.5px is the total width of the y-axis, so this shifts submit btn to be centered under the game board grid*/
-    padding-left: 42.5px;
 }
 
 
@@ -359,6 +357,13 @@ footer {
     font-size: 18px;
     padding-right: 2px;
 }
+
+/* SHIFT TITLE AND BUTTON TO ALIGN WITH BOARD GRID (NOT INCLUDING Y AXIS)*/
+
+    /* 42.5px is the total width of the y-axis */
+    .ships-submit, .placement > .names {
+        padding-left: 42.5px;
+    }
 
 /*------------------------------------------------------------------------*/
 
