@@ -336,7 +336,7 @@ footer {
 
 /* Y-AXIS */
 
-.placement-y-axis {
+.placement-y-axis, .boards-y-axis {
     display: flex;
 }
 
