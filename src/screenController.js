@@ -324,6 +324,16 @@ const screenController = () => {
             event.target.style.display = "block"; // Show it again after drop
         },
 
+        areAllShipsPlaced() {
+            const board = activePlayer.activePlayer.getBoard();
+            const words = ["aircraftCarrier", "battleship", "cruiser", "submarine", "destroyer"];
+
+            const flatGraph = board.flat();
+
+            // Check if all words are present in the flattened array
+            return words.every(word => flatGraph.includes(word));
+        },
+
 }};
 
 export const controller = screenController();

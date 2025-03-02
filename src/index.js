@@ -34,7 +34,14 @@ twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 
 
 const executeOnePlayerGame = ()=> {
-    submitShipsOne.addEventListener("click", toggler.startOnePlayerGame);
+    submitShipsOne.addEventListener("click", ()=> {
+        if(controller.areAllShipsPlaced()) {
+            toggler.startOnePlayerGame();
+        } else {
+            alert("Place all your ships first!");
+        }
+    })
+
     endPlayerOneRound.textContent = "Done"; //Better UX
     endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
 }
@@ -42,10 +49,22 @@ const executeOnePlayerGame = ()=> {
 //State issue needs to be resolved:
 const executeTwoPlayerGame = ()=> {
     //Switch to player 2, so they can place their ships:
-    submitShipsOne.addEventListener("click", toggler.goToShipPlacementScreenTwo);
+    submitShipsOne.addEventListener("click", ()=> {
+        if(controller.areAllShipsPlaced()) {
+            toggler.goToShipPlacementScreenTwo()
+        } else {
+            alert("Place all your ships first");
+        }
+    })
 
     //Switch back to player 1, and start game from player 1's turn:
-    submitShipsTwo.addEventListener("click", toggler.startTwoPlayerGame);
+    submitShipsTwo.addEventListener("click", ()=> {
+        if(controller.areAllShipsPlaced()) {
+            toggler.startTwoPlayerGame()
+        } else {
+            alert("Place all your ships first");
+        }
+    })
 
     //Toggles gameplay between player 1, 2, and an intermediate pass screen
     endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);

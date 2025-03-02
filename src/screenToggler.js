@@ -18,6 +18,8 @@ const screenToggler = () => {
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
     const shipBtnsOne = document.querySelectorAll(".ship-one");
     const shipBtnsTwo = document.querySelectorAll(".ship-two");
+    const submitShipsOne = document.querySelector(".ships-submit-player-one");
+const submitShipsTwo = document.querySelector(".ships-submit-player-two");
 
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
@@ -35,7 +37,6 @@ const screenToggler = () => {
         controller.displayBoard();
         controller.displayShips(gamePlayerOneShips);
     }
-
 
 
     return {
@@ -61,7 +62,6 @@ const screenToggler = () => {
                 btn.addEventListener("dragstart", controller.dragStart);
                 btn.addEventListener("dragend", controller.dragEnd);
             })
-
 
         },
 
