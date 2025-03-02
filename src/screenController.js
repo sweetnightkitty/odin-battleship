@@ -239,6 +239,11 @@ const screenController = () => {
 
         placeShipUI(shipname, event.target);
     };
+
+    const buttonDropHandler = (event) =>{
+        event.preventDefault();
+        console.log("Grid drop fires");
+    }
     
     return {
         displayBoard(displayBoard = activePlayer.display) {
@@ -274,10 +279,7 @@ const screenController = () => {
                         event.preventDefault();
                         console.log("Grid Button drag fires")
                     })
-                    button.addEventListener("drop", (event)=>{
-                        event.preventDefault();
-                        console.log("Grid drop fires");
-                    });
+                    button.addEventListener("drop", buttonDropHandler);
 
                     // //Marks ships that are selected
                     if(playerBoard[i][j]) {button.classList.add("selected")};
@@ -316,6 +318,7 @@ const screenController = () => {
             const shipname = event.target.classList[0];
             event.dataTransfer.setData("ship", shipname);
             console.log(shipname);
+
             setTimeout(() => {
                 event.target.style.display = "none"; // Hide the original during drag
             }, 0);
