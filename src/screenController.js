@@ -240,17 +240,17 @@ const screenController = () => {
         placeShipUI(shipname, event.target);
     };
 
-    const dragStart = (event) => {
-        const shipname = event.target.classList[0];
-        event.dataTransfer.setData("ship", shipname);
-        setTimeout(() => {
-            event.target.style.display = "none"; // Hide the original during drag
-        }, 0);
-    }; 
+    // const dragStart = (event) => {
+    //     const shipname = event.target.classList[0];
+    //     event.dataTransfer.setData("ship", shipname);
+    //     setTimeout(() => {
+    //         event.target.style.display = "none"; // Hide the original during drag
+    //     }, 0);
+    // }; 
 
-    const dragEnd = (event)=> {
-        event.target.style.display = "block"; // Show it again after drop
-    };
+    // const dragEnd = (event)=> {
+    //     event.target.style.display = "block"; // Show it again after drop
+    // };
     
     return {
         displayBoard(displayBoard = activePlayer.display) {
@@ -340,13 +340,6 @@ const screenController = () => {
             displayDiv.appendChild(cruiser);
             displayDiv.appendChild(submarine);
             displayDiv.appendChild(destroyer);
-
-            //DRAG AND DROP LISTENERS
-            const ships = document.querySelectorAll(".ship");
-            ships.forEach(ship => {
-                ship.addEventListener("dragstart", dragStart);
-                ship.addEventListener("dragend", dragEnd);
-            })
         },
 
         computerTurn() {
@@ -357,6 +350,18 @@ const screenController = () => {
 
         executePassDoneToggle(action, players) {
             TogglePassDoneBtns(action, players);
+        },
+
+        dragStart(event) {
+            const shipname = event.target.classList[0];
+            event.dataTransfer.setData("ship", shipname);
+            setTimeout(() => {
+                event.target.style.display = "none"; // Hide the original during drag
+            }, 0);
+        },
+
+        dragEnd(event) {
+            event.target.style.display = "block"; // Show it again after drop
         },
 
 }};

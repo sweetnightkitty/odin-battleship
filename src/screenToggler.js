@@ -58,9 +58,19 @@ const screenToggler = () => {
             placeShipsScreen.style.display = "flex";
             controller.displayShips();
             controller.generateShipButtons(shipButtonsOne);
+
+            //DRAG AND DROP LISTENERS
+            const ships = document.querySelectorAll(".ship-one");
+            ships.forEach(ship => {
+                ship.addEventListener("dragstart", controller.dragStart);
+                ship.addEventListener("dragend", controller.dragEnd);
+            })
         },
 
         goToShipPlacementScreenTwo() {
+            //Switch players
+            controller.switchPlayers();
+
             //hide placement one
             shipPlacementScreenOne.style.display = "none";
 
@@ -68,6 +78,13 @@ const screenToggler = () => {
             shipPlacementScreenTwo.style.display = "flex";
             controller.displayShips();
             controller.generateShipButtons(shipButtonsTwo);
+
+            //DRAG AND DROP LISTENERS
+            const ships = document.querySelectorAll(".ship-two");
+            ships.forEach(ship => {
+                ship.addEventListener("dragstart", controller.dragStart);
+                ship.addEventListener("dragend", controller.dragEnd);
+            })
         },
 
         startOnePlayerGame() {
@@ -76,6 +93,7 @@ const screenToggler = () => {
         },
 
         startTwoPlayerGame() {
+            controller.switchPlayers();
             startGame();
             controller.executePassDoneToggle("disable", "two");
         },
