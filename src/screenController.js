@@ -164,16 +164,82 @@ const screenController = () => {
         }
     };
 
+    //PLACES SHIP ON BOARD UI **
+    const placeShipUI = (shipname, targetButton) => {
+        const x = parseInt(targetButton.classList[1][0], 10);
+        const y = parseInt(targetButton.classList[1][1], 10);
+    
+        const name = activePlayer.name;
+        const boardSize = 10; // 10x10 grid
+        let shipLength = 0;
+    
+        if (shipname == "aircraftCarrier") shipLength = 5;
+        if (shipname == "battleship") shipLength = 4;
+        if (shipname == "cruiser" || shipname == "submarine") shipLength = 3;
+        if (shipname == "destroyer") shipLength = 2;
+    
+        // Find the correct button using the DOM
+        const boardBtns = document.querySelectorAll(`.player-${name}-ship-buttons`);
+        const correctButton = Array.from(boardBtns).find(btn => btn.classList[1] === targetButton.classList[1]);
+    
+        if (!correctButton) {
+            console.log("Could not find the correct button in the DOM!");
+            return;
+        }
+    
+        console.log(`Target button is at: Row ${x}, Column ${y}`);
+    
+        let isValidPlacement = false;
+        if (y <= boardSize - shipLength) { 
+            isValidPlacement = true;
+        }
+    
+        if (!isValidPlacement) {
+            alert("Invalid placement! The ship would overflow the board.");
+            return;
+        }
+    
+        const ship = document.querySelector(`.${shipname}`);
+        const board = document.querySelector(`.player-${name}-board`); // Select the game board
+    
+        // Get the board's position
+        const boardRect = board.getBoundingClientRect();
+        const buttonRect = correctButton.getBoundingClientRect();
+    
+        // Calculate the width of a single button (assuming uniform size)
+        const buttonWidth = correctButton.offsetWidth;
+        const buttonHeight = correctButton.offsetHeight; // Added this for consistency
+    
+        // Debugging info to ensure we are getting correct values
+        console.log("Board Rect:", boardRect);
+        console.log("Button Rect:", buttonRect);
+    
+        // Position the ship relative to the board
+        ship.style.position = "absolute";
+        ship.style.left = `${buttonRect.left - boardRect.left}px`;  // Relative to board
+        ship.style.top = `${buttonRect.top - boardRect.top}px`;    // Relative to board
+    
+        // Set correct width for both ships
+        ship.style.width = `${buttonWidth * shipLength}px`;  // For larger ships
+        ship.style.height = `${buttonHeight}px`;  // Match button height
+    
+        // Ensure ships align correctly by setting display to block
+        ship.style.display = "block";
+    
+        ship.classList.add("after-placement");
+    };
+    
+
+    
+    
+
     //DRAG DROP FUNCT **
     const dragDropShip = (event) =>{
         event.preventDefault();
-        const shipType = event.dataTransfer.getData("ship");
+        const shipname = event.dataTransfer.getData("ship");
+        console.log(shipname);
 
-        if(shipType == "destroyer") {
-            console.log(event.target);
-            positionDestroyer(event.target);
-            
-        }
+        placeShipUI(shipname, event.target);
     }
 
     return {
@@ -214,7 +280,6 @@ const screenController = () => {
 
                     button.addEventListener("drop", dragDropShip);
 
-                    //ORIGINAL FUNTIONS DISABLED TEMP**
                     // //Marks ships that are selected
                     if(playerBoard[i][j]) {button.classList.add("selected")};
 
@@ -275,6 +340,18 @@ const screenController = () => {
            cruiser.addEventListener("click", this.userPlacesShip);
            submarine.addEventListener("click", this.userPlacesShip);
            destroyer.addEventListener("click", this.userPlacesShip);
+
+           
+           aircraftCarrier.addEventListener("dragstart", (event)=> {
+            event.dataTransfer.setData("ship", "aircraftCarrier");
+            setTimeout(()=> {
+                aircraftCarrier.style.display = "none";
+            }, 0);
+           })
+
+           aircraftCarrier.addEventListener("dragend", ()=> {
+            aircraftCarrier.style.display = "block";
+           })
 
            //Handles dragging destroyer**
            destroyer.addEventListener("dragstart", (event) =>{
@@ -398,3 +475,5 @@ function positionDestroyer(targetButton) {
     destroyer.style.top = `${rect.top}px`;
     destroyer.style.width = `${rect.width * 2}px`; // Adjust for 2-space ship
 }
+
+
