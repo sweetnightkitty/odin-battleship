@@ -16,8 +16,9 @@ const screenToggler = () => {
     const placeShipsScreen = document.querySelector(".place-ships-screen");
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
-    const shipButtonsOne = document.querySelector(".ship-buttons-one");
-    const shipButtonsTwo = document.querySelector(".ship-buttons-two");
+    const shipBtnsOne = document.querySelectorAll(".ship-one");
+    const shipBtnsTwo = document.querySelectorAll(".ship-two");
+
 
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
@@ -35,7 +36,6 @@ const screenToggler = () => {
         controller.displayBoard();
         controller.displayShips(gamePlayerOneShips);
     }
-
 
 
     return {
@@ -57,17 +57,27 @@ const screenToggler = () => {
             //display placement one
             placeShipsScreen.style.display = "flex";
             controller.displayShips();
-            controller.generateShipButtons(shipButtonsOne);
+            shipBtnsOne.forEach(btn => {
+                btn.addEventListener("dragstart", controller.dragStart);
+                btn.addEventListener("dragend", controller.dragEnd);
+            })
+
         },
 
         goToShipPlacementScreenTwo() {
+            //Switch players
+            controller.switchPlayers();
+
             //hide placement one
             shipPlacementScreenOne.style.display = "none";
 
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
             controller.displayShips();
-            controller.generateShipButtons(shipButtonsTwo);
+            shipBtnsTwo.forEach(btn => {
+                btn.addEventListener("dragstart", controller.dragStart);
+                btn.addEventListener("dragend", controller.dragEnd);
+            })
         },
 
         startOnePlayerGame() {
@@ -76,6 +86,7 @@ const screenToggler = () => {
         },
 
         startTwoPlayerGame() {
+            controller.switchPlayers();
             startGame();
             controller.executePassDoneToggle("disable", "two");
         },

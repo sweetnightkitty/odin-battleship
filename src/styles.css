@@ -101,8 +101,8 @@ footer {
 
 .ship {
     background-color: var(--bright-gray-transparent);
-    font-size: 16px;
-    padding: 8px 10px;
+    font-size: 14px;
+    padding: 8px;
     margin-bottom: 10px;
     flex-shrink: 1;
 }
@@ -237,22 +237,26 @@ footer {
     flex-direction: column;
 
     /* Visually, the centered game does not look centered due to ship buttons on the side */
-    /* Originally calculated 285px recenters the board, minus 42.5 (the width of the y-axis */
-    padding-left: 242.5px;
+    /* Ship buttons width is 200px, so offset by that value */
+    padding-left: 200px;
 }
 
 .placement-boards {
     display: grid;
-    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-columns: repeat(10, 40px);  /* Ensures all columns are equal width */
+    grid-template-rows: repeat(10, 40px);     /* Same for rows */
+    grid-gap: 0; /* Prevents any gaps between buttons */
     border: 2px outset var(--dark-blue);
     margin-bottom: 30px;
+    position: relative; /* To position drag-drop ships */
 }
 
 .ship-buttons-one, .ship-buttons-two {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 200px; /* Prevents column width from altering as ships drag and drop ** */
+    padding-top: 130px;
 }
 
 
@@ -281,15 +285,10 @@ footer {
     background-color: white;
 }
 
-/* SHIP PLACEMENT COLORS*/
 .selected {
-    background-color: grey;
+    background-color: gray;
 }
-
-.current {
-    background-color: var(--green);
-}
-
+/* SHIP PLACEMENT COLORS*/
 .complete {
     background-color: var(--dark-gray-transparent);
 }
@@ -298,21 +297,32 @@ footer {
 
 /* SHIP BUTTON SIZES */
 
+/* One grid button is 40px x 40px */
+
 .aircraftCarrier {
-    width: 250px;
-    margin-top: 130px;
+    height: 40px;
+    width: 200px; /* Length 5, x 40px */
 }
 
 .battleship {
-    width: 200px;
+    height: 40px;
+    width: 160px; /* Length 4, x 40px */
 }
 
 .cruiser, .submarine {
-    width: 150px;
+    height: 40px;
+    width: 120px; /* Length 3, x 40px */
 }
 
 .destroyer {
-    width: 100px;
+    height: 40px;
+    width: 80px; /* Length 2, x 40px */
+}
+
+.after-placement {
+    position: absolute;
+    transition: left 0.2s, top 0.2s;
+    z-index: 9999; /* Ensures it appears above the board */
 }
 /*------------------------------------------------------------------------*/
 

@@ -164,6 +164,82 @@ const screenController = () => {
         }
     };
 
+    const relocateDraggedShip = (shipname, shipLength, targetButton)=> {
+        //Two possible ships with that shipname
+        const ships = document.querySelectorAll(`.${shipname}`);
+
+        //Gets the one related to the current player
+        const targetShip = Array.from(ships).find(ship => ship.classList.contains(`ship-${activePlayer.name}`));
+        const targetBoard = document.querySelector(`.placement-boards-player-${activePlayer.name}`);
+       
+        
+        // Get the position of the targetButton
+        const buttonRect = targetButton.getBoundingClientRect();
+
+        // Set ship styles (absolute positioning)
+        targetShip.style.position = "absolute";
+        targetShip.style.left = `${buttonRect.left}px`; // Set the horizontal position relative to the board
+        targetShip.style.top = `${buttonRect.top}px`; // Set the vertical position relative to the board
+        targetShip.style.width = `${40 * shipLength}px`; // Set width based on ship length (assuming 40px per cell)
+        targetShip.style.height = `40px`; // Consistent height for ship
+
+        targetShip.classList.add("after-placement");
+
+    }
+
+    const buttonDropHandler = (event) =>{
+        event.preventDefault();
+
+        //Get the name of the ship that's being placed
+        const shipname = event.dataTransfer.getData("ship");
+        const boardSize = 10; // 10 x 10 grid;
+
+
+        // Define ship lengths
+        const shipLengths = {
+            aircraftCarrier: 5,
+            battleship: 4,
+            cruiser: 3,
+            submarine: 3,
+            destroyer: 2
+        };
+
+        const shipLength = shipLengths[shipname];
+        if (!shipLength) return; // Early exit if invalid ship name
+        
+        // Find target button's grid position
+        const [x, y] = event.target.classList[1].split('').map(Number);
+        const occupiedCoordinates = [];
+        
+        // Validate placement (avoid overflow)
+        if (y > boardSize - shipLength) {
+        alert("Invalid placement! The ship would overflow the board.");
+        return;
+        }
+
+        // Add ship coordinates horizontally
+        for (let i = 0; i < shipLength; i++) {
+            const buttonId = `${x}${y + i}`;
+            const [newX, newY] = buttonId;
+            occupiedCoordinates.push([newX, newY]); //Format needed for placeship function coordinates parameter
+        }
+
+        const shipsBoard = activePlayer.activePlayer.getBoard();
+
+        //Resets the placement of the ship
+        for(let i = 0; i < 10; i++) {
+            for(let j = 0; j < 10; j++) {
+                if(shipsBoard[i][j] == shipname) {shipsBoard[i][j] = false};
+            }
+        }
+
+        //Stores the placed ships in the players boards.
+        activePlayer.activePlayer.placeship(shipname, occupiedCoordinates);
+   
+        //Reapply style values to the ship
+        relocateDraggedShip(shipname, shipLength, event.target);
+    }
+    
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -175,6 +251,7 @@ const screenController = () => {
                     button.classList.add(`player-${name}-buttons`, `${i}${j}`, `hover`);
                     button.addEventListener("click", userSelectsAttack);
                     applyColor(i, j, button);
+
                     displayBoard.appendChild(button);
                 }
             }
@@ -191,11 +268,17 @@ const screenController = () => {
                 for(let j = 0; j < playerBoard[i].length; j++) {
                     const button = document.createElement("button");
                     button.classList.add(`player-${name}-ship-buttons`, `${i}${j}`);
-                    
-                    //Marks ships that are selected
+
+                    //Allows drag and drop
+                    button.addEventListener("dragover", (event)=>{
+                        event.preventDefault();
+                    })
+                    button.addEventListener("drop", buttonDropHandler);
+
+                    // //Marks ships that are selected
                     if(playerBoard[i][j]) {button.classList.add("selected")};
 
-                    //Need to mark the hits only
+                    // //Need to mark the hits only
                     applyColor(i, j, button, "ships");
 
                     displayBoard.appendChild(button);
@@ -215,114 +298,42 @@ const screenController = () => {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
 
-        generateShipButtons(displayDiv) {
-            const aircraftCarrier = document.createElement("button");
-            const battleship = document.createElement("button");
-            const cruiser = document.createElement("button");
-            const submarine = document.createElement("button");
-            const destroyer = document.createElement("button");
-
-            aircraftCarrier.textContent = "Aircraft Carrier";
-            battleship.textContent = "Battleship";
-            cruiser.textContent = "Cruiser";
-            submarine.textContent = "Submarine";
-            destroyer.textContent = "Destroyer";
-            
-            aircraftCarrier.classList.add("aircraftCarrier", "ship");
-            battleship.classList.add("battleship", "ship");
-            cruiser.classList.add("cruiser", "ship");
-            submarine.classList.add("submarine", "ship");
-            destroyer.classList.add("destroyer", "ship");
-
-            displayDiv.appendChild(aircraftCarrier);
-            displayDiv.appendChild(battleship);
-            displayDiv.appendChild(cruiser);
-            displayDiv.appendChild(submarine);
-            displayDiv.appendChild(destroyer);
-
-           //Add event listeners here
-           aircraftCarrier.addEventListener("click", this.userPlacesShip);
-           battleship.addEventListener("click", this.userPlacesShip);
-           cruiser.addEventListener("click", this.userPlacesShip);
-           submarine.addEventListener("click", this.userPlacesShip);
-           destroyer.addEventListener("click", this.userPlacesShip);
-
-        },
-
-        userPlacesShip(event) {
-            const ship = event.target;
-            const shipname = event.target.classList[0];
-            ship.classList.add("current");
-            const playerOneShipButtons = document.querySelectorAll(".player-one-ship-buttons");
-            const playerTwoShipButtons = document.querySelectorAll(".player-two-ship-buttons");
-            
-            let limit = 0;
-            const coordinates = [];
-
-            //Limit determines how many coordinates are needed
-            if(shipname == "aircraftCarrier") {limit = 5};
-            if(shipname == "battleship") {limit = 4};
-            if(shipname == "submarine" || shipname == "cruiser") {limit = 3};
-            if(shipname == "destroyer") {limit = 2};
-
-            const handleShipPlacement = (event) => {
-                const [x, y] = event.target.classList[1];
-                coordinates.push([x, y]);
-
-                event.target.classList.add("selected");
-
-                //When all coordinates are collected disables buttons and passes to placeship:
-                if(coordinates.length == limit) {
-                    activePlayer.activePlayer.placeship(shipname, coordinates);
-
-                    if(activePlayer.name == "one") {
-                        playerOneShipButtons.forEach(button => {
-                            button.removeEventListener("click", handleShipPlacement);
-                            button.classList.remove("hover-effect");
-                        });
-                    } else if(activePlayer.name = "two") {
-                        playerTwoShipButtons.forEach(button => {
-                            button.removeEventListener("click", handleShipPlacement);
-                            button.classList.remove("hover-effect");
-                        })
-                    }
-                    ship.classList.remove("current");
-                    ship.classList.add("complete");
-                };
-
-            }
-
-            if(activePlayer.name == "one") {
-                playerOneShipButtons.forEach(button => {
-                    //Adds hover effects only after buttons are active
-                    button.classList.add("hover-effect");
-                    button.addEventListener("click", handleShipPlacement);
-                })
-            } else if(activePlayer.name == "two") {
-                console.log("works");
-                playerTwoShipButtons.forEach(button => {
-                    //Adds hover effects only after buttons are active
-                    button.classList.add("hover-effect");
-                    button.addEventListener("click", handleShipPlacement);
-                })
-            }
-        },
-
         computerTurn() {
             const [x, y] = generateRandomCoordinates();
             activePlayer.opponent.recieveAttack([x, y]);
-
-            // //Checks if game is over
-            // if(activePlayer.opponent.isGameOver()) {
-            //     alert("Game Over!");
-            // }
-
         },
+
 
         executePassDoneToggle(action, players) {
             TogglePassDoneBtns(action, players);
         },
 
+        dragStart(event) {
+            const shipname = event.target.classList[0];
+            event.dataTransfer.setData("ship", shipname);
+
+            setTimeout(() => {
+                event.target.style.display = "none"; // Hide the original during drag
+            }, 0);
+        },
+
+        dragEnd(event) {
+            event.target.style.display = "block"; // Show it again after drop
+        },
+
+        areAllShipsPlaced() {
+            const board = activePlayer.activePlayer.getBoard();
+            const words = ["aircraftCarrier", "battleship", "cruiser", "submarine", "destroyer"];
+
+            const flatGraph = board.flat();
+
+            // Check if all words are present in the flattened array
+            return words.every(word => flatGraph.includes(word));
+        },
+
 }};
 
 export const controller = screenController();
+
+
+
