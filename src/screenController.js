@@ -208,6 +208,25 @@ const screenController = () => {
         ship.style.height = `${buttonRect.height}px`; // Set height for consistency
     
         ship.classList.add("after-placement");
+
+// Now, store the coordinates of the ship on the board
+const occupiedCoordinates = [];
+
+// Add ship coordinates horizontally
+for (let i = 0; i < shipLength; i++) {
+    const buttonId = `${x}${y + i}`;
+    occupiedCoordinates.push(buttonId);
+}
+
+// Update the board graph with the occupied coordinates
+occupiedCoordinates.forEach((coord, index) => {
+    const xCoord = x;
+    const yCoord = y + index; // Use index to get the correct position in the horizontal direction
+    activePlayer.activePlayer.getBoard()[xCoord][yCoord] = shipname;
+});
+
+// Optionally log out the occupied coordinates for debugging
+console.log(`Ship placed at: ${occupiedCoordinates.join(", ")}`);
     };
     
 
