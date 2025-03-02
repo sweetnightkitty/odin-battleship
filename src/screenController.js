@@ -164,34 +164,26 @@ const screenController = () => {
         }
     };
 
-    //PLACES SHIP ON BOARD UI 
-    const placeShipUI = (shipname, targetButton) => {
-        const name = activePlayer.name;
-    
-        const ship = document.querySelector(`.${shipname}`);
-        const board = document.querySelector(`.player-${name}-board`);
-    
-        // Set board position for absolute positioning
-        board.style.position = "relative";
-    
-        // Get button and board positions
+    const relocateDraggedShip = (shipname, shipLength, targetButton)=> {
+        //Two possible ships with that shipname
+        const ships = document.querySelectorAll(`.${shipname}`);
+
+        //Gets the one related to the current player
+        const targetShip = Array.from(ships).find(ship => ship.classList.contains(`ship-${activePlayer.name}`));
+        const targetBoard = document.querySelector(`.placement-boards-player-${activePlayer.name}`);
+       
+        
+        // Get the position of the targetButton
         const buttonRect = targetButton.getBoundingClientRect();
-        const boardRect = board.getBoundingClientRect();
-    
-        // Calculate position of ship relative to the board
-        ship.style.position = "absolute";
-        ship.style.left = `${buttonRect.left - boardRect.left}px`;
-        ship.style.top = `${buttonRect.top - boardRect.top}px`;
-        ship.style.width = `${buttonRect.width * shipLength}px`;
-        ship.style.height = `${buttonRect.height}px`; // Set height for consistency
-    
-        ship.classList.add("after-placement");
 
-        };
-    
+        // Set ship styles (absolute positioning)
+        targetShip.style.position = "absolute";
+        targetShip.style.left = `${buttonRect.left}px`; // Set the horizontal position relative to the board
+        targetShip.style.top = `${buttonRect.top}px`; // Set the vertical position relative to the board
+        targetShip.style.width = `${40 * shipLength}px`; // Set width based on ship length (assuming 40px per cell)
+        targetShip.style.height = `40px`; // Consistent height for ship
 
-
-    const relocateDraggedShip = ()=> {
+        targetShip.classList.add("after-placement");
 
     }
 
@@ -246,7 +238,7 @@ const screenController = () => {
         activePlayer.activePlayer.placeship(shipname, occupiedCoordinates);
    
         //Reapply style values to the ship
-        relocateDraggedShip(shipname);
+        relocateDraggedShip(shipname, shipLength, event.target);
     }
     
     return {
