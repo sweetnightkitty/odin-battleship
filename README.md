@@ -122,21 +122,13 @@ At the moment, this game is in development. Please refer to the detailed list be
 
 ### Placing ships on the board
 
-At the moment, placing ships on the game board are done manually by clicking coordinates. So for example when placing the battleship, which has a length of 4, the user must click 4 buttons on the gameboard in chronological horizontal, or vertical order. 
+At the moment, placing ships on the board are done by dragging and dropping the ships onto the gameboard. So for ships can only be dragged and dropped into a horizontal position.
 
-When selecting buttons horizontally, they MUST BE from left to right and when selecting buttons vertically they MUST BE from top to bottom.
-
-Selecting buttons right to left, or bottom to top will throw an error, as well as picking buttons that are not adjacent. 
-
-This is obviously not very user-friendly and a temporary feature. It will later be replaced with a drag and drop style of placement, or another user-friendly alternative. 
-
-Also, when a ship is placed, it is still possible to click on other ships, or to press submit. This essentially means there is no checks in place to ensure a ship is placed correctly before another ship is selected, and no checks in place to prevent the user from continuing on in the game without placing their ships. 
+Also, currently there is no logic for the computer player to place their own ships.
 
 **The following tasks are being addressed on the dragDropFeature branch and are in development**
-- [X] Disable other ship buttons while the current ship is being placed.
-- [X] Prevent user from submitting ships until ALL ships are placed.
-- [ ] Create modals that pop-up to explain to user how to interact with buttons.
-- [X] Change the method for placing ships to something user-friendly and intuititve. 
+- [ ] Create logic that places ships on the board at random for a computer player.
+- [ ] Allow rotating of ships when drag and dropping.
 
 
 ### Announcing Sunk Ships and Game Over
@@ -145,13 +137,11 @@ At the moment, there is no logic that announces to players when a ship has been 
 
 **Outstanding Tasks**
 - [ ] Alert users when they sunk a single ship.
-- [ ] Check when the game is over and notify users of the winner with a modal that provides the option to play again.
-
+- [ ] Check when the game is over and notify users
 
 ### Appearance & Design
 
-**Outstanding Tasks**
-- [x] Add title row and column that contains letters for the x-axis and numbers for the y-axis. 
+**Outstanding Tasks** 
 - [ ] Update styling for "It's a hit!" "It's a miss!" messaginging (div.notices);
-- [ ] Modal screen that pops-up with a relevant explanation to replace all errors, or to appear when user clicks deactivated buttons.
+- [ ] Modal screen that pops-up for any alerts/error messages or to explain instructions.
 - [ ] In 1 player game mode user journey is not clear.
