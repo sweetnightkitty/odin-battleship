@@ -16,8 +16,8 @@ const screenToggler = () => {
     const placeShipsScreen = document.querySelector(".place-ships-screen");
     const shipPlacementScreenOne = document.querySelector(".placement-player-one");
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
-    const shipButtonsOne = document.querySelector(".ship-buttons-one");
-    const shipButtonsTwo = document.querySelector(".ship-buttons-two");
+    const shipBtnsOne = document.querySelectorAll(".ship-one");
+    const shipBtnsTwo = document.querySelectorAll(".ship-two");
 
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");
@@ -57,14 +57,12 @@ const screenToggler = () => {
             //display placement one
             placeShipsScreen.style.display = "flex";
             controller.displayShips();
-            controller.generateShipButtons(shipButtonsOne);
-
-            //DRAG AND DROP LISTENERS
-            const ships = document.querySelectorAll(".ship-one");
-            ships.forEach(ship => {
-                ship.addEventListener("dragstart", controller.dragStart);
-                ship.addEventListener("dragend", controller.dragEnd);
+            shipBtnsOne.forEach(btn => {
+                btn.addEventListener("dragstart", controller.dragStart);
+                btn.addEventListener("dragend", controller.dragEnd);
             })
+
+
         },
 
         goToShipPlacementScreenTwo() {
@@ -77,13 +75,9 @@ const screenToggler = () => {
             //display placement two
             shipPlacementScreenTwo.style.display = "flex";
             controller.displayShips();
-            controller.generateShipButtons(shipButtonsTwo);
-
-            //DRAG AND DROP LISTENERS
-            const ships = document.querySelectorAll(".ship-two");
-            ships.forEach(ship => {
-                ship.addEventListener("dragstart", controller.dragStart);
-                ship.addEventListener("dragend", controller.dragEnd);
+            shipBtnsTwo.forEach(btn => {
+                btn.addEventListener("dragstart", controller.dragStart);
+                btn.addEventListener("dragend", controller.dragEnd);
             })
         },
 
