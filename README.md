@@ -137,7 +137,7 @@ At the moment, there is no logic that announces to players when a ship has been 
 
 **Outstanding Tasks**
 - [ ] Alert users when they sunk a single ship.
-- [ ] Check when the game is over and notify users
+- [X] Check when the game is over and notify users
 
 ### Appearance & Design
 
