@@ -324,15 +324,23 @@ const screenController = () => {
             displayDiv.appendChild(destroyer);
 
            //Add event listeners here
+
+           //TO BE PHASED OUT:
            aircraftCarrier.addEventListener("click", this.userPlacesShip);
            battleship.addEventListener("click", this.userPlacesShip);
            cruiser.addEventListener("click", this.userPlacesShip);
            submarine.addEventListener("click", this.userPlacesShip);
            destroyer.addEventListener("click", this.userPlacesShip);
 
-           
+           //DRAG AND DROP LISTENERS
            aircraftCarrier.addEventListener("dragstart", dragStart);
            aircraftCarrier.addEventListener("dragend", dragEnd);
+           battleship.addEventListener("dragstart", dragStart);
+           battleship.addEventListener("dragend", dragEnd);
+           cruiser.addEventListener("dragstart", dragStart);
+           cruiser.addEventListener("dragend", dragEnd);
+           submarine.addEventListener("dragstart", dragStart);
+           submarine.addEventListener("dragend", dragEnd);
            destroyer.addEventListener("dragstart", dragStart);
            destroyer.addEventListener("dragend", dragEnd);
 
