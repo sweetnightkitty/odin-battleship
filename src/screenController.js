@@ -166,71 +166,49 @@ const screenController = () => {
 
     //PLACES SHIP ON BOARD UI **
     const placeShipUI = (shipname, targetButton) => {
-        const x = parseInt(targetButton.classList[1][0], 10);
-        const y = parseInt(targetButton.classList[1][1], 10);
-    
         const name = activePlayer.name;
-        const boardSize = 10; // 10x10 grid
-        let shipLength = 0;
+        const boardSize = 10;
+        
+        // Define ship lengths
+        const shipLengths = {
+            aircraftCarrier: 5,
+            battleship: 4,
+            cruiser: 3,
+            submarine: 3,
+            destroyer: 2
+        };
+        
+        const shipLength = shipLengths[shipname];
+        if (!shipLength) return; // Early exit if invalid ship name
     
-        if (shipname == "aircraftCarrier") shipLength = 5;
-        if (shipname == "battleship") shipLength = 4;
-        if (shipname == "cruiser" || shipname == "submarine") shipLength = 3;
-        if (shipname == "destroyer") shipLength = 2;
+        // Find target button's grid position
+        const [x, y] = targetButton.classList[1].split('').map(Number);
     
-        // Find the correct button using the DOM
-        const boardBtns = document.querySelectorAll(`.player-${name}-ship-buttons`);
-        const correctButton = Array.from(boardBtns).find(btn => btn.classList[1] === targetButton.classList[1]);
-    
-        if (!correctButton) {
-            console.log("Could not find the correct button in the DOM!");
-            return;
-        }
-    
-        console.log(`Target button is at: Row ${x}, Column ${y}`);
-    
-        let isValidPlacement = false;
-        if (y <= boardSize - shipLength) { 
-            isValidPlacement = true;
-        }
-    
-        if (!isValidPlacement) {
+        // Validate placement (avoid overflow)
+        if (y > boardSize - shipLength) {
             alert("Invalid placement! The ship would overflow the board.");
             return;
         }
     
         const ship = document.querySelector(`.${shipname}`);
-        const board = document.querySelector(`.player-${name}-board`); // Select the game board
+        const board = document.querySelector(`.player-${name}-board`);
     
-        // Get the board's position
+        // Set board position for absolute positioning
+        board.style.position = "relative";
+    
+        // Get button and board positions
+        const buttonRect = targetButton.getBoundingClientRect();
         const boardRect = board.getBoundingClientRect();
-        const buttonRect = correctButton.getBoundingClientRect();
     
-        // Calculate the width of a single button (assuming uniform size)
-        const buttonWidth = correctButton.offsetWidth;
-        const buttonHeight = correctButton.offsetHeight; // Added this for consistency
-    
-        // Debugging info to ensure we are getting correct values
-        console.log("Board Rect:", boardRect);
-        console.log("Button Rect:", buttonRect);
-    
-        // Position the ship relative to the board
+        // Calculate position of ship relative to the board
         ship.style.position = "absolute";
-        ship.style.left = `${buttonRect.left - boardRect.left}px`;  // Relative to board
-        ship.style.top = `${buttonRect.top - boardRect.top}px`;    // Relative to board
-    
-        // Set correct width for both ships
-        ship.style.width = `${buttonWidth * shipLength}px`;  // For larger ships
-        ship.style.height = `${buttonHeight}px`;  // Match button height
-    
-        // Ensure ships align correctly by setting display to block
-        ship.style.display = "block";
+        ship.style.left = `${buttonRect.left - boardRect.left}px`;
+        ship.style.top = `${buttonRect.top - boardRect.top}px`;
+        ship.style.width = `${buttonRect.width * shipLength}px`;
+        ship.style.height = `${buttonRect.height}px`; // Set height for consistency
     
         ship.classList.add("after-placement");
     };
-    
-
-    
     
 
     //DRAG DROP FUNCT **
