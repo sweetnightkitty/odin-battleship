@@ -40,6 +40,7 @@ const executeOnePlayerGame = ()=> {
     endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
 }
 
+//State issue needs to be resolved:
 const executeTwoPlayerGame = ()=> {
     //Switch to player 2, so they can place their ships:
     submitShipsOne.addEventListener("click", controller.switchPlayers);

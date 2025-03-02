@@ -286,14 +286,6 @@ footer {
 }
 
 /* SHIP PLACEMENT COLORS*/
-.selected {
-    background-color: grey;
-}
-
-.current {
-    background-color: var(--green);
-}
-
 .complete {
     background-color: var(--dark-gray-transparent);
 }
