@@ -129,7 +129,12 @@ const screenController = () => {
         //Btn color immediately changes to reflect hit/miss
         applyColor(x, y, event.target);
 
-        TogglePassDoneBtns("enable");
+        //Checks if Game is Over
+        if(activePlayer.opponent.isGameOver()) {
+            alert("game over!")
+        } else {
+            TogglePassDoneBtns("enable");
+        }
     }
 
     const disableAllCoordinateBtns = () => {
@@ -301,6 +306,11 @@ const screenController = () => {
         computerTurn() {
             const [x, y] = generateRandomCoordinates();
             activePlayer.opponent.recieveAttack([x, y]);
+
+            //Checks if game is over
+            if(activePlayer.opponent.isGameOver()) {
+                alert("Game is over computer wins");
+            }
         },
 
 
