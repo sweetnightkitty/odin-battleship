@@ -243,16 +243,20 @@ footer {
 
 .placement-boards {
     display: grid;
-    grid-template-columns: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px 40px 40px 40px 40px 40px 40px 40px;
+    grid-template-columns: repeat(10, 40px);  /* Ensures all columns are equal width */
+    grid-template-rows: repeat(10, 40px);     /* Same for rows */
+    grid-gap: 0; /* Prevents any gaps between buttons */
     border: 2px outset var(--dark-blue);
     margin-bottom: 30px;
+    position: relative;
 }
 
 .ship-buttons-one, .ship-buttons-two {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 200px; /* Prevents column width from altering as ships drag and drop ** */
+    padding-top: 130px;
 }
 
 
@@ -303,7 +307,6 @@ footer {
 .aircraftCarrier {
     height: 40px;
     width: 200px; /* Length 5, x 40px */
-    margin-top: 130px;
 }
 
 .battleship {
@@ -319,6 +322,12 @@ footer {
 .destroyer {
     height: 40px;
     width: 80px; /* Length 2, x 40px */
+}
+
+.after-placement {
+    position: absolute;
+    transition: left 0.2s, top 0.2s;
+    z-index: 10; /* Ensures it appears above the board */
 }
 /*------------------------------------------------------------------------*/
 
