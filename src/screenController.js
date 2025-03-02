@@ -215,11 +215,22 @@ const screenController = () => {
     const dragDropShip = (event) =>{
         event.preventDefault();
         const shipname = event.dataTransfer.getData("ship");
-        console.log(shipname);
 
         placeShipUI(shipname, event.target);
-    }
+    };
 
+    const dragStart = (event) => {
+        const shipname = event.target.classList[0];
+        event.dataTransfer.setData("ship", shipname);
+        setTimeout(() => {
+            event.target.style.display = "none"; // Hide the original during drag
+        }, 0);
+    }; 
+
+    const dragEnd = (event)=> {
+        event.target.style.display = "block"; // Show it again after drop
+    };
+    
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -320,28 +331,10 @@ const screenController = () => {
            destroyer.addEventListener("click", this.userPlacesShip);
 
            
-           aircraftCarrier.addEventListener("dragstart", (event)=> {
-            event.dataTransfer.setData("ship", "aircraftCarrier");
-            setTimeout(()=> {
-                aircraftCarrier.style.display = "none";
-            }, 0);
-           })
-
-           aircraftCarrier.addEventListener("dragend", ()=> {
-            aircraftCarrier.style.display = "block";
-           })
-
-           //Handles dragging destroyer**
-           destroyer.addEventListener("dragstart", (event) =>{
-            event.dataTransfer.setData("ship", "destroyer");
-            setTimeout(() => {
-                destroyer.style.display = "none"; // Hide the original during drag
-            }, 0);
-           });
-
-           destroyer.addEventListener("dragend", () => {
-                destroyer.style.display = "block"; // Show it again after drop
-        });
+           aircraftCarrier.addEventListener("dragstart", dragStart);
+           aircraftCarrier.addEventListener("dragend", dragEnd);
+           destroyer.addEventListener("dragstart", dragStart);
+           destroyer.addEventListener("dragend", dragEnd);
 
         },
 
