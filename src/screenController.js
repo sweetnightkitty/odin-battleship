@@ -239,18 +239,6 @@ const screenController = () => {
 
         placeShipUI(shipname, event.target);
     };
-
-    // const dragStart = (event) => {
-    //     const shipname = event.target.classList[0];
-    //     event.dataTransfer.setData("ship", shipname);
-    //     setTimeout(() => {
-    //         event.target.style.display = "none"; // Hide the original during drag
-    //     }, 0);
-    // }; 
-
-    // const dragEnd = (event)=> {
-    //     event.target.style.display = "block"; // Show it again after drop
-    // };
     
     return {
         displayBoard(displayBoard = activePlayer.display) {
@@ -284,8 +272,12 @@ const screenController = () => {
                     //Allows drag and drop
                     button.addEventListener("dragover", (event)=>{
                         event.preventDefault();
+                        console.log("Grid Button drag fires")
                     })
-                    button.addEventListener("drop", dragDropShip);
+                    button.addEventListener("drop", (event)=>{
+                        event.preventDefault();
+                        console.log("Grid drop fires");
+                    });
 
                     // //Marks ships that are selected
                     if(playerBoard[i][j]) {button.classList.add("selected")};
@@ -310,38 +302,6 @@ const screenController = () => {
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
         },
 
-        generateShipButtons(displayDiv) {
-            const aircraftCarrier = document.createElement("button");
-            const battleship = document.createElement("button");
-            const cruiser = document.createElement("button");
-            const submarine = document.createElement("button");
-            const destroyer = document.createElement("button");
-
-            aircraftCarrier.setAttribute('draggable', true);
-            battleship.setAttribute('draggable', true);
-            cruiser.setAttribute('draggable', true);
-            submarine.setAttribute('draggable', true);
-            destroyer.setAttribute('draggable', true);
-
-            aircraftCarrier.textContent = "Aircraft Carrier";
-            battleship.textContent = "Battleship";
-            cruiser.textContent = "Cruiser";
-            submarine.textContent = "Submarine";
-            destroyer.textContent = "Destroyer";
-            
-            aircraftCarrier.classList.add("aircraftCarrier", "ship", `ship-${activePlayer.name}`);
-            battleship.classList.add("battleship", "ship", `ship-${activePlayer.name}`);
-            cruiser.classList.add("cruiser", "ship", `ship-${activePlayer.name}`);
-            submarine.classList.add("submarine", "ship", `ship-${activePlayer.name}`);
-            destroyer.classList.add("destroyer", "ship", `ship-${activePlayer.name}`);
-
-            displayDiv.appendChild(aircraftCarrier);
-            displayDiv.appendChild(battleship);
-            displayDiv.appendChild(cruiser);
-            displayDiv.appendChild(submarine);
-            displayDiv.appendChild(destroyer);
-        },
-
         computerTurn() {
             const [x, y] = generateRandomCoordinates();
             activePlayer.opponent.recieveAttack([x, y]);
@@ -355,6 +315,7 @@ const screenController = () => {
         dragStart(event) {
             const shipname = event.target.classList[0];
             event.dataTransfer.setData("ship", shipname);
+            console.log(shipname);
             setTimeout(() => {
                 event.target.style.display = "none"; // Hide the original during drag
             }, 0);
