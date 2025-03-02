@@ -219,7 +219,6 @@ const screenController = () => {
             occupiedCoordinates.push([newX, newY]); //Format needed for placeship function coordinates parameter
         }
 
-
         const shipsBoard = activePlayer.activePlayer.getBoard();
 
         //Resets the placement of the ship
@@ -330,11 +329,11 @@ const screenController = () => {
             submarine.textContent = "Submarine";
             destroyer.textContent = "Destroyer";
             
-            aircraftCarrier.classList.add("aircraftCarrier", "ship");
-            battleship.classList.add("battleship", "ship");
-            cruiser.classList.add("cruiser", "ship");
-            submarine.classList.add("submarine", "ship");
-            destroyer.classList.add("destroyer", "ship");
+            aircraftCarrier.classList.add("aircraftCarrier", "ship", `ship-${activePlayer.name}`);
+            battleship.classList.add("battleship", "ship", `ship-${activePlayer.name}`);
+            cruiser.classList.add("cruiser", "ship", `ship-${activePlayer.name}`);
+            submarine.classList.add("submarine", "ship", `ship-${activePlayer.name}`);
+            destroyer.classList.add("destroyer", "ship", `ship-${activePlayer.name}`);
 
             displayDiv.appendChild(aircraftCarrier);
             displayDiv.appendChild(battleship);
@@ -342,28 +341,17 @@ const screenController = () => {
             displayDiv.appendChild(submarine);
             displayDiv.appendChild(destroyer);
 
-           //DRAG AND DROP LISTENERS
-           aircraftCarrier.addEventListener("dragstart", dragStart);
-           aircraftCarrier.addEventListener("dragend", dragEnd);
-           battleship.addEventListener("dragstart", dragStart);
-           battleship.addEventListener("dragend", dragEnd);
-           cruiser.addEventListener("dragstart", dragStart);
-           cruiser.addEventListener("dragend", dragEnd);
-           submarine.addEventListener("dragstart", dragStart);
-           submarine.addEventListener("dragend", dragEnd);
-           destroyer.addEventListener("dragstart", dragStart);
-           destroyer.addEventListener("dragend", dragEnd);
-
+            //DRAG AND DROP LISTENERS
+            const ships = document.querySelectorAll(".ship");
+            ships.forEach(ship => {
+                ship.addEventListener("dragstart", dragStart);
+                ship.addEventListener("dragend", dragEnd);
+            })
         },
 
         computerTurn() {
             const [x, y] = generateRandomCoordinates();
             activePlayer.opponent.recieveAttack([x, y]);
-
-            // //Checks if game is over
-            // if(activePlayer.opponent.isGameOver()) {
-            //     alert("Game Over!");
-            // }
 
         },
 
