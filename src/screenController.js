@@ -167,28 +167,6 @@ const screenController = () => {
     //PLACES SHIP ON BOARD UI 
     const placeShipUI = (shipname, targetButton) => {
         const name = activePlayer.name;
-        const boardSize = 10;
-        
-        // Define ship lengths
-        const shipLengths = {
-            aircraftCarrier: 5,
-            battleship: 4,
-            cruiser: 3,
-            submarine: 3,
-            destroyer: 2
-        };
-        
-        const shipLength = shipLengths[shipname];
-        if (!shipLength) return; // Early exit if invalid ship name
-    
-        // Find target button's grid position
-        const [x, y] = targetButton.classList[1].split('').map(Number);
-    
-        // Validate placement (avoid overflow)
-        if (y > boardSize - shipLength) {
-            alert("Invalid placement! The ship would overflow the board.");
-            return;
-        }
     
         const ship = document.querySelector(`.${shipname}`);
         const board = document.querySelector(`.player-${name}-board`);
@@ -209,36 +187,13 @@ const screenController = () => {
     
         ship.classList.add("after-placement");
 
-        // Now, store the coordinates of the ship on the board
-        const occupiedCoordinates = [];
-
-        // Add ship coordinates horizontally
-        for (let i = 0; i < shipLength; i++) {
-            const buttonId = `${x}${y + i}`;
-            const [newX, newY] = buttonId;
-            occupiedCoordinates.push([newX, newY]); //Format needed for placeship function coordinates parameter
-        }
-
-        const shipsBoard = activePlayer.activePlayer.getBoard();
-
-        //Resets the placement of the ship
-        for(let i = 0; i < 10; i++) {
-            for(let j = 0; j < 10; j++) {
-                if(shipsBoard[i][j] == shipname) {shipsBoard[i][j] = false};
-            }
-        }
-
-        //Then run placeship
-        activePlayer.activePlayer.placeship(shipname, occupiedCoordinates);
         };
     
-    //DRAG DROP FUNCT 
-    const dragDropShip = (event) =>{
-        event.preventDefault();
-        const shipname = event.dataTransfer.getData("ship");
 
-        placeShipUI(shipname, event.target);
-    };
+
+    const relocateDraggedShip = ()=> {
+
+    }
 
     const buttonDropHandler = (event) =>{
         event.preventDefault();
@@ -277,9 +232,21 @@ const screenController = () => {
             const [newX, newY] = buttonId;
             occupiedCoordinates.push([newX, newY]); //Format needed for placeship function coordinates parameter
         }
-        
-        console.log(occupiedCoordinates);
 
+        const shipsBoard = activePlayer.activePlayer.getBoard();
+
+        //Resets the placement of the ship
+        for(let i = 0; i < 10; i++) {
+            for(let j = 0; j < 10; j++) {
+                if(shipsBoard[i][j] == shipname) {shipsBoard[i][j] = false};
+            }
+        }
+
+        //Stores the placed ships in the players boards.
+        activePlayer.activePlayer.placeship(shipname, occupiedCoordinates);
+   
+        //Reapply style values to the ship
+        relocateDraggedShip(shipname);
     }
     
     return {
