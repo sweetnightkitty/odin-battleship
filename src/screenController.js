@@ -243,6 +243,43 @@ const screenController = () => {
     const buttonDropHandler = (event) =>{
         event.preventDefault();
         console.log("Grid drop fires");
+
+        //Get the name of the ship that's being placed
+        const shipname = event.dataTransfer.getData("ship");
+        const boardSize = 10; // 10 x 10 grid;
+
+
+        // Define ship lengths
+        const shipLengths = {
+            aircraftCarrier: 5,
+            battleship: 4,
+            cruiser: 3,
+            submarine: 3,
+            destroyer: 2
+        };
+
+        const shipLength = shipLengths[shipname];
+        if (!shipLength) return; // Early exit if invalid ship name
+        
+        // Find target button's grid position
+        const [x, y] = event.target.classList[1].split('').map(Number);
+        const occupiedCoordinates = [];
+        
+        // Validate placement (avoid overflow)
+        if (y > boardSize - shipLength) {
+        alert("Invalid placement! The ship would overflow the board.");
+        return;
+        }
+
+        // Add ship coordinates horizontally
+        for (let i = 0; i < shipLength; i++) {
+            const buttonId = `${x}${y + i}`;
+            const [newX, newY] = buttonId;
+            occupiedCoordinates.push([newX, newY]); //Format needed for placeship function coordinates parameter
+        }
+        
+        console.log(occupiedCoordinates);
+
     }
     
     return {
