@@ -132,11 +132,11 @@ This is obviously not very user-friendly and a temporary feature. It will later 
 
 Also, when a ship is placed, it is still possible to click on other ships, or to press submit. This essentially means there is no checks in place to ensure a ship is placed correctly before another ship is selected, and no checks in place to prevent the user from continuing on in the game without placing their ships. 
 
-**Outstanding Tasks**
-- [ ] Disable other ship buttons while the current ship is being placed.
-- [ ] Prevent user from submitting ships until ALL ships are placed.
+**The following tasks are being addressed on the dragDropFeature branch and are in development**
+- [X] Disable other ship buttons while the current ship is being placed.
+- [X] Prevent user from submitting ships until ALL ships are placed.
 - [ ] Create modals that pop-up to explain to user how to interact with buttons.
-- [ ] Change the method for placing ships to something user-friendly and intuititve. 
+- [X] Change the method for placing ships to something user-friendly and intuititve. 
 
 
 ### Announcing Sunk Ships and Game Over
