@@ -18,8 +18,7 @@ const screenToggler = () => {
     const shipPlacementScreenTwo = document.querySelector(".placement-player-two");
     const shipBtnsOne = document.querySelectorAll(".ship-one");
     const shipBtnsTwo = document.querySelectorAll(".ship-two");
-    const submitShipsOne = document.querySelector(".ships-submit-player-one");
-const submitShipsTwo = document.querySelector(".ships-submit-player-two");
+
 
     //GAME SCREEN DIVS
     const gameScreen = document.querySelector(".game-screen");

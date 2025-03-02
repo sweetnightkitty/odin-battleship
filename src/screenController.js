@@ -189,7 +189,6 @@ const screenController = () => {
 
     const buttonDropHandler = (event) =>{
         event.preventDefault();
-        console.log("Grid drop fires");
 
         //Get the name of the ship that's being placed
         const shipname = event.dataTransfer.getData("ship");
@@ -273,7 +272,6 @@ const screenController = () => {
                     //Allows drag and drop
                     button.addEventListener("dragover", (event)=>{
                         event.preventDefault();
-                        console.log("Grid Button drag fires")
                     })
                     button.addEventListener("drop", buttonDropHandler);
 
@@ -303,8 +301,8 @@ const screenController = () => {
         computerTurn() {
             const [x, y] = generateRandomCoordinates();
             activePlayer.opponent.recieveAttack([x, y]);
-
         },
+
 
         executePassDoneToggle(action, players) {
             TogglePassDoneBtns(action, players);
@@ -313,7 +311,6 @@ const screenController = () => {
         dragStart(event) {
             const shipname = event.target.classList[0];
             event.dataTransfer.setData("ship", shipname);
-            console.log(shipname);
 
             setTimeout(() => {
                 event.target.style.display = "none"; // Hide the original during drag
