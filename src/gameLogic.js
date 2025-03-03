@@ -118,6 +118,17 @@ export const gameBoard = () => {
            return selectShip(shipname);
         },
 
+        isShipSunk(shipname) {
+            let ship;
+            if(shipname == "aircraftCarrier") {ship = aircraftCarrier};
+            if(shipname == "battleship") {ship = battleship};
+            if(shipname == "cruiser") {ship = cruiser};
+            if(shipname == "submarine") {ship = submarine};
+            if(shipname == "destroyer") {ship = destroyer};
+
+            return ship.isSunk();
+        },
+
         isGameOver() {
             let sunkShips = 0;
             if(battleship.isSunk()) { ++sunkShips};
@@ -145,6 +156,10 @@ export const player = () => {
 
         recieveAttack(coordinate) {
             return game.recieveAttack(coordinate);
+        },
+
+        isShipSunk(shipname) {
+            return game.isShipSunk(shipname);
         },
 
         isGameOver() {
