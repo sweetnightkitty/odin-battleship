@@ -6,6 +6,7 @@
     --dark-blue-semi-transparent: rgb(10,66,117,0.80);
     --gray-transparent: rgb(255, 255, 255, 0.5);
     --dark-gray-transparent: rgba(178, 174, 174, 0.5);
+    --bright-gray: rgba(255, 255, 255);
     --bright-gray-transparent: rgba(255, 255, 255, 0.714);
     --green: rgb(95, 188, 149);
     --red: rgb(236,113,75);
@@ -90,7 +91,7 @@ footer {
 
 /* SMALL BLUE BUTTONS */
 
-.ships-submit-player-one, .ships-submit-player-two, .end-round {
+.ships-submit-player-one, .ships-submit-player-two, .end-round, .modal-btn {
     color: white;
     background-color: var(--dark-blue-semi-transparent);
     font-size: 16px;
@@ -399,11 +400,18 @@ footer {
   
   /* Modal Content/Box */
   .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    background-color: var(--bright-gray);
+    border-radius: 20px;
+    margin: 17% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 40%; /* Could be more or less, depending on screen size */
+    text-align: center;
+  }
+
+  .modal-notice {
+    font-size: 20px;
+    margin: 15px 50px 35px;
   }
 
 /*------------------------------------------------------------------------*/
