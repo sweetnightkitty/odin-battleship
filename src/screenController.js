@@ -119,8 +119,20 @@ const screenController = () => {
 
     const userSelectsAttack = (event) => {
         const [x, y] = event.target.classList[1];
+        const opponentBoard = activePlayer.opponent.getBoard();
+        // const ships = ["aircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"];
+        let attackedShip;
 
         disableAllCoordinateBtns();
+
+        //Get the ship, if any located at that coordinate
+        if((opponentBoard[x][y]) 
+            && (opponentBoard[x][y] != "miss") 
+            && (opponentBoard[x][y] != "hit")) {
+                attackedShip = opponentBoard[x][y];
+        }
+
+        //Sends the attack
         activePlayer.opponent.recieveAttack([x, y]);
 
         const notice = getNotice(x, y); //Need to put this somewhere in dom
@@ -128,6 +140,12 @@ const screenController = () => {
 
         //Btn color immediately changes to reflect hit/miss
         applyColor(x, y, event.target);
+
+        //If a ship was hit, checks if the ship sunk.
+        if(attackedShip) {
+            if(activePlayer.opponent.isShipSunk(attackedShip)) {
+                alert(`${attackedShip} was sunk!`);
+            }};
 
         //Checks if Game is Over
         if(activePlayer.opponent.isGameOver()) {
