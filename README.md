@@ -120,28 +120,20 @@ and then the program will load at http://localhost:8080/
 At the moment, this game is in development. Please refer to the detailed list below of current development status and known issues before getting started.
 
 
-### Placing ships on the board
+### 1 Player Game Play
 
-At the moment, placing ships on the board are done by dragging and dropping the ships onto the gameboard. So for ships can only be dragged and dropped into a horizontal position.
+Currently the user journey for the one player game is unclear. There is no visual indications to the player after their turn ends that the computer turn has taken place, or that it's their turn again.
 
-Also, currently there is no logic for the computer player to place their own ships.
+There is no current logic for the computer to place their ships on the gameboard randomly, so in the one player game play, there is no way for player 1 to win as there are no ships to hit.
 
-**The following tasks are being addressed on the dragDropFeature branch and are in development**
+### Vertical placement of ships
+
+At the moment ships can only be placed horizontally on the board, and there is no logic to rotate the ship buttons or to place their coordinates in the game vertically.
+
+### Outstanding tasks:
 - [ ] Create logic that places ships on the board at random for a computer player.
+- [ ] In 1 player game mode user journey is not clear.
 - [ ] Allow rotating of ships when drag and dropping.
 
 
-### Announcing Sunk Ships and Game Over
 
-At the moment, there is no logic that announces to players when a ship has been sunk or that the game is over. As such, the gameplay will continue on indefinitely without end.  In the case of the 1-player version, this will lead to a "maximum call stack exceeded" error, as the computer player will eventually exhaust all possible coordinates to play. 
-
-**Outstanding Tasks**
-- [X] Alert users when they sunk a single ship.
-- [X] Check when the game is over and notify users
-
-### Appearance & Design
-
-**Outstanding Tasks** 
-- [X] Update styling for "It's a hit!" "It's a miss!" messaginging (div.notices);
-- [X] Modal screen that pops-up for any alerts/error messages or to explain instructions.
-- [ ] In 1 player game mode user journey is not clear.
