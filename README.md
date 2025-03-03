@@ -136,7 +136,7 @@ Also, currently there is no logic for the computer player to place their own shi
 At the moment, there is no logic that announces to players when a ship has been sunk or that the game is over. As such, the gameplay will continue on indefinitely without end.  In the case of the 1-player version, this will lead to a "maximum call stack exceeded" error, as the computer player will eventually exhaust all possible coordinates to play. 
 
 **Outstanding Tasks**
-- [ ] Alert users when they sunk a single ship.
+- [X] Alert users when they sunk a single ship.
 - [X] Check when the game is over and notify users
 
 ### Appearance & Design
