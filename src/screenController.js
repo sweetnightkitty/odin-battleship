@@ -236,7 +236,7 @@ const screenController = () => {
         
         // Validate placement (avoid overflow)
         if (y > boardSize - shipLength) {
-        alert("Invalid placement! The ship would overflow the board.");
+            toggler.openModal("Invalid placement! The ship would overflow the board.");
         return;
         }
 
