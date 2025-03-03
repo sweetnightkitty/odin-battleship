@@ -323,7 +323,7 @@ footer {
 .after-placement {
     position: absolute;
     transition: left 0.2s, top 0.2s;
-    z-index: 9999; /* Ensures it appears above the board */
+    z-index: 10; /* Ensures it appears above the board */
 }
 /*------------------------------------------------------------------------*/
 
@@ -388,7 +388,7 @@ footer {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 11; /* Sit on top, even over the ships */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
