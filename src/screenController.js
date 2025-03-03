@@ -74,7 +74,9 @@ const screenController = () => {
         if(opponentBoard[x][y] == "miss") return "It's a miss!";
     }
 
-    const getAlert = ()=> { alert("Take a turn first!")};
+    const getModal = ()=> { 
+        toggler.openModal("Take a turn first! Select any coordinate on the attack screen");
+    };
 
     const TogglePassDoneBtns = (action, players)=>{
         const endPlayerOneRound = document.querySelector(".end-player-one");
@@ -86,33 +88,33 @@ const screenController = () => {
 
         //ONE PLAYER GAME TOGGLES:
         if((action == "enable") && (players == "one")) {
-            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.removeEventListener("click", getModal);
             endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
         }
         if((action == "disable") && (players == "one")) {
             endPlayerOneRound.removeEventListener("click", toggler.goToPlayerOneNextRound);
-            endPlayerOneRound.addEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", getModal);
         }
 
         //TWO PLAYER GAME TOGGLES
         //Player One Toggles:
         if((action == "enable") && (players == "two") && (activePlayer.name == "one")) {
-            endPlayerOneRound.removeEventListener("click", getAlert);
+            endPlayerOneRound.removeEventListener("click", getModal);
             endPlayerOneRound.addEventListener("click", toggler.goToStartScreen);
         }
         if((action == "disable") && (players == "two") && (activePlayer.name == "one")) {
             endPlayerOneRound.removeEventListener("click", toggler.goToStartScreen);
-            endPlayerOneRound.addEventListener("click", getAlert);
+            endPlayerOneRound.addEventListener("click", getModal);
         }
 
         //Player Two Toggles:
         if((action == "enable") && (players == "two") && (activePlayer.name == "two")) {
-            endPlayerTwoRound.removeEventListener("click", getAlert);
+            endPlayerTwoRound.removeEventListener("click", getModal);
             endPlayerTwoRound.addEventListener("click", toggler.goToStartScreen);
         }
         if((action == "disable") && (players == "two") && (activePlayer.name == "two")) {
             endPlayerTwoRound.removeEventListener("click", toggler.goToStartScreen);
-            endPlayerTwoRound.addEventListener("click", getAlert);
+            endPlayerTwoRound.addEventListener("click", getModal);
         }
 
     }
