@@ -41,14 +41,6 @@ export const gameBoard = () => {
         }
     }
 
-    const arePositionSAvailable = (coordinates) => {
-        for(let i = 0; i < coordinates.length; i++) {
-            let [x, y] = coordinates[i];
-            if(board[x][y]) return false;
-        }
-        return true;
-    }
-
     //Where coordinates are provided in order from top-bottom or left-right
     const isValidPlacement = (coordinates) => {
         let [x, y] = coordinates[0];
@@ -88,9 +80,6 @@ export const gameBoard = () => {
             //Coordinate is an array, ship is an object with a length property
             if(coordinates.length != ship.length) throw new Error("Make sure to select a number of locations on the board that are EQUAL to the ship's length.")
             
-            //are those positions available? Prevents duplicate ship placements
-            if(!arePositionSAvailable(coordinates)) throw new Error("Some of the positions you selected either don't exist or you already placed a ship there. Try again")
-
             for(let i = 0; i < coordinates.length; i++) {
                 let [x, y] = coordinates[i];
                 board[x][y] = shipname;
@@ -142,7 +131,15 @@ export const gameBoard = () => {
 
         checkvalid(coordinates) {
             return isValidPlacement(coordinates);
-        }
+        },
+
+        arePositionSAvailable(coordinates) {
+            for(let i = 0; i < coordinates.length; i++) {
+                let [x, y] = coordinates[i];
+                if(board[x][y]) return false;
+            }
+            return true;
+        },
     }
 }
 
@@ -168,6 +165,10 @@ export const player = () => {
 
         placeship(shipname, coordinates) {
             return game.placeship(shipname, coordinates);
+        },
+
+        arePositionSAvailable(coordinates) {
+            return game.arePositionSAvailable(coordinates);
         }
     }
 }
