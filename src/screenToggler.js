@@ -30,6 +30,10 @@ const screenToggler = () => {
     const gamePlayerOneShips = document.querySelector(".player-one-ships");
     const gamePlayerTwoShips = document.querySelector(".player-two-ships");
 
+    //MODAL
+    const modal = document.querySelector(".modal");
+    const modalNotice = document.querySelector(".modal-notice");
+
     const startGame = ()=> {
         placeShipsScreen.style.display = "none";
         gameScreen.style.display = "flex";
@@ -170,6 +174,15 @@ const screenToggler = () => {
             controller.displayBoard();
             controller.executePassDoneToggle("disable", "one");
             controller.displayShips(gamePlayerOneShips);
+        },
+
+        openModal(message) {
+            modal.style.display = "block";
+            modalNotice.textContent = message;
+        },
+
+        closeModal() {
+            modal.style.display = "none";
         },
     }
 } 
