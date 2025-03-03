@@ -260,7 +260,7 @@ const screenController = () => {
 
         //Checks if the selected coordinates are valid
         if(!activePlayer.activePlayer.arePositionSAvailable(occupiedCoordinates)) {
-            toggler.openModal("Placing that ship there would overlap with another ship you have already placed on the board. Please try to place it in an empty location.");
+            toggler.openModal("Cannot overlap ships, please try placing that in an empty location");
             return; //Aborts the placement process if coordinates are invalid.
         };
 
