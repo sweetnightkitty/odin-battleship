@@ -33,6 +33,7 @@ const screenToggler = () => {
     //MODAL
     const modal = document.querySelector(".modal");
     const modalNotice = document.querySelector(".modal-notice");
+    const modalBtn = document.querySelector(".modal-btn");
 
     const startGame = ()=> {
         placeShipsScreen.style.display = "none";
@@ -184,6 +185,15 @@ const screenToggler = () => {
         closeModal() {
             modal.style.display = "none";
         },
+
+        gameOverModal(message) {
+            modal.style.display = "block";
+            modalNotice.textContent = message;
+            modalBtn.textContent = "Play Again";
+            modalBtn.addEventListener("click", location.reload());
+            
+        },
+
     }
 } 
 

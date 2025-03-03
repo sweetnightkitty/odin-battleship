@@ -171,4 +171,4 @@ export const player = () => {
             return game.arePositionSAvailable(coordinates);
         }
     }
-}
+} 

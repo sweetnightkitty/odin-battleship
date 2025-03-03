@@ -151,7 +151,7 @@ const screenController = () => {
 
         //Checks if Game is Over
         if(activePlayer.opponent.isGameOver()) {
-            toggler.openModal(`Game Over! You win!`);
+            toggler.gameOverModal(`Game Over! You win!`);
         } else {
             TogglePassDoneBtns("enable");
         }
@@ -335,7 +335,7 @@ const screenController = () => {
 
             //Checks if game is over
             if(activePlayer.opponent.isGameOver()) {
-                toggler.openModal("Game Over! You lose!");
+                toggler.gameOverModal("Game Over! You lose!");
             }
         },
 
