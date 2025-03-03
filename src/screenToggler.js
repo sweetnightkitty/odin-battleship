@@ -6,9 +6,6 @@ const screenToggler = () => {
     //HEADER
     const headerTextContainer = document.querySelector(".header-text");
 
-    //START BATTLESHIP SCREEN
-    const startBattleshipScreen = document.querySelector(".start-battleship-screen");
-
     //SELECT PLAYERS SCREEN
     const selectPlayersScreen = document.querySelector(".select-players-screen");
 
@@ -42,18 +39,11 @@ const screenToggler = () => {
         controller.displayShips(gamePlayerOneShips);
     }
 
+    const restartGame = ()=> {
+        location.reload();
+    }
 
     return {
-        goToSelectPlayersScreen() {
-            //Hide start battleship screen
-            startBattleshipScreen.style.display = "none";
-            
-            //display select players screen
-            selectPlayersScreen.style.display = "flex";
-            headerTextContainer.style.display = "block";
-        },
-
-        //For Two Player Games
         goToShipPlacementScreenOne() {
             //hide select players screen
             selectPlayersScreen.style.display = "none";
@@ -186,12 +176,12 @@ const screenToggler = () => {
             modal.style.display = "none";
         },
 
+        //Converts the close modal btn to play again button
         gameOverModal(message) {
             modal.style.display = "block";
             modalNotice.textContent = message;
             modalBtn.textContent = "Play Again";
-            modalBtn.addEventListener("click", location.reload());
-            
+            modalBtn.addEventListener("click", restartGame);
         },
 
     }

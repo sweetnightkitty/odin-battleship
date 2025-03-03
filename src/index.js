@@ -4,9 +4,6 @@ import { controller } from "./screenController.js";
 
 //BUTTONS
 
-//START-BATTLESHIP-SCREEN:
-const startBattleshipBtn = document.querySelector(".start-game-btn");
-
 //SELECT-PLAYERS-SCREEN:
 const onePlayerGame = document.querySelector(".btn-one-player-game");
 const twoPlayerGame = document.querySelector(".btn-two-player-game");
@@ -27,9 +24,6 @@ const startRoundBtn = document.querySelector(".start-round-btn");
 const closeModal = document.querySelector(".modal-btn");
 
 //-------------------------------------------------------------------------
-
-//START-BATTLESHIP-SCREEN / USER CLICKS "START"
-startBattleshipBtn.addEventListener("click", toggler.goToSelectPlayersScreen);
 
 //Regardless of 1 vs 2 player game, next screen is Player one places their ships:
 onePlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);

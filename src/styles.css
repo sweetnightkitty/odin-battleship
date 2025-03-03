@@ -419,12 +419,12 @@ footer {
 /*------------------------------------------------------------------------*/
 
 /* SCREENS VISIBLE BY DEFAULT */
-.start-battleship-screen, .placement, .game-player-one {
+.select-players-screen, .placement, .game-player-one {
     display: flex;
 }
 
 /* SCREENS HIDDEN BY DEFUALT */
-.select-players-screen, .place-ships-screen, .placement-player-two, .game-screen, .game-player-two, .start-round, .header-text {
+.place-ships-screen, .placement-player-two, .game-screen, .game-player-two, .start-round {
     display: none;
 }
 
