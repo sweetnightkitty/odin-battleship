@@ -143,5 +143,5 @@ At the moment, there is no logic that announces to players when a ship has been 
 
 **Outstanding Tasks** 
 - [ ] Update styling for "It's a hit!" "It's a miss!" messaginging (div.notices);
-- [ ] Modal screen that pops-up for any alerts/error messages or to explain instructions.
+- [X] Modal screen that pops-up for any alerts/error messages or to explain instructions.
 - [ ] In 1 player game mode user journey is not clear.
