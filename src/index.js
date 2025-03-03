@@ -41,7 +41,7 @@ const executeOnePlayerGame = ()=> {
         if(controller.areAllShipsPlaced()) {
             toggler.startOnePlayerGame();
         } else {
-            alert("Place all your ships first!");
+            toggler.openModal("Place all your ships first before pressing submit!");
         }
     })
 
@@ -56,7 +56,7 @@ const executeTwoPlayerGame = ()=> {
         if(controller.areAllShipsPlaced()) {
             toggler.goToShipPlacementScreenTwo()
         } else {
-            alert("Place all your ships first");
+            toggler.openModal("Place all your ships first before pressing submit!");
         }
     })
 
@@ -65,7 +65,7 @@ const executeTwoPlayerGame = ()=> {
         if(controller.areAllShipsPlaced()) {
             toggler.startTwoPlayerGame()
         } else {
-            alert("Place all your ships first");
+            toggler.openModal("Place all your ships first before pressing submit!");
         }
     })
 
