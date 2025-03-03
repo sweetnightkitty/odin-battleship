@@ -23,6 +23,9 @@ const endPlayerTwoRound = document.querySelector(".end-player-two");
 //this prevents viewers from seeing each other's game board.
 const startRoundBtn = document.querySelector(".start-round-btn");
 
+//MODAL CLOSE BTN
+const closeModal = document.querySelector(".modal-btn");
+
 //-------------------------------------------------------------------------
 
 //START-BATTLESHIP-SCREEN / USER CLICKS "START"
@@ -72,6 +75,9 @@ const executeTwoPlayerGame = ()=> {
     startRoundBtn.addEventListener("click", toggler.goToPlayerBoardScreen);
 }
 
-
+//Executes correct gameplay logic depending on if 1 or 2 player game
 onePlayerGame.addEventListener("click", executeOnePlayerGame);
 twoPlayerGame.addEventListener("click", executeTwoPlayerGame);
+
+//Allows user to close modal whenever it opens.
+closeModal.addEventListener("click", toggler.closeModal);
