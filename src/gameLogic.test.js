@@ -157,7 +157,19 @@ describe("Game Board factory function", ()=> {
     
         })
     })
-    
+
+    describe("Is Ship Sunk", ()=> {
+        it("ship is sunk", ()=> {
+            const game = gameBoard();
+            expect(game.isShipSunk("destroyer")).toBe(false);
+
+            game.placeship("destroyer", [[0, 0], [0, 1]]);
+            game.recieveAttack([0, 0]);
+            game.recieveAttack([0, 1]);
+            expect(game.isShipSunk("destroyer")).toBe(true);
+        })
+    })
+
     describe("Is Game Over", ()=> {
         it("is game over", ()=> {
             const game = gameBoard();
