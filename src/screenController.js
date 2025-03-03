@@ -146,7 +146,7 @@ const screenController = () => {
         //If a ship was hit, checks if the ship sunk.
         if(attackedShip) {
             if(activePlayer.opponent.isShipSunk(attackedShip)) {
-                alert(`${attackedShip} was sunk!`);
+                toggler.openModal(`${attackedShip} was sunk!`);
             }};
 
         //Checks if Game is Over
