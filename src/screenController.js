@@ -215,7 +215,6 @@ const screenController = () => {
     const buttonDropHandler = (event) =>{
         event.preventDefault();
 
-        console.log("fires drop");
         //Get the name of the ship that's being placed
         const shipname = event.dataTransfer.getData("ship");
         const boardSize = 10; // 10 x 10 grid;
@@ -261,8 +260,7 @@ const screenController = () => {
 
         //Checks if the selected coordinates are valid
         if(!activePlayer.activePlayer.arePositionSAvailable(occupiedCoordinates)) {
-            console.log("modal is reached");
-            toggler.openModal("Some of the positions you selected either don't exist or you already placed a ship there. Try again");
+            toggler.openModal("Placing that ship there would overlap with another ship you have already placed on the board. Please try to place it in an empty location.");
             return; //Aborts the placement process if coordinates are invalid.
         };
 
