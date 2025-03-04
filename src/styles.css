@@ -108,6 +108,12 @@ footer {
     flex-shrink: 1;
 }
 
+.ship:hover {
+    cursor: pointer;
+    background-color: var(--dark-blue);
+    color: var(--bright-gray);
+}
+
 /*------------------------------------------------------------------------*/
 
 /* START BATTLESHIP SCREEN */
