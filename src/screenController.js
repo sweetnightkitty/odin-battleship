@@ -337,6 +337,10 @@ const screenController = () => {
             if(activePlayer.opponent.isGameOver()) {
                 toggler.gameOverModal("Game Over! You lose!");
             }
+
+            //Get's the result of computer's turn and loads the modal for player1
+            const result = getNotice(x, y);
+            toggler.computerModal(`Computer's turn is over. ${result}`);
         },
 
 
