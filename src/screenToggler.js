@@ -176,6 +176,12 @@ const screenToggler = () => {
             modal.style.display = "none";
         },
 
+        computerModal(message) {
+            modal.style.display = "block";
+            modalNotice.textContent = message;
+            modalBtn.textContent = "Start turn";
+        },
+
         //Converts the close modal btn to play again button
         gameOverModal(message) {
             modal.style.display = "block";
