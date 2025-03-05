@@ -271,6 +271,7 @@ const screenController = () => {
         relocateDraggedShip(shipname, shipLength, event.target);
     }
     
+
     return {
         displayBoard(displayBoard = activePlayer.display) {
             const opponentBoard = activePlayer.opponent.getBoard();
@@ -343,6 +344,13 @@ const screenController = () => {
             toggler.computerModal(`Computer's turn is over. ${result}`);
         },
 
+        computerPlaceAllships() {
+            activePlayer.activePlayer.computerPlaceship("aircraftCarrier");
+            activePlayer.activePlayer.computerPlaceship("battleship");
+            activePlayer.activePlayer.computerPlaceship("cruiser");
+            activePlayer.activePlayer.computerPlaceship("submarine");
+            activePlayer.activePlayer.computerPlaceship("destroyer");
+        },
 
         executePassDoneToggle(action, players) {
             TogglePassDoneBtns(action, players);
