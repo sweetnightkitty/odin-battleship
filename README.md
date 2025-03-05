@@ -113,27 +113,14 @@ npm run serve
 ```
 and then the program will load at http://localhost:8080/ 
 
+## Game Limitations
 
+While the original game battleship allows for horizontal or vertical placement of ships on the board, this version only allows for horizontal placement. This would be a great feature to incorporate into the game, but it comes with additional complexities due to the drag and drop features already implemented, so for now it has not been included.
 
-## Development Roadmap
+Additionally, when the computer places attacks in 1 player game mode, these attacks are entirely random, so if the computer does land a hit, there is no logic to ensure the computer keeps targeting adjacent spaces until the ship is sunk. 
 
-At the moment, this game is in development. Please refer to the detailed list below of current development status and known issues before getting started.
+At the moment, if computer lands a hit, this hit's coordinates are stored temporarily under the variable computerHit, which can be used to develop further logic to ensure the computer attacks adjacent coordinates, although there are no plans at this time to develop this feature.
 
-
-### 1 Player Game Play
-
-Currently the user journey for the one player game is unclear. There is no visual indications to the player after their turn ends that the computer turn has taken place, or that it's their turn again.
-
-There is no current logic for the computer to place their ships on the gameboard randomly, so in the one player game play, there is no way for player 1 to win as there are no ships to hit.
-
-### Vertical placement of ships
-
-At the moment ships can only be placed horizontally on the board, and there is no logic to rotate the ship buttons or to place their coordinates in the game vertically.
-
-### Outstanding tasks:
-- [ ] Create logic that places ships on the board at random for a computer player.
-- [ ] In 1 player game mode user journey is not clear.
-- [ ] Allow rotating of ships when drag and dropping.
 
 
 
