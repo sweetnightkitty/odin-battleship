@@ -145,8 +145,14 @@ const screenController = () => {
 
         //If a ship was hit, checks if the ship sunk.
         if(attackedShip) {
+            let shipname;
             if(activePlayer.opponent.isShipSunk(attackedShip)) {
-                toggler.openModal(`${attackedShip} was sunk!`);
+                if(attackedShip == "aircraftCarrier") {shipname = "Aircraft Carrier"};
+                if(attackedShip == "battleship") {shipname = "Battleship"};
+                if(attackedShip == "submarine") {shipname = "Submarine"};
+                if(attackedShip == "cruiser") {shipname = "Cruiser"};
+                if(attackedShip == "destroyer") {shipname = "Destroyer"};
+                toggler.openModal(`${shipname} was sunk!`);
             }};
 
         //Checks if Game is Over
