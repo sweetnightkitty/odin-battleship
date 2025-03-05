@@ -167,6 +167,49 @@ export const player = () => {
             return game.placeship(shipname, coordinates);
         },
 
+        computerPlaceship(shipname) {
+            let xStart = Math.floor(Math.random() * (10));
+            let yStart = Math.floor(Math.random() * (10));
+            const coordinates = [];
+    
+            //Checks if starting coordinate is taken
+            if(game.getBoard()[xStart][yStart]) {
+                return this.computerPlaceship(shipname) //Regenerates if it is
+            } else {
+                coordinates.push([[xStart], [yStart]]); // Adds to coordinates if not
+            }
+
+            // Define ship lengths
+            const shipLengths = {
+                aircraftCarrier: 5,
+                battleship: 4,
+                cruiser: 3,
+                submarine: 3,
+                destroyer: 2
+            };
+            
+            const length = shipLengths[shipname];
+
+            //Add remaining coordinates in horizontal order.
+            for(let i = 1; i < length; i++) {
+                yStart++;
+
+                //Checks if y value exceeds the board
+                if(yStart > 9) {
+                    return this.computerPlaceship(shipname);
+                } else{
+                    coordinates.push([[xStart], [yStart]]);
+                }
+            };
+
+            //Places ship IF coordinates are available 
+            if(this.arePositionSAvailable(coordinates)) {
+                game.placeship(shipname, coordinates);
+            } else{
+                this.computerPlaceship(shipname); //Or restarts the process
+            }
+        },
+
         arePositionSAvailable(coordinates) {
             return game.arePositionSAvailable(coordinates);
         }
