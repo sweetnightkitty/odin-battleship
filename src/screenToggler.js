@@ -43,6 +43,8 @@ const screenToggler = () => {
         location.reload();
     }
 
+    //Stores computer hits, which can be used to develop logic to attack adjacent spots
+    let computerHit;
     return {
         goToShipPlacementScreenOne() {
             //hide select players screen
@@ -154,7 +156,8 @@ const screenToggler = () => {
             controller.switchPlayers();
 
             //Computer takes a turn in the background:
-            controller.computerTurn();
+            const computerTurn = controller.computerTurn();
+            if(computerTurn) {computerHit = computerTurn};
 
             //Switches back to player 1
             controller.switchPlayers();
