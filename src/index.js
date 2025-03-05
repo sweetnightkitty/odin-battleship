@@ -33,11 +33,21 @@ twoPlayerGame.addEventListener("click", toggler.goToShipPlacementScreenOne);
 const executeOnePlayerGame = ()=> {
     submitShipsOne.addEventListener("click", ()=> {
         if(controller.areAllShipsPlaced()) {
+
+            //Switch players to player2/the computer to place their ships
+            controller.switchPlayers();
+            controller.computerPlaceAllships();
+
+            //Switch back to player one before loading game
+            controller.switchPlayers();
             toggler.startOnePlayerGame();
         } else {
             toggler.openModal("Place all your ships first before pressing submit!");
         }
     })
+
+    //Computer places ships in the background
+    controller.computerPlaceAllships();
 
     endPlayerOneRound.textContent = "Done"; //Better UX
     endPlayerOneRound.addEventListener("click", toggler.goToPlayerOneNextRound);
