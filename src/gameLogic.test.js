@@ -1,6 +1,4 @@
-import { isWebTarget } from "webpack-dev-server";
 import { gameBoard, player, ship } from "./gameLogic.js";
-import { experiments } from "webpack";
 
 describe("Ship Factory Function", ()=> {
     it("Ship initializes with correct length", () => {
@@ -72,7 +70,7 @@ describe("Game Board factory function", ()=> {
             const board = gameBoard();
             board.placeship("cruiser", [[1, 1], [1, 2], [1, 3]]);
             expect(board.getBoard()[1][1]).toBe("cruiser");
-            
+
             expect(()=> board.placeship("destroyer", [[3, 3], [5, 5]])).toThrow();
         })
 
@@ -109,7 +107,7 @@ describe("Game Board factory function", ()=> {
 
         it("Places a ship correctly", ()=> {
             const game = gameBoard();
-    
+
             expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
             expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
             expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
@@ -121,11 +119,11 @@ describe("Game Board factory function", ()=> {
             const game = gameBoard();
             const board = game.getBoard();
             expect(board[3][3]).toBe(false);
-    
+
             game.recieveAttack([3, 3]);
             expect(board[3][3]).toBe("miss");
         })
-    
+
         it("Records hits", ()=> {
             const game = gameBoard();
             const board = game.getBoard();
@@ -133,28 +131,28 @@ describe("Game Board factory function", ()=> {
             game.recieveAttack([1, 2]);
             expect(board[1][2]).toBe("hit");
         })
-    
+
         it("Throws an error if spot already marked miss or hit", ()=> {
             const game = gameBoard();
-    
+
             //miss case:
             game.recieveAttack([3, 3]);
             expect(()=> game.recieveAttack([3, 3])).toThrow();
-    
+
             //hit case:
             game.placeship("destroyer", [[1, 1], [1, 2]]);
             game.recieveAttack([1, 1]);
             expect(()=> game.recieveAttack([1, 1])).toThrow();
-    
+
         })
-    
+
         it("Marks a ship as hit", ()=> {
             const game = gameBoard();
-    
+
             game.placeship("destroyer", [[1, 1], [1, 2]]);
             game.recieveAttack([1, 1]);
             expect(game.getShip("destroyer").getHits()).toBe(1);
-    
+
         })
     })
 
@@ -174,7 +172,7 @@ describe("Game Board factory function", ()=> {
         it("is game over", ()=> {
             const game = gameBoard();
             expect(game.isGameOver()).toBe(false);
-    
+
             //When game is over:
             const board = game.getBoard();
             game.placeship("aircraftCarrier", [[1, 1], [1, 2], [1, 3], [1, 4], [1, 5]]);
@@ -207,7 +205,7 @@ describe("Game Board factory function", ()=> {
     describe("Is valid placement?", ()=> {
         it("Places a ship correctly", ()=> {
             const game = gameBoard();
-    
+
             expect(game.checkvalid([[1, 1], [1, 2]])).toBe(true);
             expect(game.checkvalid([[1, 1], [5, 5]])).toBe(false);
             expect(game.checkvalid([[1, 3], [2, 3], [3, 3]])).toBe(true);
