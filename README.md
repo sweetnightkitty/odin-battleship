@@ -45,21 +45,19 @@ I recommend downloading Node Version Manager (NVM) first and then downloading No
 
 **For quick and easy instructions on how to download nvm and set up node:** https://www.theodinproject.com/lessons/foundations-installing-node-js
 
-Next clone the repository
-```
-git clone git@github.com:sweetnightkitty/odin-battleship.git
-```
-
-and download the following dependencies:
+Then you will need to fork a copy of this repository to your Github account and then you can use the git clone command to clone your forked copy to your local environment and then you will need to download the following dependencies:
 
 
 ### Webpack
-
-Download Webpack locally with
 ```
 npm install --save-dev webpack webpack-cli
 ```
-and download the following:
+
+
+**Webpack Local Server**
+```
+npm install --save-dev html-loader
+```
 
 
 **HTML Plugin**
@@ -106,7 +104,7 @@ For a more detailed guide to downloading and working with Jest see: https://jest
 
 ### Local Server
 
-After sucessfully cloning the repo, and accessing the correct branch in order to launch the program locally you will need to run the webpack server using the command
+After sucessfully cloning the repository, in order to launch the program locally you will need to run the webpack server using the command
 
 ```
 npm run serve
